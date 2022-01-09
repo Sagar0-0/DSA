@@ -1,0 +1,19 @@
+class Solution
+{
+    //Function to return list containing all the pairs having both
+    //negative and positive values of a number in the array.
+    public static ArrayList<Integer>findPairs(int arr[], int n) 
+    { 
+    	ArrayList< Integer > results = new ArrayList<>();
+        Set< Integer > set = new HashSet<>();
+        for (int a : arr) {
+            if (set.contains(-a)) {
+                int x = Math.abs(a);
+                results.add(-x);
+                results.add(x);
+            }
+            set.add(a);
+        }
+        return results;
+    }
+}
