@@ -1,0 +1,26 @@
+class Solution {
+    public boolean checkValid(int[][] matrix) {
+        int n=matrix.length;
+        int[][] check=new int[n][n];
+        for(int row=0;row<n;row++){
+            for(int col=0;col<n;col++){
+                int val=matrix[row][col];
+                check[row][val-1]++;
+            }
+        }
+        for(int col=0;col<n;col++){
+            for(int row=0;row<n;row++){
+                int val=matrix[row][col];
+                check[val-1][col]++;
+            }
+        }
+        for(int row=0;row<n;row++){
+            for(int i=0;i<n;i++){
+                if(check[row][i]!=2){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+}
