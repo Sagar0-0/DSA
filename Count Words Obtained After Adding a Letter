@@ -1,0 +1,41 @@
+class Solution {
+    public int wordCount(String[] a, String[] b) {
+        int m=a.length;
+        int n=b.length;
+        Set<String> set=new HashSet<>();
+        
+        for(int i=0;i<a.length;i++){
+            char[]chars1=a[i].toCharArray();
+            Arrays.sort(chars1);
+            a[i]=new String(chars1);
+            set.add(a[i]);
+        }
+        
+        for(int i=0;i<b.length;i++){
+            char[]chars2=b[i].toCharArray();
+            Arrays.sort(chars2);
+            b[i]=new String(chars2);
+        }
+        
+        int res=0;
+        
+        for(int i=0;i<b.length;i++){
+            char[]chars=b[i].toCharArray();
+            int length=chars.length;
+            for(int j=0;j<length;j++){
+                StringBuilder s=new StringBuilder();
+                for(int k=0;k<length;k++){
+                    if(k!=j){
+                        s.append(chars[k]);
+                    }
+                }
+                if(set.contains(s+"")){
+                    res++;
+                    break;
+                }
+            }
+        }
+        return res;
+        
+    }
+}
