@@ -35,23 +35,30 @@ Time: O(H)
 Space: O(H)
 
 class Solution {
-    int rootToLeaf = 0;
-    
-    public void preorder(TreeNode r, int currNumber) {
-        if (r != null) {
-            currNumber = (currNumber << 1) | r.val;
-            // if it's a leaf, update root-to-leaf sum
-            if (r.left == null && r.right == null) {
-            rootToLeaf += currNumber;
-            }
-            preorder(r.left, currNumber);
-            preorder(r.right, currNumber);
-        }
-    }
-
+    int sum = 0;
     public int sumRootToLeaf(TreeNode root) {
-        preorder(root, 0);
-        return rootToLeaf;
+        if(root == null) return 0;
+        backtracking(root, 0);
+        return sum;
+    }
+    
+    private void backtracking(TreeNode root, int num){
+        if(root == null) return ;
+        
+        num = num*2 + root.val;
+        
+        if(root.left == null && root.right == null){
+            sum += num;
+            return ;
+        }
+        
+        if(root.left != null){
+            backtracking(root.left, num);
+        }
+        
+        if(root.right != null){
+            backtracking(root.right, num);
+        }
     }
 }
 
