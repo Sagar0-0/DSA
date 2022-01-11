@@ -35,30 +35,19 @@ Time: O(H)
 Space: O(H)
 
 class Solution {
-    int sum = 0;
     public int sumRootToLeaf(TreeNode root) {
-        if(root == null) return 0;
-        backtracking(root, 0);
-        return sum;
+        return pathSumRootToLeaf(root, 0);
     }
     
-    private void backtracking(TreeNode root, int num){
-        if(root == null) return ;
+    private int pathSumRootToLeaf(TreeNode root, int parentNodeSum){
+        if(root == null) return 0;
         
-        num = num*2 + root.val;
-        
+        parentNodeSum = 2 * parentNodeSum + root.val;
         if(root.left == null && root.right == null){
-            sum += num;
-            return ;
+            return parentNodeSum;
         }
         
-        if(root.left != null){
-            backtracking(root.left, num);
-        }
-        
-        if(root.right != null){
-            backtracking(root.right, num);
-        }
+        return pathSumRootToLeaf(root.left, parentNodeSum) + pathSumRootToLeaf(root.right, parentNodeSum);
     }
 }
 
