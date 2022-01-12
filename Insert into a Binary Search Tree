@@ -1,0 +1,24 @@
+class Solution {
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if(root==null)return new TreeNode(val);
+        return addNode(root,root,val);
+    }
+    public TreeNode addNode(TreeNode head,TreeNode root,int val){
+        if(root.val>val){
+            if(root.left==null){
+                root.left=new TreeNode(val);
+                return head;
+            }else{
+                return addNode(head,root.left,val);
+            }
+        }else if(root.val<val){
+            if(root.right==null){
+                root.right=new TreeNode(val);
+                return head;
+            }else{
+                return addNode(head,root.right,val);
+            }
+        }
+        return head;
+    }
+}
