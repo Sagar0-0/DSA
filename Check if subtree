@@ -1,0 +1,24 @@
+class Solution {
+    public static boolean isSubtree(Node T, Node S) {
+        // add code here
+        if(T==null)return false;
+        boolean check=false;
+        if(T.data==S.data){
+            check=checkSame(T,S);
+        }
+        return check || isSubtree(T.left,S) || isSubtree(T.right,S);
+    }
+    public static boolean checkSame(Node head,Node root){
+        if(head==null && root!=null){
+            return false;
+        }else if(head!=null && root==null){
+            return false;
+        }else if(head==null && root==null){
+            return true;
+        }
+        if(head.data!=root.data){
+            return false;
+        }
+        return checkSame(head.left,root.left) && checkSame(head.right,root.right);
+    }
+}
