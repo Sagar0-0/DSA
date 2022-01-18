@@ -1,25 +1,25 @@
 public class Solution {
     public int evalRPN(String[] A) {
-        Deque<String> stack=new ArrayDeque<>();
+        Deque<Integer> stack=new ArrayDeque<>();
         int i=0;
         while(i<A.length){
             if(A[i].equals("+") || A[i].equals("/")|| A[i].equals("-")|| A[i].equals("*")){
-                int first=Integer.parseInt(stack.pop());
-                int second=Integer.parseInt(stack.pop());
+                int first=stack.pop();
+                int second=stack.pop();
                 if(A[i].equals("+")){
-                    stack.push(Integer.toString(first+second));
+                    stack.push(first+second);
                 }else if( A[i].equals("/")){
-                    stack.push(Integer.toString(second/first));
+                    stack.push(second/first);
                 }else if( A[i].equals("-")){
-                    stack.push(Integer.toString(second-first));
+                    stack.push(second-first);
                 }else{
-                    stack.push(Integer.toString(first*second));
+                    stack.push(second*first);
                 }
             }else{
-                stack.push(A[i]);
+                stack.push(Integer.parseInt(A[i]));
             }
             i++;
         }
-        return Integer.parseInt(stack.pop());
+        return stack.pop();
     }
 }
