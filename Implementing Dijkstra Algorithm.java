@@ -58,3 +58,51 @@ class Solution
         return distance;
     }
 }
+
+
+
+
+=======================================================================================================================================
+    
+//without using arraylist and comparator ::
+    
+class Solution
+{
+    //Function to find the shortest distance of all the vertices
+    //from the source vertex S.
+    static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S)
+    {
+        // distance of all numbers from source
+        int[] distance=new int[V];
+        //currently we don't know so filling maximum distance
+        Arrays.fill(distance,Integer.MAX_VALUE);
+        
+        //ditance to source will be 0
+        distance[S]=0;
+        
+        //boolean array to check if already a number is selected or not and also to reduce time
+        // boolean[] selected=new boolean[V];
+        
+        //priority queue to always give smallest distance from one number
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        pq.add(S);
+        
+        while(!pq.isEmpty()){
+            //getting the element from pq
+            int number=pq.remove();
+            int currDistance=distance[number];
+            //get all connected pairs for that particular number
+            ArrayList<ArrayList<Integer>> connecteds=adj.get(number);
+            for(int i=0;i<connecteds.size();i++){
+                int connectedNumber=connecteds.get(i).get(0);
+                int newDistance=connecteds.get(i).get(1)+currDistance;
+                //if new distance to some number is smaller than the stored one
+                if(newDistance<distance[connectedNumber]){
+                    distance[connectedNumber]=newDistance;
+                    pq.add(connectedNumber);
+                }
+            }
+        }
+        return distance;
+    }
+}
