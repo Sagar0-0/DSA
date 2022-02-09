@@ -19,3 +19,12 @@ class Compute
         }
         return count;
     }
+==========================================================================
+    class Compute  
+{ 
+    static void sortBySetBitCount(Integer arr[], int n)
+    { 
+        // Your code goes here
+        Arrays.sort(arr,(o1,o2)-> Integer.bitCount(o2)-Integer.bitCount(o1));
+    }
+}
