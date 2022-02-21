@@ -1,3 +1,24 @@
+//Boyer-Moore Voting Algorithm
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int count = 0;
+        Integer candidate = null;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+
+        return candidate;
+    }
+}
+
+//=================================================================
+
+//recursive
 class Solution {
 
 public int majorityElement(int[] nums) {
@@ -21,9 +42,9 @@ public int majorityElement(int[] nums) {
     }
 }
 
-=====================================================================
-        
-        class Solution {
+//=====================================================================
+//Naive approach using map
+    class Solution {
     public int majorityElement(int[] nums) {
         Map<Integer,Integer> map=new  HashMap<>();
         for(int i=0;i<nums.length;i++){
