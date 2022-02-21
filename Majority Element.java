@@ -20,3 +20,21 @@ public int majorityElement(int[] nums) {
         return nums[start];
     }
 }
+
+=====================================================================
+        
+        class Solution {
+    public int majorityElement(int[] nums) {
+        Map<Integer,Integer> map=new  HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(!map.containsKey(nums[i])){
+                map.put(nums[i],1);
+            }else{
+                int count = map.get(nums[i]);
+                map.put(nums[i], count + 1);
+            }
+        }
+        return Collections.max(map.entrySet(),Comparator.comparingInt(Map.Entry::getValue))
+            .getKey();
+    }
+}
