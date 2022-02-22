@@ -14,6 +14,7 @@ class Solution{
         int n = mat.length;
         int m = mat[0].length;
         boolean visited[][] = new boolean[n][m];
+        visited[i][j] = true;
         Queue<int[]> q = new LinkedList<>();
         q.offer(new int[]{i,j});
         int min = 0;
