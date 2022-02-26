@@ -1,40 +1,35 @@
 class Solution {
     public int shortestPathLength(int[][] graph) {
-        if (graph.length == 1) {
-            return 0;
-        }
-        
         int n = graph.length;
-        int endingMask = (1 << n) - 1;
-        boolean[][] seen = new boolean[n][endingMask];
-        ArrayList<int[]> queue = new ArrayList<>();
+        if(n==1) return 0;
+        int target = (1 << n) - 1;
+        boolean[][] seen = new boolean[n][target];
+        Queue<int[]> q = new LinkedList<>();
         
         for (int i = 0; i < n; i++) {
-            queue.add(new int[] {i, 1 << i});
-            seen[i][1 << i] = true;
+            int source = 1 << i;
+            q.add(new int[] {i,source});
+            seen[i][source] = true;
         }
         
-        int steps = 0;
-        while (!queue.isEmpty()) {
-            ArrayList<int[]> nextQueue = new ArrayList<>();
-            for (int i = 0; i < queue.size(); i++) {
-                int[] currentPair = queue.get(i);
+        int level = 0;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                int[] currentPair = q.remove();
                 int node = currentPair[0];
                 int mask = currentPair[1];
-                for (int neighbor : graph[node]) {
-                    int nextMask = mask | (1 << neighbor);
-                    if (nextMask == endingMask) {
-                        return 1 + steps;
-                    }
+                for (int nei : graph[node]) {
+                    int nextMask = mask | (1 << nei);
+                    if (nextMask == target) return level + 1;
                     
-                    if (!seen[neighbor][nextMask]) {
-                        seen[neighbor][nextMask] = true;
-                        nextQueue.add(new int[] {neighbor, nextMask});
+                    if (!seen[nei][nextMask]) {
+                        seen[nei][nextMask] = true;
+                        q.add(new int[] {nei, nextMask});
                     }
                 }
             }
-            steps++;
-            queue = nextQueue;
+            level++;
         }
         
         return -1;
