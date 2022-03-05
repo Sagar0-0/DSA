@@ -34,3 +34,34 @@ class Solution {
         return maxPoints(maxNumber);
     }
 }
+
+//==================================================================================
+class Solution {
+    public int deleteAndEarn(int[] nums) {
+        int[] count = new int[10001];
+        for (int n : nums) {
+            count[n]++;
+        };
+        
+        int withPrev = 0;
+        int withoutPrev = 0;
+        int prev = -1;
+        
+        for (int i = 0; i < count.length; i++) {
+            if (count[i] == 0) continue;
+            
+            int currentMax = Math.max(withPrev, withoutPrev);
+            if (i - prev == 1) {
+                withPrev = withoutPrev + count[i] * i;
+                withoutPrev = currentMax;
+            } else {
+                withPrev = currentMax + count[i] * i;
+                withoutPrev = currentMax;
+            }
+            
+            prev = i;
+        }
+        
+        return Math.max(withPrev, withoutPrev);
+    }
+}
