@@ -29,7 +29,6 @@ class Solution{
     private static final int mod = 1000000007;
     private static int reset;
     private static Integer[][] dp;
-    
     private static int find(int N, int K){
         if(N == 0){
             return 1;
