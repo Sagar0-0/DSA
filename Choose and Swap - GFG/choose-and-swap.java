@@ -32,39 +32,28 @@ class GFG
 
 
 class Solution{
-    
-    
     String chooseandswap(String A){
-        // Code Here
+        int hash[] = new int[26]; 
+        Arrays.fill(hash, -1);
         
-        Set<Character> s = new TreeSet<>(); //take TreeSet to store character in sorted order
+        //get first occurence of every char
+        for(int i=A.length()-1; i>=0; i--)
+           hash[A.charAt(i)-97] = i;
         
-        for(int i = 0;i<A.length();i++){
-            s.add(A.charAt(i));
-        }
         
-        //taken an array to change the string while replacing.
-        char[] arr = A.toCharArray();
-        
-        for(int i = 0;i<arr.length;i++){
-            s.remove(arr[i]);
-            if(s.isEmpty()){
-                break;
-            }
-            char ch = s.iterator().next(); //get the 1st index of the set
-            if(ch<arr[i]){
-                char ch2 = arr[i];
-                for(int j = 0;j<arr.length;j++){
-                    if(arr[j]==ch){
-                        arr[j] = ch2;
-                    }else if(arr[j]==ch2){
-                        arr[j] = ch;
-                    }
+        for(int i=0; i<A.length(); i++){
+            char ch = A.charAt(i);
+            char st = 'a';
+            while(st < ch){
+                if(hash[st-97]!=-1 && hash[st-97]>i){
+                    String temp1 = A.replaceAll(String.valueOf(ch), "X");
+                    String temp2 = temp1.replaceAll(String.valueOf(st), String.valueOf(ch));
+                    String temp3 = temp2.replaceAll("X", String.valueOf(st));
+                    return temp3;
                 }
-                break;
+                st+=1;
             }
         }
-        A = String.valueOf(arr);
         return A;
     }
 }
