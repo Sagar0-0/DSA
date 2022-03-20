@@ -1,51 +1,28 @@
 class Solution {
     public int minDominoRotations(int[] tops, int[] bottoms) {
-        int a=tops[0];
-        int b=bottoms[0];
-        boolean hasA=true;
-        for(int i=1;i<tops.length;i++){
-            if(tops[i]!=a && bottoms[i]!=a){
-                hasA=false;
-                break;
+        int ans =-1;
+        for(int i=1;i<=6;i++){
+            int currAns = helper(i,tops,bottoms);
+            if (currAns != -1 && (ans == -1 || ans > currAns)) {
+                ans = currAns;
             }
         }
-        if(hasA==false){
-            boolean hasB=true;
-            for(int i=1;i<tops.length;i++){
-                if(tops[i]!=b && bottoms[i]!=b){
-                    hasB=false;
-                    break;
-                }
-            }
-            if(hasB==false){
+        return ans;
+    }
+    
+    private int helper(int target,int[] a,int[] b){
+        int numswapA =0;
+        int numswapB =0;
+        for(int i=0;i<a.length;i++){
+            if(a[i] != target && b[i] != target){
                 return -1;
-            }else{
-                //check min num for b
-                int up=0;
-                int down=0;
-                for(int i=0;i<tops.length;i++){
-                    if(tops[i]!=b){
-                        up++;
-                    }
-                    if(bottoms[i]!=b){
-                        down++;
-                    }
-                }
-                return Math.min(up,down);
             }
-        }else{
-            //check min num for a
-            int up=0;
-            int down=0;
-            for(int i=0;i<tops.length;i++){
-                if(tops[i]!=a){
-                    up++;
-                }
-                if(bottoms[i]!=a){
-                    down++;
-                }
+            if(a[i] != target){
+                numswapA++;
+            } else if(b[i] != target){
+                numswapB++;
             }
-            return Math.min(up,down);
         }
+        return Math.min(numswapA,numswapB);
     }
 }
