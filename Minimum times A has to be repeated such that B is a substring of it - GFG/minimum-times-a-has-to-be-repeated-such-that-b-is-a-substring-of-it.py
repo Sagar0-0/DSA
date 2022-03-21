@@ -12,10 +12,7 @@ class Solution:
             ans+=1
             if (parent.find(B) == -1):
                 return -1
-            else:
-                return ans
-        else:
-            return ans
+        return ans
 
 #{ 
 #  Driver Code Starts
