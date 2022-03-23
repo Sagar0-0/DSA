@@ -116,28 +116,41 @@ class LinkedList
   }
 */
 class GFG{
-   //Function to swap Kth node from beginning and end in a linked list.
-   Node swapkthnode(Node head, int num, int K){
-        if(K>num)return head;
-        Node temp=head;
-        ArrayList<Node> list=new ArrayList<Node>();
-       
-        while(temp!=null){
-            list.add(temp); 
-            temp=temp.next;
+    //Function to swap Kth node from beginning and end in a linked list.
+    Node swapkthnode(Node head, int num, int k){
+        // your code here
+        if (head == null)return head;
+        if (k > num)return head;
+        // begining node will be at k
+        // end node will be at n - k + 1
+        Node x = head;
+        Node prevX = null;
+        Node y = head;
+        Node prevY = null;
+        for (int i = 1; i < k; i++) {
+            prevX = x;
+            x = x.next;
+        }
+        for (int i = 1; i < num - k + 1; i++) {
+            prevY = y;
+            y = y.next;
         }
         
-        Node temp2=list.get(K-1);
-        list.set(K-1,list.get(list.size()-K));
-        list.set(list.size()-K,temp2);
-       
-        Node dummy=new Node(-1);
-        Node curr=dummy;
-        for(int i=0;i<list.size();i++){
-            dummy.next=list.get(i);
-            list.get(i).next=null;
-            dummy=dummy.next;
+        if (prevX != null) {
+            prevX.next = y;
         }
-        return curr.next;
-   }
+        if (prevY != null) {
+            prevY.next = x;
+        }
+        Node temp = x.next;
+        x.next = y.next;
+        y.next = temp;
+        if (k == 1) {
+            head = y;
+        }
+        if (k == num) {
+            head = x;
+        }
+        return head;
+    }
 }
