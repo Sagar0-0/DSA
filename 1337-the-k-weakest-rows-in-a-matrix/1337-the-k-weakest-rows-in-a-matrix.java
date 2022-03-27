@@ -14,6 +14,7 @@ class Solution {
     public int count(int[][]mat,int i){
         int ans=0;
         for(int j=0;j<mat[i].length;j++){
+            if(mat[i][j]==0)break;
             ans+=mat[i][j];
         }
         return ans;
