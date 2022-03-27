@@ -20,24 +20,47 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-    static int longestSubstring(String s) {
-        HashMap<Integer, Integer> index = new HashMap<>();
+    static int longestSubstring(String S) {
+        
+        int n = S.length();
+        Map<Integer, Integer> index = new HashMap<>();
+      
+        // Initialize answer with 0 
         int answer = 0;
+      
         int mask = 0;
         index.put(mask, -1);
-        for (int i = 0; i < s.length(); i++) {
-            int temp = (int) s.charAt(i) - 'a';
+        
+        for(int i = 0; i < n; i++){
+            int temp = (int)S.charAt(i) - 97;
+            // Turn the temp-th bit on if 
+            // character occurs odd number 
+            // of times and turn off the temp-th 
+            // bit off if the character occurs 
+            // ever number of times 
             mask ^= (1 << temp);
-            if (index.containsKey(mask)) {
-                answer = Math.max(answer, i - index.get(mask));
-            } else {
-                index.put(mask, i);
+            // If a mask is present in the index 
+            // Therefore a palindrome is 
+            // found from index[mask] to i 
+            if (index.containsKey(mask)){ 
+                answer = Math.max(answer, i - index.get(mask)); 
             }
-
-            for (int j = 0; j < 26; j++) {
+            // If x is not found then add its 
+            // position in the index dict. 
+            else
+                index.put(mask,i); 
+            
+            // Check for the palindrome of 
+            // odd length 
+            for (int j = 0;j < 26; j++){
+                // We cancel the occurrence 
+                // of a character if it occurs 
+                // odd number times 
                 int mask2 = mask ^ (1 << j);
-                if (index.containsKey(mask2)) {
-                    answer = Math.max(answer, i - index.get(mask2));
+                if (index.containsKey(mask2))
+                { 
+                    answer = Math.max(answer, 
+                        i - index.get(mask2)); 
                 }
             }
         }
