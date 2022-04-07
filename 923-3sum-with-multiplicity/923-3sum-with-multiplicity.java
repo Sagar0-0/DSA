@@ -22,7 +22,7 @@ class Solution {
         // Now, let's do a 3sum on "keys", for i <= j <= k.
         // We will use count to add the correct contribution to ans.
 
-        for (int i = 0; i < keys.length; ++i) {
+        for (int i = 0; i < keys.length; i++) {
             int x = keys[i];
             int T = target - x;
             int j = i, k = keys.length - 1;
