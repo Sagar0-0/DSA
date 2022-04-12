@@ -47,9 +47,8 @@ class Solution{
                 int destination = edge[1];
                 int weight = edge[2];
                 // condition
-                if (distance[source] != Integer.MAX_VALUE && distance[source] + 
-                weight < distance[destination]) {
-                    distance[destination] = distance[source] + weight;
+                if (distance[source] != Integer.MAX_VALUE) {
+                    distance[destination] =Math.min(distance[destination], distance[source] + weight);
                 }
             }
         }
