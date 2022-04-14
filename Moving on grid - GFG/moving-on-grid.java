@@ -27,12 +27,8 @@ class GFG
 class Solution
 {
     public String movOnGrid(int r, int c){
-       // code here
-        c = c^r;
-        r = c^r;
-        c = c^r;
-        r=(r-1)&3;
-        c=(c-1)%7;
+        r=(r-1)%7;
+        c=(c-1)%4;
         return(r==c?"ARYA":"JON");
    }
 }
