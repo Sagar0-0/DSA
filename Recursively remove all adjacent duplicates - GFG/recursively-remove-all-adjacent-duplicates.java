@@ -21,37 +21,17 @@ class GFG {
 
 class Solution{
     String remove(String s) {
-        StringBuilder str=new StringBuilder(s);
-        while(str.length()>0){
-            int count=0,i=1,n=str.length();
-            List<Integer> arr=new ArrayList<>();
-            char c=str.charAt(0);
-            for(;i<n;i++){
-                if(str.charAt(i)==c){
-                    if(count==0)
-                        count=2;
-                    else
-                        count++;
-                }else{
-                    if(count>0){
-                        arr.add(i-count);
-                        arr.add(i-1);
-                    }
-                    c=str.charAt(i);
-                    count=0;
-                }
-            }
-            if(count!=0){
-                arr.add(i-count);
-                arr.add(i-1);
-            }
-            if(arr.size()==0)
-                break;
-            for(int j=arr.size()-1;j>=1;j-=2){
-                for(int k=arr.get(j);k>=arr.get(j-1);k--)
-                    str.deleteCharAt(k);
-            }
+        if(s.length()<=1) return s;
+        StringBuilder str = new StringBuilder();
+        for(int i =0;i<s.length()-1;i++){
+            if(s.charAt(i)==s.charAt(i+1) ){
+                int j =i;
+                while(j<s.length() && s.charAt(i)==s.charAt(j) ) j++;
+                i=j-1;
+            }else str.append(s.charAt(i));
         }
-        return str.toString();
-    }
+        if(s.charAt(s.length()-2)!=s.charAt(s.length()-1)) str.append(s.charAt(s.length()-1));
+        if(s.length()==str.length()) return s;
+        return remove(str.toString());
+   }
 }
