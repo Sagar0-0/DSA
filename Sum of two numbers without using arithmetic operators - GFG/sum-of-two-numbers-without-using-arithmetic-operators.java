@@ -29,14 +29,12 @@ class GFG
 
 class Solution{
     int sum(int a , int b){
-       //code here
-        int C=a&b;
-        int sum=a^b;
-        while(C>0){
-            int Shift=C<<1;
-            C=sum&Shift;
-            sum=sum^Shift;
-        } 
-        return sum;
+        while(b!=0){
+            int ans=(a^b);
+            int carry=(a&b)<<1;
+            a=ans;
+            b=carry;
+        }
+        return a;
     }
 }
