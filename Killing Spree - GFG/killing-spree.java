@@ -34,7 +34,7 @@ class Solution{
     {
         long low=1;
         long high=(long)Math.sqrt(n);
-        long ans=1;
+        long ans=0;
         while(low<=high){
             long mid=low+(high-low)/2;
             long sum=(mid*(mid+1)*(2*mid + 1))/6;
