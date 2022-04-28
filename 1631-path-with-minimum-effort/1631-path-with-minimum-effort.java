@@ -1,43 +1,29 @@
 class Solution {
     public int minimumEffortPath(int[][] heights) {
-        
-        int n=heights.length;
-        int m=heights[0].length;
-        
-        if(n==1 && m==1)
-            return 0;
-        
-        int efforts[][]=new int[n][m];//stores the minimum effots required to travel upto a given cell
-        for(int row[]:efforts)
+        int[][] dirs = new int[][]{{-1,0},{1,0},{0,1},{0,-1}};
+        int numR = heights.length; int numC = heights[0].length;
+        int[][] ans = new int[numR][numC];
+        for (int[] row : ans) {
             Arrays.fill(row,Integer.MAX_VALUE);
-        
-        PriorityQueue<int[]>pq=new PriorityQueue<int[]>((t1,t2)->(t1[2]-t2[2]));//returns cell with minimum efforts
-        
-        pq.offer(new int[]{0,0,0});
-        int dir[][]={{0,1},{0,-1},{1,0},{-1,0}};//direction to travel
-        
-        while(!pq.isEmpty())
-        {
-            int curr[]=pq.poll();
-            int curr_row=curr[0];
-            int curr_col=curr[1];
-            int curr_wt=curr[2];
-            for(int x[]:dir)
-            {
-                int nrow=curr_row+x[0];
-                int ncol=curr_col+x[1];
-                if(nrow<0 || nrow>=n || ncol<0 || ncol>=m)
-                    continue;
-                int wt = Math.max(curr_wt,Math.abs(heights[nrow][ncol]-heights[curr_row][curr_col]));//getting max absolute value
-                //updating the minimum effort
-                if(wt<efforts[nrow][ncol])
-                {
-                    efforts[nrow][ncol]=wt;
-                    pq.offer(new int[]{nrow,ncol,wt});
+        }
+        PriorityQueue<int[]> queue = new PriorityQueue<>((a,b)->a[2]-b[2]);
+        queue.offer(new int[]{0,0,0});
+        ans[0][0] = 0;
+        while (!queue.isEmpty()) {
+            int[] curr = queue.poll();
+            if (curr[0]==numR-1 && curr[1]==numC-1) return curr[2];
+            for (int i=0; i<4; i++) {
+                int nextR = curr[0]+dirs[i][0];
+                int nextC = curr[1]+dirs[i][1];
+                if (nextR<0 || nextC<0 || nextR>=numR || nextC>=numC) continue;
+                int diff = Math.abs(heights[nextR][nextC]-heights[curr[0]][curr[1]]);
+                int max = Math.max(diff,curr[2]);
+                if (max<ans[nextR][nextC]) {
+                    ans[nextR][nextC] = max;
+                    queue.offer(new int[]{nextR,nextC,max});
                 }
-                
             }
         }
-        return efforts[n-1][m-1];
+        return ans[numR-1][numC-1];
     }
 }
