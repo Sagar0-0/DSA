@@ -1,13 +1,19 @@
 class Solution {
-    public int[] sortArrayByParity(int[] num) {
-        Integer[]nums=new Integer[num.length];
-        for(int i=0;i<num.length;i++){
-            nums[i]=num[i];
+    public int[] sortArrayByParity(int[] nums) {
+        int left = 0, right = nums.length-1;
+        while (left < right) {
+            if (nums[left]%2 == 1) {
+                if (nums[right]%2 == 0) {
+                    int temp = nums[left];
+                    nums[left] = nums[right];
+                    nums[right] = temp;
+                    left++;
+                }
+                right--;
+            } else {
+                left++;
+            }
         }
-        Arrays.sort(nums,(a,b)->Integer.compare(a%2,b%2));
-        for(int i=0;i<num.length;i++){
-            num[i]=nums[i];
-        }
-        return num;
+        return nums;
     }
 }
