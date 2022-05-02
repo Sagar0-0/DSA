@@ -33,7 +33,7 @@ class GFG{
 
 //User function Template for Java
 class Solution{
-   static int dfs(ArrayList<ArrayList<Integer>> adj, int start, int[]visited){
+   static int dfs(ArrayList<ArrayList<Integer>> adj, int start, boolean[]visited){
         Queue<Integer> q = new LinkedList<>();
         q.add(start);
         int level = 0;
@@ -41,9 +41,9 @@ class Solution{
             int size = q.size();
             while(size-->0){
                int val = q.remove();
-               visited[val] = level;
+               visited[val] = true;
                for(int i : adj.get(val)){
-                   if(visited[i]==-1){
+                   if(visited[i]==false){
                        q.add(i);
                    }
                }
@@ -56,8 +56,7 @@ class Solution{
    {
        int ans = Integer.MAX_VALUE;
        for(int i=1; i<=N;i++){
-           int[]visited = new int[N+1];
-           Arrays.fill(visited,-1);
+           boolean[]visited = new boolean[N+1];
            ans = Math.min(ans, dfs(adj, i,visited));    
        }    
        return ans;
