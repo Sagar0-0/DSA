@@ -1,34 +1,33 @@
 class Solution {
-    List<List<Integer>> ans;
-    Set<Set<Integer>> megaSet;
     public List<List<Integer>> combinationSum3(int k, int n) {
-        ans=new ArrayList<>();
-        megaSet=new HashSet<>();
-        dfs(new ArrayList<Integer>(),new HashSet<Integer>(),n,k);
-        return ans;
+      List<List<Integer>> res = new ArrayList<>();
+        List out = new ArrayList<>();
+        back(res,out,k,n,1);
+        return res;
     }
-    public void dfs(List<Integer> curr,Set<Integer> set,int n,int k){
-        if(k==0){
-            if(n==0){
-                if(!megaSet.contains(set)){
-                    Set<Integer> newSet=new HashSet<>();
-                    newSet.addAll(set);
-                    List<Integer> newCurr=new ArrayList<>();
-                    newCurr.addAll(curr);
-                    megaSet.add(newSet);
-                    ans.add(newCurr);
-                }
-            }
-            return;
+    void back(List<List<Integer>> res,List<Integer> out,int currSize,int n,int limit)
+    {
+        if(out.size()==currSize && n ==0)
+        {
+            res.add(new ArrayList<>(out));
+            return ;
         }
-        for(int i=1;i<=9;i++){
-            if(!set.contains(i) && n>=i){
-                curr.add(i);
-                set.add(i);
-                dfs(curr,set,n-i,k-1);
-                curr.remove(curr.size()-1);
-                set.remove(i);
-            }
+        if(limit>9)
+        {
+            return ;
         }
+            
+        if(out.size()>currSize)
+        {
+            return ;
+        }
+        if(n<0)
+        {
+            return ;
+        }
+        out.add(limit);
+        back(res,out,currSize,n-limit,limit+1);
+        out.remove(out.size()-1);
+        back(res,out,currSize,n,limit+1);
     }
 }
