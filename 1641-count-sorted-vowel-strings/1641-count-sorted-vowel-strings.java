@@ -1,28 +1,21 @@
 class Solution {
-    int ans;
-    char[] vow={'a','e','i','o','u'};
-    
     public int countVowelStrings(int n) {
-        ans=0;
-        count(n,new StringBuilder());
-        return ans;
-    }
-    public void count(int n,StringBuilder str){
-        if(n==0){
-            ans++;
-            return;
+        int[] countOfEach = new int[] { 1, 1, 1, 1, 1 };
+        
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 1; j < countOfEach.length; j++) {
+                countOfEach[j] = countOfEach[j - 1] + countOfEach[j];
+             }  
         }
-        for(int i=0;i<5;i++){
-            if(str.length()==0){
-                str.append(vow[i]);
-                count(n-1,str);
-                str.deleteCharAt(str.length()-1);
-            }else if(vow[i]>=str.charAt(str.length()-1)){
-                str.append(vow[i]);
-                count(n-1,str);
-                str.deleteCharAt(str.length()-1);
-            }
-        }
+        
+        return sum(countOfEach);
     }
     
+    private int sum(int[] arr) {
+        int amount = 0;
+        for (int num : arr) {
+            amount += num;
+        }
+        return amount;
+    }
 }
