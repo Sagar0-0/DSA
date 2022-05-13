@@ -33,16 +33,6 @@ public class GFG {
 }
 // } Driver Code Ends
 
-
-//User function Template for Java
-class Node{
-    int val;
-    int arr;
-    Node(int v,int a){
-        val=v;
-        arr=a;
-    }
-}
 class Solution {
     ArrayList<Integer> maximizeArray(int[] arr1, int[] arr2, int n) {
         ArrayList<Integer> ans=new ArrayList<>();
