@@ -29,7 +29,7 @@ class Solution {
 }
 
 //==============================================================
-//merge sort
+//merge sort (iterative)
 
 class Solution {
     public ListNode sortList(ListNode head) {
@@ -68,5 +68,48 @@ class Solution {
         ListNode mid = midPrev.next;
         midPrev.next = null;
         return mid;
+    }
+}
+//===============================================================================
+//merge sort (recursive)
+public class Solution {
+
+    public ListNode merge(ListNode A,ListNode B){
+        ListNode res=null;
+        if(A==null)
+            return B;
+        if(B==null)
+            return A;
+        if(A.val<=B.val){
+            res=A;
+            res.next=merge(A.next,B);
+        }else{
+            res=B;
+            res.next=merge(A,B.next);
+        }
+        return res;
+    }
+
+    public ListNode sortList(ListNode A) {
+        if(A==null || A.next==null)
+            return A;
+        ListNode middle=getMiddle(A);
+        ListNode nextOfMiddle=middle.next;
+        middle.next=null;
+        ListNode left=sortList(A);
+        ListNode right=sortList(nextOfMiddle);
+        ListNode ans=merge(left,right);
+        return ans;
+    }
+
+    public ListNode getMiddle(ListNode A){
+        if(A==null)
+            return A;
+        ListNode slow=A,fast=A;
+        while(fast.next!=null && fast.next.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
     }
 }
