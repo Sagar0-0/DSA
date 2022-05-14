@@ -61,3 +61,39 @@ class Solution {
         return 1 + getListSize(head.next);
     }
 }
+//==================================================================================
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     public int val;
+ *     public ListNode next;
+ *     ListNode(int x) { val = x; next = null; }
+ * }
+ */
+public class Solution {
+    public ListNode rotateRight(ListNode A, int B) {
+        ListNode temp=A;
+        int sz=0;
+        while(temp!=null){
+            temp=temp.next;
+            sz++;
+        }
+        B=B%sz;
+        int size=sz;
+        temp=A;
+        while(sz-B-1>0){
+            sz--;
+            temp=temp.next;
+        }
+        ListNode Alast=temp;
+        ListNode Bfist=Alast.next;
+        if(Bfist==null)return A;
+        Alast.next=null;
+        temp=Bfist;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=A;
+        return Bfist;
+    }
+}
