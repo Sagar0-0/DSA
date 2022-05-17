@@ -33,23 +33,15 @@ class Solution
 {
     //Function to find the minimum element in sorted and rotated array.
     static int minNumber(int arr[], int l, int h){
-        while(l<=h)
-   {
-       int m=(l+h)/2;
-       
-       if(m==0 || arr[m-1]>arr[m])
-       return arr[m];
-       
-       if(arr[m]<arr[h])
-       h=m-1;
-       
-       else if(arr[m]>arr[h])
-       l=m+1;
-       
-       
-   }
-   
-   return -1;
-   
-}
+        while(l<=h){
+            int m=(l+h)/2;
+            if(m==0 || arr[m-1]>arr[m])
+                return arr[m];
+            if(arr[m]<arr[h])
+                h=m-1;
+            else if(arr[m]>arr[h])
+                l=m+1;
+        }
+        return -1;
+    }
 }
