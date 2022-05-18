@@ -35,20 +35,23 @@ class GFG
 
 
 class Solution{
-   ArrayList<String> ans= new ArrayList<>();
-   void helper(String a ,String b){
-       if(b.length()==0){
-           ans.add(a);
-           return;
-       }
-       if(a.length()!=0)
-           helper(a+" "+b.charAt(0),b.substring(1));
-       helper(a+b.charAt(0),b.substring(1));
-   }
-   ArrayList<String> permutation(String S){
-       // Code Here
-       helper("",S.substring(0));
-       return ans;
-   }
-   
+    ArrayList<String> ans;
+    ArrayList<String> permutation(String S){
+        ans=new ArrayList<>();
+        helper("",S);
+        return ans;
+    }
+    public void helper(String curr,String s){
+        if(s.length()==0){
+            ans.add(curr);
+            return;
+        }
+        if(curr.length()==0){
+            helper(s.charAt(0)+"",s.substring(1));    
+            return;
+        }
+        helper(curr+" "+s.charAt(0),s.substring(1));
+        helper(curr+s.charAt(0),s.substring(1));
+    }
+    
 }
