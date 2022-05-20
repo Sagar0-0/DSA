@@ -8,7 +8,7 @@ class Solution {
         row[0] = 1 - a[0][0];
         for (int i = 1; i < n; ++i) {
             if (a[0][i] == 1 || a[0][i-1] == 1) {
-                row[i] = 0;
+                // row[i] = 0;
                 continue;
             }
             row[i] = row[i-1];
