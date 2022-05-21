@@ -4,7 +4,7 @@ class Solution {
         Arrays.fill(dp,amount+1);
         dp[0]=0;
         for(int coin:coins){
-            for(int i=coin;i<=amount;i++){//<=dp.length
+            for(int i=coin;i<=amount;i++){//<dp.length
                 dp[i]=Math.min(dp[i],dp[i-coin]+1);
             }
         }
