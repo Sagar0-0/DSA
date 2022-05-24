@@ -22,7 +22,7 @@ public class Solution {
             }
             if (left == right) {
                 maxlength = Math.max(maxlength, 2 * left);
-            } else if (left >= right){
+            } else if (left >= right) {
                 left = right = 0;
             }
         }
