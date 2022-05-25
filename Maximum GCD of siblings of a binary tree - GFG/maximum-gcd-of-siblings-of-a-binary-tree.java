@@ -32,7 +32,20 @@ class GFG {
 
 class Solution {
     static int getGCD(int a,int b){
-        return b==0 ? a : getGCD(b,a%b);
+        // Everything divides 0
+        if (a == 0)
+          return b;
+        if (b == 0)
+          return a;
+      
+        // base case
+        if (a == b)
+            return a;
+      
+        // a is greater
+        if (a > b)
+            return getGCD(a-b, b);
+        return getGCD(a, b-a);
     }
     static int maxBinTreeGCD(ArrayList<ArrayList<Integer>> arr, int N) {
         if(N==1)return 0;
