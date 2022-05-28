@@ -25,7 +25,7 @@ class Solution {
     int shortestPath( int x, int y){ 
         int max=Math.max(x,y);
         int min=Math.min(x,y);
-        int ans=0,f=0;
+        int ans=0;
         while(max!=min){
             max/=2;
             ans++;
