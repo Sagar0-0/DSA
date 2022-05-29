@@ -11,18 +11,14 @@ class Solution {
         for(int i=0;i<n-1;i++){
             for(int j=i+1;j<n;j++){
                 boolean cont=false;
-                int a=0;
-                int b=0;
                 for(int k=0;k<26;k++){
-                    a+=arr[i][k];
-                    b+=arr[j][k];
                     if(arr[i][k]>0 && arr[j][k]>0){
                         cont=true;
                         break;
                     }
                 }
                 if(cont)continue;
-                int curr=a*b;
+                int curr=words[i].length()*words[j].length();
                 ans=Math.max(ans,curr);
             }
         }
