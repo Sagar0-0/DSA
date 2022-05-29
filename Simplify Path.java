@@ -4,9 +4,9 @@ class Solution {
         
         int i = 0;
         while (i < path.length()) {
-            ++i;
+            i++;
             int l = i;
-            while (i < path.length() && path.charAt(i) != '/') ++i;
+            while (i < path.length() && path.charAt(i) != '/') i++;
             String segment = path.substring(l, i);
             
             if (segment.equals(".") || segment.isEmpty()) continue;
