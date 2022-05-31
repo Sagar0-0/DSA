@@ -1,13 +1,22 @@
 class Solution {
-    public boolean hasAllCodes(String s, int k) {
-        Set<Integer> set=new HashSet<>();
-        int n=s.length();
-        for(int i=0;i<=n-k;i++){
-            int j=i+k;
-            int num=Integer.parseInt(s.substring(i,j),2);
-            set.add(num);
+    public static boolean hasAllCodes(String s, int k) {
+        int need = 1 << k;
+        boolean[] got = new boolean[need];
+        int allOne = need - 1;
+        int hashVal = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            // calculate hash for s.substr(i-k+1,i+1)
+            hashVal = ((hashVal << 1) & allOne) | (s.charAt(i) - '0');
+            // hash only available when i-k+1 > 0
+            if (i >= k - 1 && !got[hashVal]) {
+                got[hashVal] = true;
+                need--;
+                if (need == 0) {
+                    return true;
+                }
+            }
         }
-        if(set.size()!=(int)Math.pow(2,k))return false;
-        return true;
+        return false;
     }
 }
