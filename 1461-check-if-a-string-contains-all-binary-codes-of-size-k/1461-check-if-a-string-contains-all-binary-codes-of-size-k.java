@@ -1,15 +1,13 @@
 class Solution {
     public boolean hasAllCodes(String s, int k) {
-        boolean[] vis=new boolean[(int)Math.pow(2,k)];
+        Set<Integer> set=new HashSet<>();
         int n=s.length();
         for(int i=0;i<=n-k;i++){
             int j=i+k;
             int num=Integer.parseInt(s.substring(i,j),2);
-            vis[num]=true;
+            set.add(num);
         }
-        for(boolean bool:vis){
-            if(!bool)return false;
-        }
+        if(set.size()!=(int)Math.pow(2,k))return false;
         return true;
     }
 }
