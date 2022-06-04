@@ -1,64 +1,46 @@
 class Solution {
     public List<List<String>> solveNQueens(int n) {
-        boolean[][] board=new boolean[n][n];
-        List<List<String>> list=new ArrayList<>();
-        nQueen(board,0,list);
-        return list;
+        char[][] board=new char[n][n];
+        for(int i=0;i<n;i++)
+            for(int j=0;j<n;j++)
+                board[i][j]='.';
+        int leftRow[]=new int[n];
+        int upperDiagonal[]=new int[2*n-1];
+        int lowerDiagonal[]=new int[2*n -1];
+        List<List<String>> res=new ArrayList<>();
+        solve(res, 0,board, leftRow, upperDiagonal, lowerDiagonal);
+        return res;
     }
-    void nQueen(boolean[][] board,int row,List<List<String>> ans){
-        if(row==board.length){
-            saveRes(board,ans);
+    public static void solve(List<List<String>> res, int col, char[][] board, int[] leftRow, int[] upperDiagonal, int[] lowerDiagonal)
+    {
+        int n=board.length;
+        if(col==n){
+            res.add(construct(board));
             return;
         }
-        for(int col=0;col<board.length;col++){
-            if(isSafe(board,row,col)){
-                board[row][col]=true;
-                nQueen(board,row+1,ans);
-                board[row][col]=false;
+        for(int row=0;row<board.length;row++)
+            if(leftRow[row]==0 && upperDiagonal[n-1+col-row]==0 && lowerDiagonal[row+col]==0){
+                board[row][col]='Q';
+                leftRow[row]=1;
+                upperDiagonal[n-1+col-row]=1;
+                lowerDiagonal[row+col]=1;
+                solve(res, col+1,board, leftRow, upperDiagonal, lowerDiagonal);
+                board[row][col]='.';
+                leftRow[row]=0;
+                upperDiagonal[n-1+col-row]=0;
+                lowerDiagonal[row+col]=0;
             }
-        }
+        
     }
     
-    void saveRes(boolean[][] board,List<List<String>> ans){
-        List<String> l=new ArrayList<>();
-        for(int i=0;i<board.length;i++){
-            String s="";
-            for(int j=0;j<board.length;j++){
-                if(board[i][j]){
-                    s+="Q";
-                }else{
-                    s+=".";
-                }
-            }
-            l.add(s);
+    public static List<String> construct(char[][] board){
+        List<String> fans=new ArrayList<>();
+        for(int i=0;i<board.length;i++)
+        {
+            String s=new String(board[i]);
+            // fans.add(new String(board[i]));
+            fans.add(s);
         }
-        ans.add(l);
-    }
-    
-    boolean isSafe(boolean[][] board,int row,int col){
-        //checking vertically
-        for(int i=0;i<row;i++){
-            if(board[i][col]){
-                return false;
-            }
-        }
-        
-        //checking upper left
-        int leftMin=Math.min(row,col);
-        for(int i=1;i<=leftMin;i++){
-            if(board[row-i][col-i]){
-                return false;
-            }
-        }
-        
-        //checking upper right
-        int rightMin=Math.min(row,board.length-1-col);
-        for(int i=1;i<=rightMin;i++){
-            if(board[row-i][col+i]){
-                return false;
-            }
-        }
-        //else true
-        return true;
+        return fans;
     }
 }
