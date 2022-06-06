@@ -5,10 +5,12 @@ public class Solution {
         int n=0,m=0;
         while(t1!=null){
             m++;
-            t1=t1.next;}
+            t1=t1.next;
+        }
         while(t2!=null){
             n++;
-            t2=t2.next;}
+            t2=t2.next;
+        }
         t1=headA;
         t2=headB;
         int t=m-n;
@@ -23,7 +25,8 @@ public class Solution {
             n-=t;
             while(t>0){
                 t2=t2.next;
-            t--;}
+                t--;
+            }
         }
         
         while(n>0){
