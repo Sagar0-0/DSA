@@ -21,9 +21,17 @@ class Sorted_Array {
 
 class GfG {
     int transitionPoint(int arr[], int n){
-        for(int i=0;i<n;i++){
-            if(arr[i]==1)return i;
+        int i=0;
+        int j=n;
+        int mid;
+        while(i<j){
+            mid=(i+j)/2;
+            if(arr[mid]==0){
+                i=mid+1;
+            }else{
+                j=mid;
+            }
         }
-        return -1;
+        return i==n?-1:i;
     }
 }
