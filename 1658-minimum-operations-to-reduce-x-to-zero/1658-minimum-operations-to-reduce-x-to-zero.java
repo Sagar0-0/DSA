@@ -1,24 +1,22 @@
 class Solution {
-    // class Solution {
     public int minOperations(int[] nums, int x) {
-        int current = 0;
-        for (int num : nums) {
-            current += num;
-        }
-        int n = nums.length;
-        int mini = Integer.MAX_VALUE;
-        int left = 0;
+        
+        int k = 0;
+		for(int i = 0; i < nums.length; ++i)k  += nums[i];
+		k -= x;
+		
+		int globalMax = -1;
+		int windowSum = 0;
+		int left = 0;
 
-        for (int right = 0; right < n; right++) {
-            current -= nums[right];
-            while (current < x && left <= right) {
-                current += nums[left];
-                left += 1;
-            }
-            if (current == x) {
-                mini = Math.min(mini, (n-1-right)+left);
-            }
-        }
-        return mini != Integer.MAX_VALUE ? mini : -1;
+		for (int i = 0; i < nums.length; i++) {
+			windowSum += nums[i];
+			while (left <= i && windowSum > k) {
+				windowSum -= nums[left];
+				++left;
+			}
+            if(windowSum == k)globalMax = Math.max(globalMax, i - left + 1);
+		}
+		return globalMax==-1?-1:nums.length - globalMax;
     }
 }
