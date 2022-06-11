@@ -25,9 +25,7 @@ public class Solution {
                 currLar=currLar.next;
             }
         }
-        if(largers.next!=null){
-            curr.next=largers.next;
-        }
+        curr.next=largers.next;
         return ans.next;
     }
 }
