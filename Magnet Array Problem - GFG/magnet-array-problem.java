@@ -54,7 +54,7 @@ class Solution {
         while(low<high){
             double mid=(low+high)/2.0;
             double frc=force(arr,n,mid);
-            if(Math.abs(frc)<0.000000001){
+            if(Math.abs(frc)<0.0000001){
                 return mid;
             }else if(frc<0){
                 high=mid;
