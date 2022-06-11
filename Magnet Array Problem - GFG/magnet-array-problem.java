@@ -50,16 +50,19 @@ class Solution {
             getAnswer[i]=solve(n,magnets,magnets[i],magnets[i+1]);
         }
     }
-    public double solve(int n,double arr[],double str,double end){
-        double mid=(str+end)/2.0;
-        double frc=force(arr,n,mid);
-        if(Math.abs(frc)<0.000000000008)return mid;
-        
-        if(frc>0){
-            return solve(n,arr,mid,end);
-        }else{
-            return solve(n,arr,str,mid);
+    public double solve(int n,double arr[],double low,double high){
+        while(low<high){
+            double mid=(low+high)/2.0;
+            double frc=force(arr,n,mid);
+            if(Math.abs(frc)<0.000000001){
+                return mid;
+            }else if(frc<0){
+                high=mid;
+            }else{
+                low=mid;
+            }
         }
+        return low;
     }
     public double force(double arr[],int n,double mid){
         double frc=0.00;
