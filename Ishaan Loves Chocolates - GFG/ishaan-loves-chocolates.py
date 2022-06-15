@@ -1,6 +1,6 @@
 #User function Template for python3
 
-def chocolates (arr, n) : 
+def chocolates (arr, n):
     return min(arr)
     
 
