@@ -1,0 +1,24 @@
+public class Solution {
+    // DO NOT MODIFY THE LIST
+    public int repeatedNumber(final List<Integer> a) {
+        int n = a.size();
+        HashMap<Integer, Integer> h = new HashMap<Integer, Integer>();
+        for(int i = 0; i < n; i++){
+            int x = a.get(i), times = 0;
+            if(h.containsKey(x)){
+                times = h.get(x);
+                h.put(x, times + 1);
+                times++;
+                
+            }else{
+                h.put(x, 1);
+                times = 1;
+            }
+            if(times > n / 3){
+                return x;
+            }
+        }
+        return -1;
+    }
+}
+
