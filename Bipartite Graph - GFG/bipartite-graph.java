@@ -42,7 +42,7 @@ class Solution
         boolean[] color=new boolean[100000];
         Queue<Integer> q=new LinkedList<>();
         for(int i=0;i<adj.size();i++){
-            if(adj.get(i).size()==0 || vis[i])continue;
+            if(vis[i])continue;
             q.add(i);
             vis[i]=true;
             color[i]=true;
