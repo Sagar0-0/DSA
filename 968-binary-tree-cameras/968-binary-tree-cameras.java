@@ -1,29 +1,27 @@
 class Solution {
-    int ans;
-    Set<TreeNode> covered;
+    private int NOT_MONITORED = 0;
+    private int MONITORED_NOCAM = 1;
+    private int MONITORED_WITHCAM = 2;
+    private int cameras = 0;
+    
     public int minCameraCover(TreeNode root) {
-        ans = 0;
-        covered = new HashSet();
-        covered.add(null);
-
-        dfs(root, null);
-        return ans;
+        int top = dfs(root);
+        return top == NOT_MONITORED ? cameras+1 :cameras;
+        
     }
     
-    public void dfs(TreeNode node, TreeNode par) {
-        if (node != null) {
-            dfs(node.left, node);
-            dfs(node.right, node);
-
-            if (par == null && !covered.contains(node) ||
-                    !covered.contains(node.left) ||
-                    !covered.contains(node.right)) {
-                ans++;
-                covered.add(node);
-                covered.add(par);
-                covered.add(node.left);
-                covered.add(node.right);
-            }
+    private int dfs (TreeNode root){
+        if(root == null)    return MONITORED_NOCAM;
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        
+        if (left == MONITORED_NOCAM && right == MONITORED_NOCAM) {
+            return NOT_MONITORED;
+        } else if (left == NOT_MONITORED || right == NOT_MONITORED) {
+            cameras++;
+            return MONITORED_WITHCAM;
+        } else {
+            return MONITORED_NOCAM;
         }
     }
 }
