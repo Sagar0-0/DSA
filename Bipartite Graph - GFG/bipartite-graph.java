@@ -38,8 +38,8 @@ class Solution
 {
     public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj)
     {
-        boolean[] vis=new boolean[100000];
-        boolean[] color=new boolean[100000];
+        boolean[] vis=new boolean[V+1];
+        boolean[] color=new boolean[V+1];
         Queue<Integer> q=new LinkedList<>();
         for(int i=0;i<adj.size();i++){
             if(vis[i])continue;
