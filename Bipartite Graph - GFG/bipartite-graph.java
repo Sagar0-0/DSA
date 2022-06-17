@@ -36,29 +36,8 @@ class GFG
 
 class Solution
 {
-    public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>graph)
+    public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj)
     {
-        boolean[]vis=new boolean[100000];
-        boolean[]color=new boolean[100000];
-        Queue<Integer> q=new LinkedList<>();
-        for(int i=0;i<graph.size();i++){
-            if(graph.get(i).size()==0 || vis[i])continue;
-            q.add(i);
-            vis[i]=true;
-            color[i]=true;
-            while(!q.isEmpty()){
-                int node=q.remove();
-                for(int neb:graph.get(node)){
-                    if(!vis[neb]){
-                        q.add(neb);
-                        vis[neb]=true;
-                        color[neb]=!color[node];
-                    }else if(color[neb]==color[node]){
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
+        // Code here
     }
 }
