@@ -7,11 +7,10 @@ class Solution {
     public int minCameraCover(TreeNode root) {
         int top = dfs(root);
         return top == NOT_MONITORED ? cameras+1 :cameras;
-        
     }
     
     private int dfs (TreeNode root){
-        if(root == null)    return MONITORED_NOCAM;
+        if(root == null)return MONITORED_NOCAM;
         int left = dfs(root.left);
         int right = dfs(root.right);
         
