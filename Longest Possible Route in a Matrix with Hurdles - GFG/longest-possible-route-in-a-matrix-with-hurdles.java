@@ -96,32 +96,39 @@ class GFG {
 
 
 class Solution {
-    public static int longestPath(int[][] mat,int n,int m,int xs,int ys,int xd,int yd) {
-        // code here
-        int ans = solveLongestPath(mat,n,m,xs,ys,xd,yd);
-        return ans < 0 ? -1 : ans;
+    static int xd;
+    static int yd;
+    public static int longestPath(int[][] mat,int n,int m,int xs,int ys,int x,int y) {
+        xd=x;
+        yd=y;
+        boolean[][]vis=new boolean[n][m];
+        int ans=dfs(mat,xs,ys,vis);
+        return ans<0?-1:ans;
+    }
+    public static int dfs(int[][]mat,int x,int y,boolean[][]vis){
+        if(!valid(mat,x,y,vis))return Integer.MIN_VALUE;
+        if(x==xd && y==yd)return 0;
+        
+        vis[x][y]=true;
+        
+        int ans=Integer.MIN_VALUE;
+        
+        if(valid(mat,x+1,y,vis))
+            ans=Math.max(ans,1+dfs(mat,x+1,y,vis));
+        if(valid(mat,x,y+1,vis))
+            ans=Math.max(ans,1+dfs(mat,x,y+1,vis));
+        if(valid(mat,x-1,y,vis))
+            ans=Math.max(ans,1+dfs(mat,x-1,y,vis));
+        if(valid(mat,x,y-1,vis))
+            ans=Math.max(ans,1+dfs(mat,x,y-1,vis));
+            
+        vis[x][y]=false;
+        return ans;
     }
     
-    private static int solveLongestPath(int[][] mat,int n,int m,int xs,int ys,int xd,int yd){
-        if(mat[xs][ys]==0) return Integer.MIN_VALUE;
-        if(xs==xd && ys==yd) return 0;
-        mat[xs][ys] = 0;
-        int maxMovesRequired = Integer.MIN_VALUE;
-        if(xs+1<n){
-            maxMovesRequired = Math.max(maxMovesRequired,1+solveLongestPath(mat,n,m,xs+1,ys,xd,yd));
-        }
-        if(xs-1>=0){
-            maxMovesRequired = Math.max(maxMovesRequired,1+solveLongestPath(mat,n,m,xs-1,ys,xd,yd));
-        }
-        if(ys+1<m){
-            maxMovesRequired = Math.max(maxMovesRequired,1+solveLongestPath(mat,n,m,xs,ys+1,xd,yd));
-        }
-        if(ys-1>=0){
-            maxMovesRequired = Math.max(maxMovesRequired,1+solveLongestPath(mat,n,m,xs,ys-1,xd,yd));
-        }
-        
-        mat[xs][ys] = 1;
-        return maxMovesRequired;
+    public static boolean valid(int[][]mat,int x,int y,boolean[][]vis){
+        if(x<0 || y<0 || x==mat.length || y==mat[0].length)return false;
+        if(mat[x][y]==0 || vis[x][y])return false;
+        return true;
     }
 }
-
