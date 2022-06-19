@@ -6,7 +6,7 @@ class Solution {
             List<String> toAdd = new ArrayList();
             String key = searchWord.substring(0,i);
             for(String product : products) {
-                if(product.length() >= i && product.indexOf(key) == 0) {
+                if(product.indexOf(key) == 0) {
                     toAdd.add(product);
                     if(toAdd.size() == 3) break;
                 }
