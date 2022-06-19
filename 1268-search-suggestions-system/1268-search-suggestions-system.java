@@ -1,67 +1,18 @@
-
-class Trie {
-    class Node {
-        boolean isWord = false;
-        List<Node> children = Arrays.asList(new Node[26]);
-    };
-    Node Root, curr;
-    List<String> resultBuffer;
-    
-    void dfsWithPrefix(Node curr, String word) {
-        if (resultBuffer.size() == 3)
-            return;
-        if (curr.isWord)
-            resultBuffer.add(word);
-
-        // Run DFS on all possible paths.
-        for (char c = 'a'; c <= 'z'; c++)
-            if (curr.children.get(c - 'a') != null)
-                dfsWithPrefix(curr.children.get(c - 'a'), word + c);
-    
-    }
-    
-    Trie() {
-        Root = new Node();
-    }
-    
-    void insert(String s) {
-
-        curr = Root;
-        for (char c : s.toCharArray()) {
-            if (curr.children.get(c - 'a') == null)
-                curr.children.set(c - 'a', new Node());
-            curr = curr.children.get(c - 'a');
-        }
-
-        // Mark this node as a completed word.
-        curr.isWord = true;
-    }
-    List<String> getWordsStartingWith(String prefix) {
-        curr = Root;
-        resultBuffer = new ArrayList<String>();
-        // Move curr to the end of prefix in its trie representation.
-        for (char c : prefix.toCharArray()) {
-            if (curr.children.get(c - 'a') == null)
-                return resultBuffer;
-            curr = curr.children.get(c - 'a');
-        }
-        dfsWithPrefix(curr, prefix);
-        return resultBuffer;
-    }
-};
 class Solution {
-    List<List<String>> suggestedProducts(String[] products,
-                                         String searchWord) {
-        Trie trie = new Trie();
-        List<List<String>> result = new ArrayList<>();
-        // Add all words to trie.
-        for (String w : products)
-            trie.insert(w);
-        String prefix = new String();
-        for (char c : searchWord.toCharArray()) {
-            prefix += c;
-            result.add(trie.getWordsStartingWith(prefix));
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+        List<List<String>> ret = new ArrayList();
+        Arrays.sort(products);
+        for(int i = 1; i <= searchWord.length(); i++) {
+            List<String> toAdd = new ArrayList();
+            String key = searchWord.substring(0,i);
+            for(String product : products) {
+                if(product.length() >= i && product.indexOf(key) == 0) {
+                    toAdd.add(product);
+                    if(toAdd.size() == 3) break;
+                }
+            }
+            ret.add(toAdd);
         }
-        return result;
+        return ret;
     }
-};
+}
