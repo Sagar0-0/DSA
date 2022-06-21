@@ -110,45 +110,41 @@ class GFG
 //     } 
 // }
 
-
 class Solution{
-    static int ans;
+    
     // Return the size of the largest sub-tree which is also a BST
-    static int largestBst(Node root){
-        if(root==null)return 0;
-        ans=0;
-        checkBST(root);
-        return ans;
-    }
-    static boolean checkBST(Node root){
-        if(root==null)return true;
-        boolean isLeftBST=checkBST(root.left);
-        boolean isRightBST=checkBST(root.right);
-        boolean isLeftSmaller=true;
-        boolean isRightLarger=true;
-        if(root.left!=null && isLeftBST){
-            if(getMAX(root.left)>=root.data)isLeftSmaller=false;
+    
+    static class NodeValue{
+        int maxValue;
+        int minValue;
+        int size;
+        NodeValue(int minValue, int maxValue,int size){
+            this.maxValue = maxValue;
+            this.minValue = minValue;
+            this.size = size;
         }
-        if(root.right!=null && isRightBST){
-            if(getMIN(root.right)<=root.data)isRightLarger=false;
+    }
+    
+    static NodeValue largestBstHelper(Node root){
+        if(root == null){
+            return new NodeValue(Integer.MAX_VALUE,Integer.MIN_VALUE,0);
         }
-        boolean isBST=isLeftSmaller && isRightLarger && isLeftBST && isRightBST;
-        if(isBST){
-            ans=Math.max(ans,count(root));
+        
+        NodeValue left = largestBstHelper(root.left);
+        NodeValue right = largestBstHelper(root.right);
+        
+        if(root.data > left.maxValue && root.data < right.minValue){
+            return new NodeValue(Math.min(root.data,left.minValue),Math.max(root.data,right.maxValue),left.size+right.size+1);
         }
-        return isBST;
+        else{
+            return new NodeValue(Integer.MIN_VALUE,Integer.MAX_VALUE,Math.max(left.size,right.size));
+        }
     }
-    static int count(Node root){
-        if(root==null)return 0;
-        return 1+count(root.left)+count(root.right);
-    }
-    static int getMIN(Node root){
-        if(root.left==null)return root.data;
-        return getMIN(root.left);
-    }
-    static int getMAX(Node root){
-        if(root.right==null)return root.data;
-        return getMAX(root.right);
+    static int largestBst(Node root)
+    {
+        // Write your code here
+        return largestBstHelper(root).size;
+        
     }
     
 }
