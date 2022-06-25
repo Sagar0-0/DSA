@@ -18,8 +18,7 @@ class Solution {
                     if(i+1==a.length-1){
                         a[i+1]=a[i];
                     }else{
-                        if(a[i+2]>a[i+1])
-                            a[i+1]=a[i+2];
+                        a[i+1]=a[i+2];
                     }
                     if(a[i]>a[i+1])return false;
                 }
