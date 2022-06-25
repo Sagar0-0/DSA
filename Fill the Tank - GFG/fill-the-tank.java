@@ -40,12 +40,10 @@ class Solution
     long minimum_amount(int [][]Edges, int N, int S, int []cap)
     {
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for(int i=0; i<=N; i++)
-        {
+        for(int i=0; i<=N; i++){
             adj.add(new ArrayList<>());
         }
-        for(int i=0; i<Edges.length; i++)
-        {
+        for(int i=0; i<Edges.length; i++){
             adj.get(Edges[i][0]).add(Edges[i][1]);
             adj.get(Edges[i][1]).add(Edges[i][0]);
         }
@@ -53,14 +51,12 @@ class Solution
         long ans = ans(adj,S,cap,visited);
         return visited[0] ? -1 : ans;
     }
-    long ans(ArrayList<ArrayList<Integer>> adj, int s, int[] cap, boolean[] visited)
-    {
+    long ans(ArrayList<ArrayList<Integer>> adj, int s, int[] cap, boolean[] visited){
         long res = -1;
         visited[s] = true;
         int sz = 0;
-        for(int x: adj.get(s))
-        {
-            if(visited[x]) continue;
+        for(int x: adj.get(s)){
+            if(visited[x])continue;
             sz++;
             long cur = ans(adj,x,cap,visited);
             if(cur>10E17) visited[0] = true;
