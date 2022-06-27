@@ -3,7 +3,7 @@ class Solution {
         int res = 0;
         for(int i=9; i>=1; i--) {
             
-            String ch = String.valueOf(i);
+            String ch = Integer.toString(i);
             
             if( n.contains(ch) ) {
                 res = i;
