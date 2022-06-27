@@ -1,9 +1,18 @@
 class Solution {
     public int minPartitions(String n) {
-        int max=0;
-        for(char c:n.toCharArray()){
-            max=Math.max(max,c-'0');
+        int res = 0;
+        for(int i=9; i>=1; i--) {
+            
+            String ch = String.valueOf(i);
+            
+            if( n.contains(ch) ) {
+                res = i;
+                break;
+            }
+                
         }
-        return max;
+        
+        return res;
+        
     }
 }
