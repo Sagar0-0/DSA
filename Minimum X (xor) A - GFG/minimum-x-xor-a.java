@@ -24,35 +24,35 @@ class GFG {
 
 
 // User function Template for Java
+//1001
+//1011
+//bitsA=2
+//bitsB=3
+
+//1101
+//1001
+//0100
+
+
 
 class Solution {
-   public static int minVal(int a, int b) {
-       // code here
-       if(count(a)==count(b))
-           return a;
-       int count = count(b);
-       int x=a;
-       while(count(x)<count)
-           x++;
-       while(count(x)>count)
-           x--;
-       while(count(x)==count)
-       {
-           int xor1 = ((x+1)^a);
-           int xor2 = x^a;
-           if(xor1<xor2)
-               x++;
-           else
-               break;
-           while(count(x)<count)
-               x++;
-       }
-       if(count(x)>count)
-           x--;
-       return x;
-   }
-   static int count(int num)
-   {
-       return Integer.bitCount(num);
-   }
+    public static int minVal(int a, int b) {
+        int bitsA=Integer.bitCount(a);
+        int bitsB=Integer.bitCount(b);
+        int diff=Math.abs(bitsA-bitsB);
+        
+        if(diff==0)return a;
+        else if(bitsA>bitsB){
+            while(diff>0){
+                a = a&(a-1);
+                diff--;
+            }
+        }else{
+            while(diff>0){
+                a = a|(a+1);
+                diff--;
+            }
+        }
+        return a;
+    }
 }
