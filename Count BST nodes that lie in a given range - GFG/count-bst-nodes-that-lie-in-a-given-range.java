@@ -110,21 +110,29 @@ class GfG {
 
 
 // A Binary Search Tree node
+
+
 class Solution
 {
-    int cnt = 0;
-    void inorder(Node root,int l,int h){
-        if(root==null) return;
-        inorder(root.left,l,h);
-        int k = root.data;
-        if(k<=h && k>=l) cnt++;
-        inorder(root.right,l,h);
-    }
+    int ans;
     //Function to count number of nodes in BST that lie in the given range.
     int getCount(Node root,int l, int h)
     {
-        cnt = 0;
-        inorder(root,l,h);
-        return cnt;
+        ans=0;
+        dfs(root,l,h);
+        return ans;
+    }
+    void dfs(Node root,int l,int h){
+        if(root==null)return;
+        if(root.data>=l && root.data<=h){
+            ans++;
+            dfs(root.left,l,h);
+            dfs(root.right,l,h);
+        }else if(root.data<l){
+            dfs(root.right,l,h);
+        }else{
+            dfs(root.left,l,h);
+        }
+        
     }
 }
