@@ -118,6 +118,7 @@ class Solution
     //Function to count number of nodes in BST that lie in the given range.
     int getCount(Node root,int l, int h)
     {
+        //Your code here
         ans=0;
         dfs(root,l,h);
         return ans;
@@ -133,6 +134,5 @@ class Solution
         }else{
             dfs(root.left,l,h);
         }
-        
     }
 }
