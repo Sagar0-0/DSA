@@ -53,12 +53,6 @@ class Solution {
    }
    static int count(int num)
    {
-       int count = 0, temp = num;
-       while(temp!=0)
-       {
-           count += temp%2;
-           temp = temp>>1;
-       }
-       return count;
+       return Integer.bitCount(num);
    }
 }
