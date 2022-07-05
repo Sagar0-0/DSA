@@ -123,20 +123,22 @@ class Node{
 }*/
 class Tree
 {
-    public ArrayList<Integer> diagonal(Node root){
-        Queue<Node> q=new LinkedList<>();
-        ArrayList<Integer> ans=new ArrayList<>();
-        q.add(root);
-        while(!q.isEmpty()){
-            Node temp=q.remove();
-            while(temp!=null){
-                if(temp.left!=null){
-                    q.add(temp.left);
-                }
-                ans.add(temp.data);
-                temp=temp.right;
-            }
-        }
-        return ans;
-    }
+     public ArrayList<Integer> diagonal(Node root)
+      {
+           //add your code here.
+           Queue<Node> q=new LinkedList<>();
+           ArrayList<Integer> ans=new ArrayList<>();
+           q.add(root);
+           while(!q.isEmpty()){
+               Node temp=q.remove();
+               while(temp!=null){
+                   if(temp.left!=null){
+                       q.add(temp.left);
+                   }
+                   ans.add(temp.data);
+                   temp=temp.right;
+               }
+           }
+           return ans;
+      }
 }
