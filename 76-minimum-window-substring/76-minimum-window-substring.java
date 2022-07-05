@@ -1,48 +1,25 @@
-public class Solution {
-    public String minWindow(String A, String B) {
-        int want=B.length();
-        int count=0;
-        StringBuilder sb=new StringBuilder();
-        String ans=null;
-        Map<Character,Integer> map=new HashMap<>();
-        Map<Character,Integer> curr=new HashMap<>();
-        for(char c:B.toCharArray()){
-            map.put(c,map.getOrDefault(c,0)+1);
+class Solution {
+    public String minWindow(String s, String t) {
+        int[] cs = new int[256];
+        for (char ch : t.toCharArray()) {
+            cs[ch]++;
         }
-        
-        int i=0;
-        int j=0;
-        while(j<A.length()){
-            if(count==want){
-                if(ans==null || ans.length()>sb.length()){
-                    ans=sb.toString();
+        int l = 0, r = 0, cnt = t.length();
+        int start = -1, end = s.length(); // substring [start, end)
+        while (r < s.length()) {
+            if (cs[s.charAt(r++)]-- > 0) {
+                cnt--;
+            }
+            while (cnt == 0) {
+                if (cs[s.charAt(l++)]++ == 0) {
+                    cnt++;
                 }
-                char c=A.charAt(j);
-                sb.deleteCharAt(0);
-                curr.put(c,curr.get(c)-1);
-                if(!map.containsKey(c)){
-                    j++;
-                    continue;
+                if (r - l + 1 < end - start) {
+                    start = l - 1;
+                    end = r;
                 }
-                if(curr.get(c)<map.get(c)){
-                    count--;
-                }
-                j++;
-            }else{
-                if(i==A.length())break;
-                char c=A.charAt(i);
-                sb.append(c);
-                curr.put(c,curr.getOrDefault(c,0)+1);
-                if(!map.containsKey(c)){
-                    i++;
-                    continue;
-                }
-                if(curr.get(c)<=map.get(c)){
-                    count++;
-                }
-                i++;
             }
         }
-        return ans==null?"":ans;
+        return end - start > s.length() ? "" : s.substring(start, end);
     }
 }
