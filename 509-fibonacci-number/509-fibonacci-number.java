@@ -1,8 +1,6 @@
 class Solution{
     static long mod = 1000000007;
-    
-    long[][] multiply(long [][]m1, long[][]m2)
-    {
+    long[][] multiply(long [][]m1, long[][]m2){
         long ans[][] =new long[2][2];
         for(int i=0;i<2;i++)
             for(int j=0;j<2;j++)
@@ -21,10 +19,9 @@ class Solution{
     
     public int fib(int N){
        long n = N;
-        if(n==0)return 0;
-       if(n==1 || n==0)return 1;
+       if(n==1 || n==0)return N;
        long mat[][] = {{1,1},{1,0}};
-       mat = matPow(mat,n);
-       return (int) (mat[1][0]%mod);
+       mat = matPow(mat,n-1);
+       return (int) (mat[0][0]%mod);
     }
 }
