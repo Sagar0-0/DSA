@@ -1,5 +1,5 @@
 # Brain Game
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">2 players A and&nbsp;B take&nbsp;turns alternatively to play a game in which they have N numbers on a paper. In one turn, a player can replace one of the numbers by any of its factor (except for 1 &amp; the number itself).&nbsp;The player who is unable to make a move looses the game. Find the winner of the game if A starts the game and both play optimally.</span><br>
 &nbsp;</p>
