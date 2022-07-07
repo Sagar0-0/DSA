@@ -45,7 +45,7 @@ class Solution
     {
         int ans=0;
         for(int num:nums){
-            if(!isPrime(num))ans=ans^(primeFactors(num)-1);
+            if(!isPrime(num))ans=ans^(primeFactors(num)+1);
         }
         return ans!=0;
     }
