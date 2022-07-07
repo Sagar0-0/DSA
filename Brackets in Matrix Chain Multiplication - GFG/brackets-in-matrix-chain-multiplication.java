@@ -57,23 +57,17 @@ class Solution{
 	// Please refer below article for details of this
 	// function
 	// https://goo.gl/k6EYKj
-	static String matrixChainOrder(int p[], int n)
-	{
+	static String matrixChainOrder(int p[], int n){
 		int[][] m = new int[n][n];
         st = "";
-		for (int L = 2; L < n; L++)
-		{
-			for (int i = 1; i < n - L + 1; i++)
-			{
+		for (int L = 2; L < n; L++){
+			for (int i = 1; i < n - L + 1; i++){
 				int j = i + L - 1;
 				m[i][j] = Integer.MAX_VALUE;
-				for (int k = i; k <= j - 1; k++)
-				{
-
+				for (int k = i; k <= j - 1; k++){
 					// q = cost/scalar multiplications
 					int q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
-					if (q < m[i][j])
-					{
+					if (q < m[i][j]){
 						m[i][j] = q;
 
 						// Each entry m[j,ji=k shows
