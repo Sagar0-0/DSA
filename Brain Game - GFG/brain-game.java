@@ -47,13 +47,11 @@ class Solution
         for(int num:nums){
             if(!isPrime(num))ans=ans^(primeFactors(num)-1);
         }
-        if(ans==0)return false;
-        return true;
+        return ans!=0;
     }
     
     int primeFactors(int n)
     {
-        if(isPrime(n))return 0;
         int ans = 0;
         int num =n;
         for(int i=2; i<=num/2; i++)
@@ -73,6 +71,5 @@ class Solution
               return false;
         }
         return true;
-
     }
 }
