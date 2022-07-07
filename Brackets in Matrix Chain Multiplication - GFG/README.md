@@ -1,5 +1,5 @@
 # Brackets in Matrix Chain Multiplication
-## Hard 
+##  Hard 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an array&nbsp;<strong>p[]</strong>&nbsp;of length <strong>n </strong>used to denote the dimensions of a series of matrices such that&nbsp;dimension of <strong>i'th</strong> matrix is <strong>p[i] * p[i+1]</strong>. There are a total of&nbsp;<strong>n-1</strong> matrices.&nbsp;Find the most efficient way to multiply these matrices together.&nbsp;<br>
 The problem is not actually to perform the multiplications, but merely to decide in which order to perform the multiplications such that you need to perform minimum number of multiplications. There are&nbsp;many options to multiply a chain of matrices because matrix multiplication is associative i.e.&nbsp;no matter how one&nbsp;parenthesize the product, the result will be the same.</span></p>
