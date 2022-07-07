@@ -53,6 +53,7 @@ class Solution
     
     int primeFactors(int n)
     {
+        if(isPrime(n))return 0;
         int ans = 0;
         int num =n;
         for(int i=2; i<=num/2; i++)
