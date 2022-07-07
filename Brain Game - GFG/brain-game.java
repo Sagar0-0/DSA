@@ -32,75 +32,48 @@ class GFG
 
 
 //User function Template for Java
+//2
+
+
+//2 4  4  0
+//00010
+
 
 class Solution
 {
-    public boolean brainGame(int[] nums){
-        int[]primeFactor=new int[1001];
-        for(int i=2;i<=1000;i++){
-            if(!isPrime(i)){
-                primeFactor[i]=primeFactors(i)-1;
-            }
-        }
-        int x=0;
+    public boolean brainGame(int[] nums)
+    {
+        int ans=0;
         for(int num:nums){
-            x=x^primeFactor[num];
+            if(!isPrime(num))ans=ans^(primeFactors(num)-1);
         }
-        if(x==0)return false;
+        if(ans==0)return false;
         return true;
     }
-    
     
     int primeFactors(int n)
     {
-        // to store the count of prime factors
-        int ans = 0 ;
-        // Print the number of 2s that divide n
-        while (n % 2 == 0)
+        int ans = 0;
+        int num =n;
+        for(int i=2; i<=num/2; i++)
         {
-            ans++;
-            n = n/2;
-        }
-
-        // n must be odd at this point. So we can skip
-        // one element (Note i = i +2)
-        for (int i = 3; i <= Math.sqrt(n); i = i + 2)
-        {
-            // While i divides n, print i and divide n
-            while (n % i == 0)
+            while(n%i == 0)
             {
                 ans++;
-                n = n/i;
+                n/= i;
             }
         }
-
-        // This condition is to handle the case when n
-        // is a prime number greater than 2
-        if (n > 2)
-            ans++;
         return ans;
     }
-    boolean isPrime(int n){
+    
+    boolean isPrime(int n)
+    {
  
-        // Check if number is less than
-        // equal to 1
-        if (n <= 1)
-            return false;
- 
-        // Check if number is 2
-        else if (n == 2)
-            return true;
- 
-        // Check if n is a multiple of 2
-        else if (n % 2 == 0)
-            return false;
- 
-        // If not, then just check the odds
-        for (int i = 3; i <= Math.sqrt(n); i += 2)
-        {
-            if (n % i == 0)
-                return false;
+        for(int i=2;i<=Math.sqrt(n);i++){
+            if(n%i==0)
+              return false;
         }
         return true;
+
     }
 }
