@@ -92,11 +92,13 @@ class Solution
         Node temp2=p2;
         while(temp1!=null && temp2!=null){
             if(temp1.pow==temp2.pow){
-                Node newNode=new Node(temp1.coeff+temp2.coeff,temp1.pow);
-                curr.next=newNode;
-                curr=curr.next;
+                Node newNode=temp1;
+                newNode.coeff=temp1.coeff+temp2.coeff;
                 temp1=temp1.next;
                 temp2=temp2.next;
+                newNode.next=null;
+                curr.next=newNode;
+                curr=curr.next;
             }else if(temp1.pow>temp2.pow){
                 Node newNode=temp1;
                 temp1=temp1.next;
