@@ -96,19 +96,19 @@ class Solution
                 newNode.coeff=temp1.coeff+temp2.coeff;
                 temp1=temp1.next;
                 temp2=temp2.next;
-                newNode.next=null;
+                // newNode.next=null;
                 curr.next=newNode;
                 curr=curr.next;
             }else if(temp1.pow>temp2.pow){
                 Node newNode=temp1;
                 temp1=temp1.next;
-                newNode.next=null;
+                // newNode.next=null;
                 curr.next=newNode;
                 curr=curr.next;
             }else{
                 Node newNode=temp2;
                 temp2=temp2.next;
-                newNode.next=null;
+                // newNode.next=null;
                 curr.next=newNode;
                 curr=curr.next;
             }
