@@ -86,38 +86,34 @@ class Solution
     public static Node addPolynomial(Node p1,Node p2)
     {
         //Add your code here.
-        Node ans=new Node(-1,-1);
+        Node ans =new Node(-1,-1);
         Node curr=ans;
         Node temp1=p1;
         Node temp2=p2;
         while(temp1!=null && temp2!=null){
             if(temp1.pow==temp2.pow){
-                Node newNode=temp1;
-                newNode.coeff=temp1.coeff+temp2.coeff;
+                curr.next=new Node(temp1.coeff+temp2.coeff,temp1.pow);
+                curr=curr.next;
                 temp1=temp1.next;
                 temp2=temp2.next;
-                // newNode.next=null;
-                curr.next=newNode;
+            }else if(temp2.pow<temp1.pow){
+                curr.next=new Node(temp1.coeff,temp1.pow);
                 curr=curr.next;
-            }else if(temp1.pow>temp2.pow){
-                Node newNode=temp1;
                 temp1=temp1.next;
-                // newNode.next=null;
-                curr.next=newNode;
-                curr=curr.next;
             }else{
-                Node newNode=temp2;
-                temp2=temp2.next;
-                // newNode.next=null;
-                curr.next=newNode;
+                curr.next=new Node(temp2.coeff,temp2.pow);
                 curr=curr.next;
+                temp2=temp2.next;
             }
         }
+        
         if(temp1!=null){
             curr.next=temp1;
-        }else if(temp2!=null){
+        }
+        if(temp2!=null){
             curr.next=temp2;
         }
+        
         return ans.next;
     }
 }
