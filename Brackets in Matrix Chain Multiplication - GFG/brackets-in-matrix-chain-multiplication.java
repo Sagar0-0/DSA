@@ -23,68 +23,42 @@ class GFG{
 }// } Driver Code Ends
 
 
+//User function Template for Java
+
 class Solution{
-    static char name;
-    static String st;
-	// Function for printing the optimal
-	// parenthesization of a matrix chain product
-	static void printParenthesis(int i, int j, int n, int[][] bracket)
-	{
-		// If only one matrix left in current segment
-		if (i == j)
-		{
-		    st+=name;
-		    name++;
-			return;
-		}
-
-		st+='(';
-
-		// Recursively put brackets around subexpression
-		// from i to bracket[j][i].
-		// Note that "*((bracket+j*n)+i)" is similar to
-		// bracket[i][j]
-		printParenthesis(i, bracket[j][i], n, bracket);
-
-		// Recursively put brackets around subexpression
-		// from bracket[j][i] + 1 to i.
-		printParenthesis(bracket[j][i] + 1, j, n, bracket);
-
-		st+=')';
-	}
-
-	// Matrix Ai has dimension p[i-1] x p[i] for i = 1..n
-	// Please refer below article for details of this
-	// function
-	// https://goo.gl/k6EYKj
-	static String matrixChainOrder(int p[], int n){
-		int[][] m = new int[n][n];
-        st = "";
-		for (int L = 2; L < n; L++){
-			for (int i = 1; i < n - L + 1; i++){
-				int j = i + L - 1;
-				m[i][j] = Integer.MAX_VALUE;
-				for (int k = i; k <= j - 1; k++){
-					// q = cost/scalar multiplications
-					int q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
-					if (q < m[i][j]){
-						m[i][j] = q;
-
-						// Each entry m[j,ji=k shows
-						// where to split the product arr
-						// i,i+1....j for the minimum cost.
-						m[j][i] = k;
-					}
-				}
-			}
-		}
-
-		// The first matrix is printed as 'A', next as 'B',
-		// and so on
-		name = 'A';
-
-		printParenthesis(1, n - 1, n, m);
-		return st;
-	}
-
+    static char matrix;
+    static String ans;
+    static String matrixChainOrder(int p[], int n){
+        // code here
+        matrix='A';
+        ans="";
+        int[][]dp=new int[n][n];
+        int[][]path=new int[n][n];
+        for(int pair=2;pair<n;pair++){
+            for(int i=1;i<=n-pair;i++){
+                int j=i+pair-1;
+                dp[i][j]=Integer.MAX_VALUE;
+                for(int k=i;k<j;k++){
+                    int temp= dp[i][k]+dp[k+1][j]+ p[i-1]*p[k]*p[j];
+                    if(temp<dp[i][j]){
+                        dp[i][j]=temp;
+                        path[i][j]=k;
+                    }
+                }
+            }
+        }
+        dfs(1,n-1,path);
+        return ans;
+    }
+    static void dfs(int i,int j,int[][]path){
+        if(i==j){
+            ans+=matrix;
+            matrix++;
+            return;
+        }
+        ans+='(';
+        dfs(i,path[i][j],path);
+        dfs(path[i][j]+1,j,path);
+        ans+=')';
+    }
 }
