@@ -1,72 +1,100 @@
 class Solution {
-    // Maximum cost possible plus 1
-    final int MAX_COST = 1000001;
+    
+    static final int MAX_COST = 1000001;
     
     public int minCost(int[] houses, int[][] cost, int m, int n, int target) {
-        int[][] prevMemo = new int[target + 1][n];
-      
-        // Initialize prevMemo array
-        for (int i = 0; i <= target; i++) {
-            Arrays.fill(prevMemo[i], MAX_COST);
-        }
-            
-        // Initialize for house 0, neighborhood will be 1
-        for (int color = 1; color <= n; color++) {
-            if (houses[0] == color) {
-                // If the house has same color, no cost
-                prevMemo[1][color - 1] = 0;
-            } else if (houses[0] == 0) {
-                // If the house is not painted, assign the corresponding cost
-                prevMemo[1][color - 1] = cost[0][color - 1];
+        // dp(i, j, k): house, color, group
+        int[][][] dp = new int[m][n][target]; 
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                for (int k = 0; k < target; k++) {
+                    dp[i][j][k] = MAX_COST;
+                }
             }
+        }
+         
+        if (houses[0] == 0) {
+            for (int j = 0; j < n; j++) {
+                dp[0][j][target - 1] = cost[0][j];
+            } 
+        } else {
+            int j = houses[0] - 1;
+            dp[0][j][target - 1] = 0;
         }
         
-        for (int house = 1; house < m; house++) {
-            int[][] memo = new int[target + 1][n];
-      
-            // Initialize memo array
-            for (int i = 0; i <= target; i++) {
-                Arrays.fill(memo[i], MAX_COST);
+        
+        int lr = target - 1;
+        
+        for (int i = 1; i < m; i++) {
+            int hr = m - i;
+            if (hr >= target) {
+                hr = target - 1;
             }
             
-            for (int neighborhoods = 1; neighborhoods <= Math.min(target, house + 1); neighborhoods++) {
-                for (int color = 1; color <= n; color++) {
+            if (houses[i] > 0) {
+                int j = houses[i] - 1;
+                for (int remaining = hr; remaining >= lr; remaining--) {
+                    // not change
+                    dp[i][j][remaining] = Math.min(dp[i][j][remaining], dp[i - 1][j][remaining]);
                     
-                    // If the house is already painted, and color is different
-                    if (houses[house] != 0 && color != houses[house]) {
-                        // Cannot be painted with different color
-                        continue;
+                    // change
+                    if (houses[i - 1] > 0 && houses[i - 1] - 1 != j) {
+                        dp[i][j][remaining - 1] = Math.min(dp[i][j][remaining - 1], dp[i - 1][houses[i - 1] - 1][remaining]);
+                    } else {
+                        dp[i][j][remaining - 1] = Math.min(dp[i][j][remaining - 1], min(dp[i - 1], j, remaining));
                     }
- 
-                    int currCost = MAX_COST;
-                    // Iterate over all the possible color for previous house
-                    for (int prevColor = 1; prevColor <= n; prevColor++) {
-                        if (prevColor != color) {
-                            // Decrement the neighborhood as adjacent houses has different color
-                            currCost = Math.min(currCost, prevMemo[neighborhoods - 1][prevColor - 1]);
+                }
+                
+                if (lr == 1) {
+                    dp[i][j][0] = Math.min(dp[i][j][0], dp[i - 1][j][0]);
+                }
+            } else {
+                for (int j = 0; j < n; j++) {
+                    for (int remaining = hr; remaining >= lr; remaining--) {
+                        // not change
+                        int a = dp[i - 1][j][remaining];
+                        int b = cost[i][j];
+                        dp[i][j][remaining] = Math.min(dp[i][j][remaining], dp[i - 1][j][remaining] + cost[i][j]);
+
+                        // change
+                        if (houses[i - 1] > 0 && houses[i - 1] - 1 != j) {
+                            dp[i][j][remaining - 1] = Math.min(dp[i][j][remaining - 1], dp[i - 1][houses[i - 1] - 1][remaining] + cost[i][j]);
                         } else {
-                            // Previous house has the same color, no change in neighborhood count
-                            currCost = Math.min(currCost, prevMemo[neighborhoods][color - 1]);
+                            dp[i][j][remaining - 1] = Math.min(dp[i][j][remaining - 1], min(dp[i - 1], j, remaining) + cost[i][j]);
                         }
                     }
 
-                    // If the house is already painted cost to paint is 0
-                    int costToPaint = houses[house] != 0 ? 0 : cost[house][color - 1];
-                    memo[neighborhoods][color - 1] = currCost + costToPaint;
+                    if (lr == 1) {
+                        dp[i][j][0] = Math.min(dp[i][j][0], dp[i - 1][j][0] + cost[i][j]);
+                    }
                 }
             }
-            // Update the table to have the current house results
-            prevMemo = memo;
+            
+            if (lr > 1) {
+                lr--;
+            }
         }
         
-        int minCost = MAX_COST;
-        // Find the minimum cost with m houses and target neighborhoods
-        // By comparing cost for different color for the last house
-        for (int color = 1; color <= n; color++) {
-            minCost = Math.min(minCost, prevMemo[target][color - 1]);
+        int min = dp[m - 1][0][0];
+        for (int j = 1; j < n; j++) {
+            if (dp[m - 1][j][0] < min) {
+                min = dp[m - 1][j][0];
+            }
         }
-        
-        // Return -1 if the answer is MAX_COST as it implies no answer possible
-        return minCost == MAX_COST ? -1 : minCost;
+
+        return min < MAX_COST ? min : -1;
     }
+    
+    private int min(int[][] minCost, int j, int remaining) {
+        int min = Integer.MAX_VALUE;
+        for (int k = 0; k < minCost.length; k++) {
+            if (k != j && minCost[k][remaining] < min) {
+                min = minCost[k][remaining];
+            }
+        }
+        
+        return min;
+    }
+    
 }
