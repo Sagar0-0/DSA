@@ -92,16 +92,17 @@ class Solution
         Node temp2=p2;
         while(temp1!=null && temp2!=null){
             if(temp1.pow==temp2.pow){
-                curr.next=new Node(temp1.coeff+temp2.coeff,temp1.pow);
+                temp1.coeff=temp1.coeff+temp2.coeff;
+                curr.next=temp1;
                 curr=curr.next;
                 temp1=temp1.next;
                 temp2=temp2.next;
             }else if(temp2.pow<temp1.pow){
-                curr.next=new Node(temp1.coeff,temp1.pow);
+                curr.next=temp1;
                 curr=curr.next;
                 temp1=temp1.next;
             }else{
-                curr.next=new Node(temp2.coeff,temp2.pow);
+                curr.next=temp2;
                 curr=curr.next;
                 temp2=temp2.next;
             }
