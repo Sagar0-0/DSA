@@ -97,21 +97,24 @@ class Solution {
         // code here
         ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
         ArrayList<Integer> curr=new ArrayList<>();
+        int i=0;
+        int j=0;
         curr.add(grid[0][0]);
-        dfs(ans,curr,0,0,grid);
+        dfs(ans,curr,i,j,grid);
         return ans;
     }
-    static void dfs(ArrayList<ArrayList<Integer>> ans,ArrayList<Integer> curr,int i,int j,int[][]grid){
+    static void dfs(ArrayList<ArrayList<Integer>> ans,ArrayList<Integer>curr,int i,int j,int[][]grid){
         if(i==grid.length-1 && j==grid[0].length-1){
             ans.add(new ArrayList<>(curr));
             return;
         }
+        
+        
         if(valid(i+1,j,grid)){
             curr.add(grid[i+1][j]);
             dfs(ans,curr,i+1,j,grid);
             curr.remove(curr.size()-1);
         }
-        
         if(valid(i,j+1,grid)){
             curr.add(grid[i][j+1]);
             dfs(ans,curr,i,j+1,grid);
@@ -119,7 +122,7 @@ class Solution {
         }
     }
     static boolean valid(int i,int j,int[][]grid){
-        if(i<0 || j<0 || i==grid.length || j==grid[0].length)return false;
+        if(i==grid.length || j==grid[0].length)return false;
         return true;
     }
 }
