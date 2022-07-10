@@ -57,6 +57,9 @@ class Array {
 
 
 //User function Template for Java
+//2 4 10
+//10 2 4
+
 
 
 class Complete{
@@ -68,23 +71,24 @@ class Complete{
         ArrayList<Integer> ans=new ArrayList<>();
         Arrays.sort(arr);
         int flag=0;
-        int i=arr.length-1;
-        int j=0;
-        while(i>=j){
-            ans.add(arr[i]);
-            flag+=arr[i];
-            if(i!=j){
-                ans.add(arr[j]);
-                flag-=arr[j];
-            }
-            i--;
-            j++;
-        }
         
+        int end=arr.length-1;
+        int start=0;
+        while(end>=start){
+            ans.add(arr[end]);
+            flag+=arr[end];
+            if(end!=start){
+                ans.add(arr[start]);
+                flag-=arr[start];
+            }
+            end--;
+            start++;
+        }
         if(flag==0){
             ans.clear();
             ans.add(-1);
         }
+        
         return ans;
     }
     
