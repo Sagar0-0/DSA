@@ -52,7 +52,6 @@ class Solution {
                 else{
                     dp[i][j] = Math.min(dp[i-1][j], dp[i-1][k]+1);
                 }
-                
             }
             
         }
