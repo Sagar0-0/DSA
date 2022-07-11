@@ -35,8 +35,8 @@ class Solution {
         
         int MAX = 501;
         
-        for(int i=0;i<=n;i++) dp[i][0]=1;
         for(int i=0;i<=m;i++) dp[0][i]=MAX;
+        for(int i=0;i<=n;i++) dp[i][0]=1;
         
         
         for(int i=1;i<=n;i++) {
@@ -49,7 +49,7 @@ class Solution {
                 }
                 
                 if(k<0) dp[i][j]=1;
-                else {
+                else{
                     dp[i][j] = Math.min(dp[i-1][j], dp[i-1][k]+1);
                 }
                 
