@@ -21,23 +21,19 @@ class GFG {
     }
 }// } Driver Code Ends
 
-
-//User function Template for Java
-
+//s ka character (i-1)
+//t ki range(rightmost same char in range 0 to j)
 class Solution {
     static int shortestUnSub(String S, String T) {
         // code here
-        if(S.equals(T))return -1;
-        
         int n=S.length(), m=T.length();
         
         int [][] dp = new int[n+1][m+1];
         
-        int MAX = 501;
+        int MAX = 600;
         
-        for(int i=0;i<=m;i++) dp[0][i]=MAX;
         for(int i=0;i<=n;i++) dp[i][0]=1;
-        
+        for(int i=0;i<=m;i++) dp[0][i]=MAX;
         
         for(int i=1;i<=n;i++) {
             
@@ -45,13 +41,16 @@ class Solution {
                 
                 int k;
                 for(k=j-1;k>=0;k--) {
-                    if(T.charAt(k)==S.charAt(i-1))break;
+                    if(T.charAt(k)==S.charAt(i-1)) break;
                 }
                 
                 if(k<0) dp[i][j]=1;
-                else{
+                else {
+                    
                     dp[i][j] = Math.min(dp[i-1][j], dp[i-1][k]+1);
+                    
                 }
+                
             }
             
         }
