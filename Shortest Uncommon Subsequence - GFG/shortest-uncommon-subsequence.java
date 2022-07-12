@@ -21,41 +21,50 @@ class GFG {
     }
 }// } Driver Code Ends
 
-//s ka character (i-1)
-//t ki range(rightmost same char in range 0 to j)
+
+//bcda
+//bcd
+
+
+//dp[i][j]=Math.min(dp[i-1][j],dp[i-1][k]+ 1)
+
+
+//User function Template for Java
+
 class Solution {
     static int shortestUnSub(String S, String T) {
         // code here
-        int n=S.length(), m=T.length();
+        int n=S.length();
+        int m=T.length();
+        int[][]dp=new int[n+1][m+1];
         
-        int [][] dp = new int[n+1][m+1];
-        
-        int MAX = 600;
-        
-        for(int i=0;i<=n;i++) dp[i][0]=1;
-        for(int i=0;i<=m;i++) dp[0][i]=MAX;
-        
-        for(int i=1;i<=n;i++) {
-            
-            for(int j=1;j<=m;j++) {
-                
-                int k;
-                for(k=j-1;k>=0;k--) {
-                    if(T.charAt(k)==S.charAt(i-1)) break;
-                }
-                
-                if(k<0) dp[i][j]=1;
-                else {
-                    
-                    dp[i][j] = Math.min(dp[i-1][j], dp[i-1][k]+1);
-                    
-                }
-                
-            }
-            
+        for(int i=0;i<=n;i++){
+            dp[i][0]=1;
         }
         
-        if(dp[n][m] >= MAX) return -1;
+        int MAX=501;
+        for(int j=0;j<=m;j++){
+            dp[0][j]=MAX;
+        }
+        
+        
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                int k;
+                for(k=j-1;k>=0;k--){
+                    if(S.charAt(i-1)==T.charAt(k))break;
+                }
+                
+                if(k==-1){
+                    dp[i][j]=1;
+                }else{
+                    dp[i][j]=Math.min(dp[i-1][j],dp[i-1][k]+ 1);
+                }
+            }
+        }
+        
+        if(dp[n][m]>=MAX)return -1;
+        
         return dp[n][m];
         
     }
