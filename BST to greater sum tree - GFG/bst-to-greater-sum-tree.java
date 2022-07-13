@@ -126,16 +126,17 @@ class Tree {
 } */
 class Solution
 {
-    public static void transformTree (Node root)
-    {
-        dfs(root,new int[]{0});
+    static int sum;
+    public static void transformTree (Node root){
+        sum=0;
+        dfs(root);
     }
-    static void dfs(Node root,int[] sum){
+    static void dfs(Node root){
         if(root==null)return;
-        dfs(root.right,sum);
+        dfs(root.right);
         int t=root.data;
-        root.data=sum[0];
-        sum[0]+=t;
-        dfs(root.left,sum);
+        root.data=sum;
+        sum+=t;
+        dfs(root.left);
     }
 }
