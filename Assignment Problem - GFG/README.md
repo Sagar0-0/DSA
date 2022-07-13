@@ -29,8 +29,8 @@ and job 2 to person 2 for a total for 3+1 = 4.</span></pre>
 <span style="font-size:18px">3 
 <strong>Explanation: </strong>
 The optimal arrangement would be to assign 
-job 1 to person 2,job 2 to person 3 and job 
-3 to person 1.</span></pre>
+job 1 to person 3,job 2 to person 1 and job 
+3 to person 2.</span></pre>
 
 <p>&nbsp;</p>
 
