@@ -6,8 +6,7 @@ class Solution {
     static int UNDELETED = 0;
 
     public static void main(String[] args) {
-        System.out.println(assignmentProblem(new int[]{
-                28 ,30 ,81 ,56 ,52 ,97 ,17 ,17 ,53 ,98 ,65 ,74 ,7 ,16 ,80, 58 ,13, 5 ,25 ,42 ,92 ,53, 74 ,28, 49 ,92, 7, 15 ,66, 82 ,20, 85, 53 ,51 ,5 ,45 ,93 ,48, 81, 30 ,89 ,88 ,57, 7 ,22, 22, 94, 33 ,7}, 7));
+        System.out.println(assignmentProblem(new int[]{2, 1, 2, 9, 8, 1, 1, 1, 1}, 3));
     }
 
     static int assignmentProblem(int Arr[], int N) {
