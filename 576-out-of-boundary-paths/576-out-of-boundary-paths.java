@@ -1,25 +1,30 @@
 class Solution {
-  public int findPaths(int m, int n, int N, int x, int y) {
-    int M = 1000000000 + 7;
-    int dp[][] = new int[m][n];
-    dp[x][y] = 1;
-    int count = 0;
-    for (int moves = 1; moves <= N; moves++) {
-      int[][] temp = new int[m][n];
-      for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-          if (i == m - 1) count = (count + dp[i][j]) % M;
-          if (j == n - 1) count = (count + dp[i][j]) % M;
-          if (i == 0) count = (count + dp[i][j]) % M;
-          if (j == 0) count = (count + dp[i][j]) % M;
-          temp[i][j] = (
-              ((i > 0 ? dp[i - 1][j] : 0) + (i < m - 1 ? dp[i + 1][j] : 0)) % M +
-              ((j > 0 ? dp[i][j - 1] : 0) + (j < n - 1 ? dp[i][j + 1] : 0)) % M
-          ) % M;
+    int[][][] cache;
+    int MOD = 1000_000_007;
+    public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        cache = new int[m][n][maxMove + 1];
+        for(int[][] cc : cache) {
+            for(int[] c : cc) {
+                Arrays.fill(c, -1);
+            }
         }
-      }
-      dp = temp;
+        return f(m, n, maxMove, startRow, startColumn);
     }
-    return count;
-  }
+    int f(int m, int n, int max, int r, int c) {
+        if(r < 0 || c < 0 || r == m || c == n) {
+            return 1;
+        }
+        if(max == 0) {
+            return 0;
+        }
+        if(cache[r][c][max] > -1) {
+            return cache[r][c][max];
+        }
+        long l = f(m, n, max - 1, r - 1, c) % MOD;
+        l += f(m, n, max - 1, r + 1, c) % MOD;
+        l += f(m, n, max - 1, r, c + 1) % MOD;
+        l += f(m, n, max - 1, r, c - 1) % MOD;
+        cache[r][c][max] = (int)(l % MOD);
+        return cache[r][c][max];
+    }
 }
