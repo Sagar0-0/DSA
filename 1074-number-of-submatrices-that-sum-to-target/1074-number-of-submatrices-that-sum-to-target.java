@@ -1,38 +1,33 @@
 class Solution {
     public int numSubmatrixSumTarget(int[][] matrix, int target) {
-        int row = matrix.length;
-        int col = matrix[0].length;
+        int m = matrix.length;
+        int n = matrix[0].length;
         int res = 0;
-        //int[][] sum = new int[row][col];
         
-        for(int i = 0; i < row; i++){
-            for(int j = 1; j < col; j++){
-                //sum[i][j] =sum[i][j-1] + matrix[i][j-1];
-                matrix[i][j] += matrix[i][j-1];
-            }
-        }
-        
-        for(int start = 0; start < col; start++){
-            for(int end = start; end < col; end++){
-                int subMatrixSum = 0;
+        // traverse upper boundary
+        for (int top = 0; top < m; top++) {
+            
+            // for each upper boundary, we have a prefix sum array
+            int[] sum = new int[n];
+            
+            // traverse lower boundary
+            for (int bottom = top; bottom < m; bottom++) {
                 
-                Map<Integer, Integer> countElm = new HashMap<Integer, Integer>();
-                countElm.put(0,1);
-                
-                for(int k = 0; k < row; k++){
-                    //subMatrixSum += sum[k][end] - sum[k][start];
-                    int prefixSum = start == 0 ? 0:matrix[k][start-1];
-                    subMatrixSum += matrix[k][end] - prefixSum;
-                    
-                    if(countElm.containsKey(subMatrixSum - target))
-                        res += countElm.get(subMatrixSum - target);
-                    
-                    int r = countElm.getOrDefault(subMatrixSum, 0);
-                    countElm.put(subMatrixSum, r+1);
+                // count the prefix sum for each column
+                for (int col = 0; col < n; col++) {
+                    sum[col] += matrix[bottom][col];
+                }
+          
+                // traverse left and right boundary
+                for (int left = 0; left < n; left++) {
+                    int cnt = 0;
+                    for (int right = left; right < n; right++) {
+                        cnt += sum[right];
+                        if (cnt == target) res++;
+                    }
                 }
             }
         }
-        
         return res;
     }
 }
