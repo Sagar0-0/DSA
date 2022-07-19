@@ -1,26 +1,27 @@
 class Solution {
     public List<List<Integer>> generate(int numRows) {
-        List<List<Integer>> ans=new ArrayList<>();
-        List<Integer> base=new ArrayList<>();
-        base.add(1);
-        ans.add(base);
-        if(numRows==1)return ans;
-        List<Integer> base2=new ArrayList<>();
-        base2.add(1);
-        base2.add(1);
-        ans.add(base2);
-        if(numRows==2)return ans;
-        for(int i=0;i<numRows-2;i++){
-            List<Integer> curr=new ArrayList<>();
-            curr.add(1);
+        List<List<Integer>> triangle = new ArrayList<>();
+        
+        triangle.add(new ArrayList<Integer>());
+        triangle.get(0).add(1);
+        
+        for(int i=1; i<numRows; i++) {
+            List<Integer> row = new ArrayList<>();
+            List<Integer> previousRow = triangle.get(i-1);
             
-            List<Integer> prev=ans.get(ans.size()-1);
-            for(int j=0;j<prev.size()-1;j++){
-                curr.add(prev.get(j)+prev.get(j+1));
+            //first element is always 1
+            row.add(1);
+            
+            for(int j=1; j<i; j++) {
+                //Add two cells directly above the current row
+                row.add(previousRow.get(j-1) + previousRow.get(j));
             }
-            curr.add(1);
-            ans.add(curr);
+            
+            //last element of a row is also 1
+            row.add(1);
+            
+            triangle.add(row);
         }
-        return ans;
+        return triangle;
     }
 }
