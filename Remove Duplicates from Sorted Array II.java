@@ -23,7 +23,7 @@ class Solution {
 
 
 
-====================================================================================
+//====================================================================================
   
 //faster
 class Solution {
@@ -36,4 +36,34 @@ class Solution {
         }
         return count+1;
     }
+}
+
+//=========================================================
+public class Solution {
+	public int removeDuplicates(ArrayList<Integer> a) {
+        int extras=0;
+        int i=0;
+        int x=0;
+        while(i<a.size()){
+            int cnt=1;
+            int j=i+1;
+            while(j<a.size() && Objects.equals(a.get(j), a.get(i))){
+                cnt++;
+                j++;
+            }
+            if(cnt>1){
+                a.set(x,a.get(i));
+                x++;
+                a.set(x,a.get(i));
+                x++;
+                i=j;
+                extras+=cnt-2;
+            }else{
+                a.set(x,a.get(i));
+                x++;
+                i=j;
+            }
+        }
+        return a.size()-extras;
+	}
 }
