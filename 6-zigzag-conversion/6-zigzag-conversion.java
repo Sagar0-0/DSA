@@ -1,19 +1,32 @@
 class Solution {
     public String convert(String s, int numRows) {
-
-        if (numRows == 1) return s;
-
-        StringBuilder ret = new StringBuilder();
-        int n = s.length();
-        int cycleLen = 2 * numRows - 2;
-
-        for (int i = 0; i < numRows; i++) {
-            for (int j = 0; j + i < n; j += cycleLen) {
-                ret.append(s.charAt(j + i));
-                if (i != 0 && i != numRows - 1 && j + cycleLen - i < n)
-                    ret.append(s.charAt(j + cycleLen - i));
-            }
+        int strlen = s.length();
+    int n = numRows;
+    StringBuilder sub = new StringBuilder();
+    if(n==1 || n > strlen) {
+      return s;
+    }
+    for (int i = 0; i < n; i++) {
+      int k = i;
+      if(i==0 || i == n-1) {
+        while(k<strlen) {
+          sub.append(s.charAt(k));
+          k+= (n-1)*2;
         }
-        return ret.toString();
+      } else {
+        sub.append(s.charAt(k));
+        while(k<strlen) {
+          int j = k+ ((n-1)*2 - 2*i);
+          if(j<strlen) {
+            sub.append(s.charAt(j));
+          }
+          k+= (n-1)*2;
+          if(k<strlen) {
+            sub.append(s.charAt(k));
+          }
+        }
+      }
+    }
+        return sub.toString();
     }
 }
