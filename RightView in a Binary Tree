@@ -1,18 +1,28 @@
-class Solution {
-    public List<Integer> rightSideView(TreeNode root) {
-        List<Integer> list=new ArrayList<>();
-        int level=0;
-        rightView(root,list,level);
-        return list;
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> solve(TreeNode A) {
+        ArrayList<Integer> ans=new ArrayList<>();
+        dfs(A,ans,0);
+        return ans;
     }
-    void rightView(TreeNode root,List<Integer> list,int level){
-        if(root==null)return;
-        
-        if(level==list.size()){
-            list.add(root.val);
+    public void dfs(TreeNode a,ArrayList<Integer> ans,int level){
+        if(a==null)return;
+        if(ans.size()==level){
+            ans.add(a.val);
         }
-        
-        rightView(root.right,list,level+1);
-        rightView(root.left,list,level+1);
-    }  
+        dfs(a.right,ans,level+1);
+        dfs(a.left,ans,level+1);
+    }
 }
