@@ -1,13 +1,24 @@
 class Solution {
+    private int[] dp;
+
     public int combinationSum4(int[] nums, int target) {
-        int[]dp=new int[target+1];
-        dp[0]=1;
-        for(int i=1;i<target+1;i++){
-            dp[i]=0;
-            for(int n:nums){
-                if(i-n>=0)dp[i]+=dp[i-n];
+        dp = new int[target + 1];
+        Arrays.fill(dp, -1);
+        dp[0] = 1;
+        return helper(nums, target);
+    }
+
+    private int helper(int[] nums, int target) {
+        if (dp[target] != -1) 
+            return dp[target];
+
+        int res = 0;
+        for (int num: nums) {
+            if (target >= num) {
+                res += helper(nums, target - num);
             }
         }
-        return dp[target];
+        return dp[target] = res;
+        // res;
     }
 }
