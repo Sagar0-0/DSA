@@ -1,17 +1,26 @@
 class Solution {
-    public int countVowelPermutation(int N) {
+    public int countVowelPermutation(int n) {
         int mod=(int)Math.pow(10,9)+7;
-        int[][]dp=new int[5][N+1];
-        for(int i=0;i<5;i++){
-            dp[i][1]=1;
+        Map<Character,Integer> map=new HashMap<>();
+        map.put('a',1);
+        map.put('e',1);
+        map.put('i',1);
+        map.put('o',1);
+        map.put('u',1);
+        for(int x=2;x<=n;x++){
+            int a=((map.get('e') +map.get('i'))%mod +map.get('u'))%mod;
+            int e=(map.get('a') +map.get('i'))%mod;
+            int i=(map.get('e')+map.get('o'))%mod;
+            int o=map.get('i');
+            int u=(map.get('i')+map.get('o'))%mod;
+            map.put('a',a);
+            map.put('e',e);
+            map.put('i',i);
+            map.put('o',o);
+            map.put('u',u);
         }
-        for(int n=2;n<=N;n++){
-            dp[0][n]= ((dp[1][n-1]+dp[2][n-1])%mod +dp[4][n-1])%mod;
-            dp[1][n]= (dp[0][n-1]+dp[2][n-1])%mod;
-            dp[2][n]= (dp[1][n-1]+dp[3][n-1])%mod;
-            dp[3][n]= dp[2][n-1];
-            dp[4][n]=(dp[2][n-1]+dp[3][n-1])%mod;
-        }
-        return ( ((dp[0][N]+dp[1][N])%mod + (dp[2][N]+dp[3][N])%mod)%mod +dp[4][N] )%mod;
+        
+        return
+( ((map.get('a')+map.get('e'))%mod + (map.get('i')+map.get('o'))%mod)%mod + map.get('u'))%mod;
     }
 }
