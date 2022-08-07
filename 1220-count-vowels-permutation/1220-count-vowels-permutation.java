@@ -1,26 +1,17 @@
 class Solution {
-    int mod=1000000007;
     public int countVowelPermutation(int n) {
-        int[] f=new int[5];
+        int mod=(int)Math.pow(10,9)+7;
+        int[][]dp=new int[5][n+1];
         for(int i=0;i<5;i++){
-            f[i]=1;
+            dp[i][1]=1;
         }
-        for(int i=1;i<n;i++){
-            int f0=((f[1]+f[2])%mod+f[4])%mod;
-            int f1=(f[0]+f[2])%mod;
-            int f2=(f[1]+f[3])%mod;
-            int f3=f[2];
-            int f4=(f[2]+f[3])%mod;
-            f[0]=f0;
-            f[1]=f1;
-            f[2]=f2;
-            f[3]=f3;
-            f[4]=f4;
+        for(int level=2;level<=n;level++){
+            dp[0][level]= ((dp[1][level-1] + dp[2][level-1])%mod +dp[4][level-1])%mod;
+            dp[1][level]= (dp[0][level-1] + dp[2][level-1])%mod;
+            dp[2][level]= (dp[1][level-1] + dp[3][level-1])%mod;
+            dp[3][level]=dp[2][level-1];
+            dp[4][level]=(dp[2][level-1] + dp[3][level-1])%mod;
         }
-        int result=0;
-        for(int i=0;i<5;i++){
-            result=(result+f[i])%mod;
-        }
-        return result;
+        return (((dp[0][n]+dp[1][n])%mod +(dp[2][n]+dp[3][n])%mod)%mod +dp[4][n])%mod;
     }
 }
