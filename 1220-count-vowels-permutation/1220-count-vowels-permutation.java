@@ -1,26 +1,26 @@
 class Solution {
+    int mod=1000000007;
     public int countVowelPermutation(int n) {
-        int mod=(int)Math.pow(10,9)+7;
-        Map<Character,Integer> map=new HashMap<>();
-        map.put('a',1);
-        map.put('e',1);
-        map.put('i',1);
-        map.put('o',1);
-        map.put('u',1);
-        for(int x=2;x<=n;x++){
-            int a=((map.get('e') +map.get('i'))%mod +map.get('u'))%mod;
-            int e=(map.get('a') +map.get('i'))%mod;
-            int i=(map.get('e')+map.get('o'))%mod;
-            int o=map.get('i');
-            int u=(map.get('i')+map.get('o'))%mod;
-            map.put('a',a);
-            map.put('e',e);
-            map.put('i',i);
-            map.put('o',o);
-            map.put('u',u);
+        int[] f=new int[5];
+        for(int i=0;i<5;i++){
+            f[i]=1;
         }
-        
-        return
-( ((map.get('a')+map.get('e'))%mod + (map.get('i')+map.get('o'))%mod)%mod + map.get('u'))%mod;
+        for(int i=1;i<n;i++){
+            int f0=((f[1]+f[2])%mod+f[4])%mod;
+            int f1=(f[0]+f[2])%mod;
+            int f2=(f[1]+f[3])%mod;
+            int f3=f[2];
+            int f4=(f[2]+f[3])%mod;
+            f[0]=f0;
+            f[1]=f1;
+            f[2]=f2;
+            f[3]=f3;
+            f[4]=f4;
+        }
+        int result=0;
+        for(int i=0;i<5;i++){
+            result=(result+f[i])%mod;
+        }
+        return result;
     }
 }
