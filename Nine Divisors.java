@@ -11,7 +11,7 @@ class Solution{
         //fill sieve
         for(int i=2;i*i<=size;i++){
             if(prime[i]==i){
-                for(int j=i+i;j<=size;j+=i){
+                for(int j=i*i;j<=size;j+=i){
                     if(prime[j]==j){
                         prime[j]=i;
                     }
