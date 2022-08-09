@@ -8,15 +8,10 @@ class Solution {
         for (int i = 0; i < n; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
-                if (arr[j]*arr[j] > arr[i])break;
-                if (arr[i] % arr[j] == 0 && idxs.containsKey(arr[i]/arr[j])) {
-                    if (arr[j]*arr[j] == arr[i]) {
-                        dp[i] += dp[j]*dp[j];
-                        dp[i] %= mod;
-                    }
-                    else {
-                        dp[i] += 2*dp[j]*dp[idxs.get(arr[i]/arr[j])];
-                        dp[i] %= mod;
+                if (arr[i] % arr[j] == 0) { // A[j] is left child
+                    int right = arr[i] / arr[j];
+                    if (idxs.containsKey(right)) {
+                        dp[i] = (dp[i] + dp[j] * dp[idxs.get(right)]) % mod;
                     }
                 }
             }
