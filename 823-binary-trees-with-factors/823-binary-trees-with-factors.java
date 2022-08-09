@@ -8,7 +8,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             dp[i] = 1;
             for (int j = 0; j < i; j++) {
-                if (arr[i] % arr[j] == 0) { // A[j] is left child
+                if (arr[i] % arr[j] == 0) {
                     int right = arr[i] / arr[j];
                     if (idxs.containsKey(right)) {
                         dp[i] = (dp[i] + dp[j] * dp[idxs.get(right)]) % mod;
