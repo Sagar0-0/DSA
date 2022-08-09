@@ -9,6 +9,7 @@
 - Become an active member🔥
 - Contribute and get Appreciated🤝
 
+> *I contribute 3 Code per day*
 <br>
 
 # ➡️Platforms covered:
@@ -33,4 +34,24 @@
 </a>
 
 <br>
+<br>
+<br>
 
+# ☕My Profiles:
+<a href="https://leetcode.com/sagar0_0/">
+<img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg" width=200px>
+</a>
+
+<br>
+<br>
+
+<a href="https://auth.geeksforgeeks.org/user/0sagar0/practice">
+<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200817185016/gfg_complete_logo_2x-min.png" width=200px>
+</a>
+
+<br>
+<br>
+
+<a href="https://www.interviewbit.com/profile/sagar0_0">
+<img src="https://assets.interviewbit.com/packs/images/logo.87a398.svg" width=200px>
+</a>
