@@ -67,16 +67,16 @@ class Solution{
 };
 
 
-Another Approach :: 
+// Another Approach :: 
 
-We can use Vector, and store the char as 'L' when we move to left of node in 'R' when me move to right of node, in a common vector, 
-when we got to find first number, we then store all that data to vector named First, similarily for second number we save to vector named Second,
-now in main function we would traverse through, First and Second vector so as to remove common char stored for common Nodes, then after the common 
-nodes have been filtered, we travese in both vectors separately so as to count number of points when char has been changed from the previous char, as that
-would mean a turn from LEFT to RIGHT or from RIGHT to LEFT, also just after removing the common nodes we would check if we have traversed any vector completely, 
-that would mean that one of the node is ancestor to other, in that case we would not increment an extra for a turn at an ancestor node..
+// We can use Vector, and store the char as 'L' when we move to left of node in 'R' when me move to right of node, in a common vector, 
+// when we got to find first number, we then store all that data to vector named First, similarily for second number we save to vector named Second,
+// now in main function we would traverse through, First and Second vector so as to remove common char stored for common Nodes, then after the common 
+// nodes have been filtered, we travese in both vectors separately so as to count number of points when char has been changed from the previous char, as that
+// would mean a turn from LEFT to RIGHT or from RIGHT to LEFT, also just after removing the common nodes we would check if we have traversed any vector completely, 
+// that would mean that one of the node is ancestor to other, in that case we would not increment an extra for a turn at an ancestor node..
   
-  MY code : 
+//   MY code : 
 
 class Solution{
   public:
