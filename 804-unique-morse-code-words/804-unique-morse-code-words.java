@@ -1,18 +1,28 @@
 class Solution {
+    //gou
     public int uniqueMorseRepresentations(String[] words) {
-        Set<String> set=new HashSet<>();
-        for(String s:words){
-            String morse=getMorse(s);
-            set.add(morse);
+
+        String[] MORSE = new String[]{
+            ".-","-...","-.-.","-..",".","..-.","--.",
+            "....","..",".---","-.-",".-..","--","-.",
+            "---",".--.","--.-",".-.","...","-","..-",
+            "...-",".--","-..-","-.--","--.."};
+        
+        Set<String> uniqueSet = new HashSet<>();
+        for (String word : words) {
+            uniqueSet.add(convertToMorseStr(MORSE, word));
         }
-        return set.size();
+        
+        return uniqueSet.size();
     }
-    String getMorse(String s){
-        String[] m=new String[]{".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
-        StringBuilder ans=new StringBuilder();
-        for(char c:s.toCharArray()){
-            ans.append(m[c-'a']);
+    
+    private String convertToMorseStr(String[] MORSE, String word) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < word.length(); i++) {
+            sb.append(MORSE[word.charAt(i)-'a']);
         }
-        return ans.toString();
+        return sb.toString();
     }
+    
+    
 }
