@@ -35,3 +35,63 @@ class Solution
         return true;
     }
 }
+
+//Approach-2
+
+class Solution
+{
+    int count;
+    static boolean isSafe(int[][] grid,int row,int col,boolean[][] visited,int ROW,int COL)
+    {
+        if(row<0 || col<0 || row>=ROW || col>=COL || visited[row][col] || grid[row][col]==0)
+            return false;
+        return true;    
+    }
+
+    
+    void DFS(int[][] grid,int row,int col,boolean[][] visited,int ROW,int COL)
+    {
+        int[] x = { -1, -1, -1, 0, 0, 1, 1, 1 };
+        int[] y = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+        visited[row][col] = true;
+
+        for (int k = 0; k < 8; k++) 
+        {
+            if (isSafe(grid, row + x[k], col + y[k],visited, ROW, COL)) 
+            {
+                count++;
+                DFS(grid, row + x[k], col + y[k],visited, ROW, COL);
+            }
+        }
+    }
+    
+    public int findMaxArea(int[][] grid)
+    {
+        int ROW = grid.length;
+        int COL = grid[0].length;
+        
+        boolean[][] visited = new boolean[ROW][COL];
+
+        int result = 0;
+      
+        for (int i = 0; i < ROW; i++) 
+        {
+            for (int j = 0; j < COL; j++) 
+            {
+                
+                if (grid[i][j] == 1 && !visited[i][j]) 
+                {
+                    count = 1;
+                    DFS(grid, i, j, visited, ROW, COL);
+
+                    result = Math.max(result, count);
+                }
+            }
+        }
+        return result;
+    }
+}
+
+    
+   
