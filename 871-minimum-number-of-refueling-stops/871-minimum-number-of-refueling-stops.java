@@ -18,14 +18,12 @@ class Solution {
         }
 
         // Repeat body for station = (target, inf)
-        // {
-            tank -= target - prev;
+         tank -= target - prev;
             while (!pq.isEmpty() && tank < 0) {
                 tank += pq.poll();
                 ans++;
             }
             if (tank < 0) return -1;
-        // }
 
         return ans;
     }
