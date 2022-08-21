@@ -1,74 +1,116 @@
 class Solution {
     public int[] movesToStamp(String stamp, String target) {
-        int M = stamp.length(), N = target.length();
-        Queue<Integer> queue = new ArrayDeque();
-        boolean[] done = new boolean[N];
-        Stack<Integer> ans = new Stack();
-        List<Node> A = new ArrayList();
+        char[] s = stamp.toCharArray();
+        char[] t = target.toCharArray();
+        int m = s.length, n = t.length, count = 0; // count chars replaced successfully
 
-        for (int i = 0; i <= N-M; ++i) {
-            // For each window [i, i+M), A[i] will contain
-            // info on what needs to change before we can
-            // reverse stamp at this window.
-
-            Set<Integer> made = new HashSet();
-            Set<Integer> todo = new HashSet();
-            for (int j = 0; j < M; ++j) {
-                if (target.charAt(i+j) == stamp.charAt(j))
-                    made.add(i+j);
-                else
-                    todo.add(i+j);
-            }
-
-            A.add(new Node(made, todo));
-
-            // If we can reverse stamp at i immediately,
-            // enqueue letters from this window.
-            if (todo.isEmpty()) {
-                ans.push(i);
-                for (int j = i; j < i + M; ++j) if (!done[j]) {
-                    queue.add(j);
-                    done[j] = true;
+        boolean[] visited = new boolean[n];
+        int[] res = new int[n];
+        int top = res.length;
+        while (count < n) {
+            boolean stamped = false;
+            for (int i = 0; i <= n - m; i++)
+                if (!visited[i] && canStamp(i, s, t)) {
+                    visited[i] = true;
+                    // System.out.printf("%s%d\n%s\n%s%s\n\n", " ".repeat(i), i, new String(t), " ".repeat(i), new String(s));
+                    count = stamp(i, s, t, count);
+                    stamped = true; // successfully stamped this round
+                    res[--top] = i; // add result
+                    if (count == n) break; // all stamped
                 }
+            
+            if (!stamped) return new int[0]; // nothing found, return an empty array
+        }
+        
+        return Arrays.copyOfRange(res, top, res.length);
+    }
+    
+    private int stamp(int start, char[] s, char[] t, int count) {
+        for (int i = 0; i < s.length; i++)
+            if (t[start + i] != '*') {
+                t[start + i] = '*';
+                count++;
             }
+        
+        return count;
+    }
+    
+    private boolean canStamp(int start, char[] s, char[] t) {
+        int count = 0;
+        for (int i = 0; i < s.length; i++) {
+            if (t[start + i] == '*') count++;
+            else if (t[start + i] != '*' && s[i] != t[start + i])
+                return false;
         }
 
-        // For each enqueued letter (position),
-        while (!queue.isEmpty()) {
-            int i = queue.poll();
-
-            // For each window that is potentially affected,
-            // j: start of window
-            for (int j = Math.max(0, i-M+1); j <= Math.min(N-M, i); ++j) {
-                if (A.get(j).todo.contains(i)) {  // This window is affected
-                    A.get(j).todo.remove(i);
-                    if (A.get(j).todo.isEmpty()) {
-                        ans.push(j);
-                        for (int m: A.get(j).made) if (!done[m]) {
-                            queue.add(m);
-                            done[m] = true;
-                        }
-                    }
-                }
-            }
-        }
-
-        for (boolean b: done)
-            if (!b) return new int[0];
-
-        int[] ret = new int[ans.size()];
-        int t = 0;
-        while (!ans.isEmpty())
-            ret[t++] = ans.pop();
-
-        return ret;
+        return count != s.length;
     }
 }
 
-class Node {
-    Set<Integer> made, todo;
-    Node(Set<Integer> m, Set<Integer> t) {
-        made = m;
-        todo = t;
-    }
-}
+/*
+Case 0:
+"abc"
+"abababcbcbababcbc"
+
+    4
+abababcbcbababcbc
+    abc
+
+      6
+abab***bcbababcbc
+      abc
+
+            12
+abab*****bababcbc
+            abc
+
+              14
+abab*****bab***bc
+              abc
+
+  2
+abab*****bab*****
+  abc
+
+          10
+ab*******bab*****
+          abc
+
+0
+ab*******b*******
+abc
+
+        8
+*********b*******
+        abc
+
+
+
+Case 1:
+"abc"
+"ababc"
+
+  2
+ababc
+  abc
+  
+0
+ab***
+abc
+
+"abca"
+"aabcaca"
+
+ 1
+aabcaca
+ abca
+ 
+   3
+a****ca
+   abca
+   
+0
+a******
+abca
+
+*/
