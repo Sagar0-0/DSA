@@ -79,8 +79,10 @@ public:
     // jo bhi ho raha hain pop function m ho raha hain
     int pop() {
         int i = stack.size() - 1;
-        if (i < 0) return -1;
-        if (i > 0) inc[i - 1] += inc[i];
+        if (i < 0) return -1; // if stack is empty
+        if (i > 0) inc[i - 1] += inc[i]; // here if we have added more to current then increment to the previous values too.
+        // like in case of 5, 100 and again 2, 100
+        // do dry run you will understand better.
         int res = stack[i] + inc[i];
         stack.pop_back();
         inc.pop_back();
@@ -89,6 +91,6 @@ public:
 
     void increment(int k, int val) {
         int i = min(k, (int)stack.size()) - 1;
-        if (i >= 0) inc[i] += val;
+        if (i >= 0) inc[i] += val; // here comes the use of increment vector
     }        
 };
