@@ -1,0 +1,65 @@
+class Solution
+{
+    //Function to return Breadth First Traversal of given graph.
+    public ArrayList<Integer> articulationPoints(int V,ArrayList<ArrayList<Integer>> adj)
+    {
+       int[] tIn=new int[V];  // Time of insertion
+        int[] low=new int[V]; // Lowest  time insertion
+        boolean[] visited=new boolean[V];
+        int[] isArticulationPoint=new int[V]; //It work as a hash set not contain duplicate elements. contain element as Index.
+        ArrayList<Integer> ans=new ArrayList<>();
+        int timer=0;
+        for (int i = 0; i <V ; i++) {
+             if(visited[i]==false){
+                 dfs(i,-1,tIn,low,timer,visited,isArticulationPoint,adj);
+             }
+
+        }
+        for (int i = 0; i <V ; i++) {
+            if(isArticulationPoint[i]==1){
+                ans.add(i);
+            }
+            
+        }
+      if(ans.size()==0){
+            ans.add(-1);
+            return ans;
+        }
+        return ans;
+
+
+    }
+
+    private void dfs(int Node, int parent, int[] tIn, int[] low, int timer, boolean[] visited, int[] isArticulationPoint,  ArrayList<ArrayList<Integer>> adj) {
+        visited[Node]=true;
+        tIn[Node]=low[Node]=timer++;
+        int child=0;  // This help for root element  , checking child of all individual elements
+        for (int ad:adj.get(Node)) {// ad= adjacent element
+            if(ad==parent){
+                continue;
+            }
+            if(visited[ad]==false){
+                dfs(ad,Node,tIn,low,timer,visited,isArticulationPoint,adj);
+                low[Node]=Math.min(low[ad],low[Node]);
+                if(low[ad]>=tIn[Node]&&parent!=-1){
+                    isArticulationPoint[Node]=1;
+                }
+
+
+                child++;
+            }
+            
+
+            else  {
+                low[Node]=Math.min(tIn[ad],low[Node]);
+            }
+
+
+        }
+        if(child>1&&parent==-1){
+            isArticulationPoint[Node]=1;
+        }
+
+
+    }
+}
