@@ -98,3 +98,74 @@ class Solution{
     }
 
 };
+
+// Another approach
+
+// class Solution{
+//   public:
+//   vector<string> ans;
+  
+//     bool isValidIp(string &s)
+//     {
+//         string temp = "";
+        
+//         for(int i=0; i<s.length(); i++)
+//         {
+//             if(s[i] != '.')
+//                 temp.push_back(s[i]);
+                
+//             else
+//             {
+//                 if(temp.empty() or (temp.length() > 1 and temp[0] == '0'))
+//                     return false;
+                
+//                 if(stoll(temp) > 255)
+//                     return false;
+                
+//                 temp = "";
+//             }
+//         }
+        
+//         if(temp.empty() or (temp.length() > 1 and temp[0] == '0'))
+//             return false;
+            
+//         if(stoll(temp) > 255)
+//             return false;
+            
+//         return true;
+//     }
+    
+//     void solve(string &s, int i, int cnt)
+//     {
+//         if(cnt == 3)
+//         {
+//             if(isValidIp(s))
+//             ans.push_back(s);
+            
+//             return;
+//         }
+        
+//         for(int p=i+1; p<s.length() and (p-i)<=4; p++)
+//         {
+//             s.insert(s.begin()+p, '.');
+            
+//             solve(s, p, cnt+1);
+            
+//             s.erase(s.begin()+p);
+//         }
+//     }
+    
+//     vector<string> genIp(string &s) {
+//         // Your code here
+//         ans.clear();
+        
+//         if(s.length() >= 4 and s.length() <= 12)
+//         solve(s, 0, 0);
+        
+//         if(ans.empty())
+//         ans.push_back({"-1"});
+        
+//         return ans;
+//     }
+
+// };
