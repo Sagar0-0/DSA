@@ -1,0 +1,32 @@
+class Solution
+{
+    public static ArrayList<Integer> countEleLessThanOrEqual(int arr1[], int arr2[], int m, int n)
+    {
+       // add your code here
+       ArrayList<Integer> a = new ArrayList<>();
+       Arrays.sort(arr2);
+       for(int i=0; i<m; i++){
+           int l = 0;
+           int h = n-1;
+           int index = 0;
+           boolean found = false;
+           while(h >= l){
+               int mid = (l+h)/2;
+               if(arr2[mid] > arr1[i]){
+                   h = mid - 1;
+               }else if(arr2[mid] < arr1[i]){
+                   l = mid + 1;
+               }else{
+                   index = mid;
+                   l = mid + 1;
+                   found = true;
+               }
+           }
+           if(!found){
+               index = h;
+           }
+           a.add(index + 1);
+       }
+       return a;
+    }
+}
