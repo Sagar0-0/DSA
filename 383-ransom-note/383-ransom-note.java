@@ -4,12 +4,9 @@ class Solution {
         for(char c:magazine.toCharArray()){
             a[c-'a']++;
         }
-        int[] b=new int[26];
         for(char c:ransomNote.toCharArray()){
-            b[c-'a']++;
-        }
-        for(int i=0;i<26;i++){
-            if(a[i]<b[i])return false;
+            a[c-'a']--;
+            if(a[c-'a']<0)return false;
         }
         return true;
     }
