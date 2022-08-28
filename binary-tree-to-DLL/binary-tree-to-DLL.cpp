@@ -29,6 +29,8 @@ class Solution
         inorder(root); // making one traversal from left to right of doubly linkedList
       
       // making another traversal from right to left of DLL
+      // if you are heading from right to left then for DLL your next is right and prev is left
+        // if you are heading from left to right then for DLL your next is left and prev is right
         Node* t = p, *p1 = NULL;
         t->right = p1;
         while(t->left != NULL){
