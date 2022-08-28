@@ -9,7 +9,6 @@ struct Node
         left = right = NULL;
     }
 };
- */
 
 // This function should return head to the DLL
 class Solution
