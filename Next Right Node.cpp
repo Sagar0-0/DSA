@@ -25,3 +25,43 @@ public:
         return new Node(-1);
     }
 };
+
+// Another approach
+
+// class Solution
+// {
+// public:
+//     Node *nextRight(Node *root, int key)
+//     {
+//         //code here
+//         queue<Node*> Q;
+//         Q.push(root);
+        
+//         while(!Q.empty())
+//         {
+//             int sz = Q.size();
+            
+//             while(sz--)
+//             {
+//                 Node* cur = Q.front();
+//                 Q.pop();
+                
+//                 if(cur->data == key)
+//                 {
+//                     if(sz == 0)
+//                     return new Node(-1);
+//                     else
+//                     return Q.front();
+//                 }
+                
+//                 if(cur->left)
+//                 Q.push(cur->left);
+                
+//                 if(cur->right)
+//                 Q.push(cur->right);
+//             }
+//         }
+        
+//         return new Node(-1);
+//     }
+// };
