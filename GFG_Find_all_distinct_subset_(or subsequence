@@ -1,0 +1,31 @@
+class Solution{
+    public:
+    vector<int> DistinctSum(vector<int>nums){
+        // tabulation - bottom up approach - used , it is faster than memoization
+	   vector<int>res;
+	   int sum =0, m= nums.size();
+	   for(auto n : nums) sum+=n;
+	   
+	   vector<vector<bool>>dp_tab(m+1, vector<bool>(sum+1));
+	   for(int i=0; i<=m;i++){
+	      for(int j =0; j<=sum; j++){
+	          if(j==0) dp_tab[i][j] = true;
+	          else if(i==0) dp_tab[i][j] = false;
+	          else if(j>=nums[i-1])
+	              dp_tab[i][j] = dp_tab[i-1][j-nums[i-1]] || dp_tab[i-1][j];
+	          else dp_tab[i][j] = dp_tab[i-1][j];
+	      }
+	   }
+	   for(int j =0; j<=sum; j++){
+	      for(int i =0; i<=m; i++){
+	          if(dp_tab[i][j]){
+	              res.push_back(j);
+	              break;
+	          }
+	      }
+	   }
+	   return res;
+	//    TC: O(n*sum), SC: O(n*sum)
+    }
+
+};
