@@ -1,3 +1,7 @@
+// two solutions:
+
+
+// 1.
 class Solution {
 public:
     set<int> s;
@@ -21,5 +25,24 @@ public:
 	    solve(sum+nums[n-1], nums, n-1);
 	    solve(sum, nums, n-1);
 	    dp[n][sum] = 1;
+	}
+};
+
+
+// 2. 
+class Solution {
+public:
+	vector<int> DistinctSum(vector<int> nums){
+	    // Code here
+	    set<int> st;
+	    st.insert(0);
+	    for(auto num : nums){
+	        vector<int> v;
+	        for(auto i : st) v.push_back(i + num);
+	        for(auto vv : v) st.insert(vv);
+	    }
+	    nums.clear();
+	    for(auto it : st) nums.push_back(it);
+	    return nums;
 	}
 };
