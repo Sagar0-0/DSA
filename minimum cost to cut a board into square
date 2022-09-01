@@ -1,0 +1,75 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+//User function Template for C++
+
+class Solution {
+public:
+    int minimumCostOfBreaking(vector<int> X, vector<int> Y, int M, int N){
+        //Write your code here
+        int i =0;
+        int j=0;
+        int ans = 0;
+        
+        sort(X.begin(),X.end(),greater<int>());
+        sort(Y.begin(),Y.end(),greater<int>());
+        
+        
+        int hz_cnt =1;
+        int vt_cnt = 1;
+        M = M-1;
+        N =N-1;
+        while(i<M && j<N){
+            if(X[i]>Y[j]){
+                ans += X[i]*hz_cnt;
+                vt_cnt++;
+                i++;
+            }else{
+                ans += Y[j]*vt_cnt;
+                hz_cnt++;
+                j++;
+            }
+        }
+        
+        while(i<M){
+            ans += X[i]*hz_cnt;
+            vt_cnt++;
+            i++;
+        }
+        
+        while(j<N){
+            ans += Y[j]*vt_cnt;
+            hz_cnt++;
+            j++;
+        }
+        
+        return ans;
+    }
+};
+
+
+
+//{ Driver Code Starts.
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+	    int m, n;
+	    cin >> m >> n;
+	    vector<int>X(m - 1), Y(n - 1);
+	    for(int i = 0; i < m - 1; i++){
+	        cin >> X[i];
+	    }
+	    for(int i = 0; i < n - 1; i++){
+	        cin >> Y[i];
+	    }
+	    Solution ob;
+	    int ans = ob.minimumCostOfBreaking(X, Y, m, n);
+	    cout << ans<<endl;
+	}
+	return 0;
+}
