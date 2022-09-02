@@ -1,0 +1,43 @@
+int minimumCostOfBreaking(vector<int> X, vector<int> Y, int M, int N){
+      //sort to get highest cost first and use it first    
+        sort(X.begin(),X.end());
+        sort(Y.begin(),Y.end());
+        int ans=0;
+      //initially no cut in row as well as column    
+        int rowcount=1,columncount=1;
+      //start from last index    
+        int i=M-2;
+        int j=N-2;
+        while(i>=0||j>=0){
+         //if any one's index become 0's then rest will be carry on    
+            if(j<0){
+                ans+=X[i]*rowcount;
+                columncount++;  //if cut vertically then increse columncount
+                i--;
+                // cout<<X[i]<<"*"<<rowcount<<endl;
+            }
+            else if(i<0){
+               ans+=Y[j]*columncount;
+                rowcount++;  //if cut horizontally, increse rowcount
+                j--; 
+                // cout<<Y[j]<<"*"<<columncount<<endl;
+            }
+        //else comparison, which cost is high will be high priority for cut if same
+        // then row is given priority
+          else{
+            if(X[i]>=Y[j]){
+               ans+=X[i]*rowcount;
+                columncount++;  
+                i--; 
+            }
+            else{
+                 ans+=Y[j]*columncount;
+                rowcount++;
+                j--; 
+            }
+           }
+            // cout<<ans<<" ";
+        }
+        
+        return ans;
+    }
