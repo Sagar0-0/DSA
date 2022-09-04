@@ -1,6 +1,9 @@
+// 2 approaches 
+
+
+// 1.
 #include<bits/stdc++.h>
 using namespace std;
-
 class Solution{
     public:
         vector<string> pattern(int n){
@@ -28,5 +31,38 @@ class Solution{
         }
         
         return res;
+    }
+};
+
+
+// 2.
+class Solution{
+public:
+    vector<string> pattern(int n){
+        // code here
+        vector<string> v;
+        int curr=n, next=n*n+1;
+        for(int i=0;i<n;i++){
+            string s="";
+            int tar=2*i;
+            while(tar--){
+                s += '-';
+            }
+            for(int k=curr-n+i+1;k<=curr;k++){
+                string t = to_string(k);
+                s += t;
+                s += '*';
+            }
+            for(int k=next;k<=next+n-i-1;k++){
+                string t = to_string(k);
+                s += t;
+                if(k==next+n-i-1)break;
+                s += '*';
+            }
+            curr += (n-i-1);
+            next -= (n-i-1);
+            v.push_back(s);
+        }
+        return v;
     }
 };
