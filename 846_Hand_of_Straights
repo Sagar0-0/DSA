@@ -1,0 +1,24 @@
+class Solution {
+public:
+    bool isNStraightHand(vector<int>& hand, int g) {
+        if(hand.size()%g!=0){
+            return false;
+        }
+        map<int,int> m;
+        for(int i =0;i<hand.size();i++){
+            m[hand[i]]++;
+        }
+        while(m.size()!=0){
+            int t = m.begin()->first;
+            for(int i =0;i<g;i++){
+                if(m[t+i]==0){
+                    return false;
+                }
+                else if(--m[t+i] <1){
+                    m.erase(t+i);
+                }
+            }
+        }
+              return true;
+    }
+};
