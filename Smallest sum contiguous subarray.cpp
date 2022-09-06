@@ -22,3 +22,19 @@ class Solution{
       return ans;
   }
 };
+
+
+// Another Approach - 2
+
+class Solution{
+  public:
+  int smallestSumSubarray(vector<int>& a){
+      int ans = INT_MAX,sum=0;
+     for(int i=0;i<a.size();i++){
+         sum+=a[i];
+         sum = min(sum,a[i]);
+         ans = min(ans,sum);
+     }
+      return ans;
+  }
+};
