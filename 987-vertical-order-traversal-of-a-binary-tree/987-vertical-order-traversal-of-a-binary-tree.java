@@ -52,3 +52,63 @@ class Solution {
         dfs(root.right,row+1,col+1);
     }
 }
+
+################  Approach-2 by @Jay-Thesia  ###########################3
+
+class Solution {
+
+    class Pair{
+
+        TreeNode value;
+        int hdist;
+
+        Pair(TreeNode value,int hdist){
+            this.value=value;
+            this.hdist=hdist;
+        }
+
+    }
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+
+        List<List<Integer>> outter=new ArrayList<>();
+
+        TreeMap<Integer,ArrayList<Integer>>  tm=new TreeMap();
+
+        Deque<Pair> q=new LinkedList<>();
+        q.add(new Pair(root,0));
+
+        while(q.size()>0){
+
+            int len=q.size();
+            HashMap<Integer,ArrayList<Integer>> hm=new HashMap<>();
+
+            for(int i=0;i<len;i++){
+                //RPA
+                Pair curr=q.remove();
+                TreeNode cVal=curr.value;
+                int cHdist=curr.hdist;
+
+                List<Integer> inner=hm.getOrDefault(cHdist,new ArrayList<>());
+                inner.add(cVal.val);
+                Collections.sort(inner);
+
+                hm.put(cHdist,new ArrayList<>(inner));
+
+                if(cVal.left!=null) q.add(new Pair(cVal.left,cHdist-1));
+                if(cVal.right!=null) q.add(new Pair(cVal.right,cHdist+1));
+            }
+
+            for(Map.Entry<Integer,ArrayList<Integer>> item:hm.entrySet()){
+
+                ArrayList<Integer> list=tm.getOrDefault(item.getKey(),new ArrayList<>());
+                list.addAll(item.getValue());
+                tm.put(item.getKey(),list);
+
+            }
+        }
+
+        return new ArrayList<>(tm.values());
+
+
+    }
+}
