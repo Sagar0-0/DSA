@@ -45,3 +45,29 @@ class Solution {
     }
     
 }
+
+
+Approach-2 BY @Jay-Thesia
+
+class Solution {
+    public TreeNode pruneTree(TreeNode root) {
+        
+        return helper(root)?null:root;
+    }
+    
+    public boolean helper(TreeNode root){
+        
+        if(root==null)
+            return true;
+        
+        boolean left=helper(root.left);
+        boolean right=helper(root.right);
+        
+        if(left)
+            root.left=null;
+        if(right)
+            root.right=null;
+        
+        return root.val==0 && left && right;
+    }
+}
