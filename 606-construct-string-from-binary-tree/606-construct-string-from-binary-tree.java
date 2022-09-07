@@ -14,23 +14,23 @@
  * }
  */
 class Solution {
-    StringBuilder sb;
+    String sb;
     public String tree2str(TreeNode root) {
-        sb=new StringBuilder();
+        sb=new String();
         dfs(root);
-        return sb.toString();
+        return sb;
     }
     public void dfs(TreeNode root){
         if(root==null)return;
-        sb.append(root.val);
+        sb+=root.val;
         if(root.left==null && root.right==null)return;
-        sb.append("(");
+        sb+="(";
         dfs(root.left);
-        sb.append(")");  
+        sb+=")";  
         if(root.right!=null){
-            sb.append("(");
+            sb+="(";
             dfs(root.right);
-            sb.append(")");
+            sb+=")";
         }
     }
 }
