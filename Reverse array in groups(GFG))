@@ -37,23 +37,24 @@ Solution(JAVA):
 class Solution
 {
     //Function to reverse every sub-array group of size k.
-    void reverseInGroups(ArrayList<Integer> arr, int n, int k) 
+    void reverseInGroups(ArrayList<Integer> arr, int n, int k)
     {
-        int l=0;
-        int r=Math.min(n,k);
-        while(l<n)
+        for (int i = 0; i < n; i += k)
         {
-            reverse(arr,l,r);
-            l+=k;
-            r=Math.min(n,k+r);
-        }
-    }
-    void reverse(ArrayList<Integer> arr, int l,int u)
-    {
-        int j=u-1;
-        for (int k=l;k<u; k++)
-        {
-            arr.add(k,arr.remove(j));
+            // Get the left element ==========
+            int starting = i;
+            // Get the right most element ====
+            int ending = Math.min(i + k - 1, n - 1);
+            
+            // Now swap reverse the small piece of sub-arry in the arraylist
+            while(starting < ending){
+                int aux = arr.get(starting);
+                arr.set(starting, arr.get(ending));
+                arr.set(ending, aux);
+                starting++;
+                ending--;
+                
+            }
         }
     }
 }
