@@ -1,13 +1,24 @@
 class Solution {
-    public int maxProfit(int k, int[] prices) {
-        int[][][] dp = new int[k+1][prices.length][2];
-        return f(k,0,prices,false,dp);
+ 
+            
+     public int maxProfit(int k, int[] prices) {
+        return DP(prices, k);
     }
-    private int f(int k, int day, int[] prices, boolean stock_in_hand,int[][][] dp){
-        if(day==prices.length || k==-1) return 0;
-        int s = (stock_in_hand)?1:0;
-        if(dp[k][day][s]!=0) return dp[k][day][s];
-        if(s==1) return dp[k][day][s] = Math.max(prices[day]+f(k,day+1,prices,false,dp),f(k,day+1,prices,true,dp));
-        else return dp[k][day][s] = Math.max(f(k-1,day+1,prices,true,dp)-prices[day],f(k,day+1,prices,false,dp));
+    
+    private int DP(int[] prices, int k) {
+        int[] costs = new int[k+1];
+        int[] profits = new int[k+1];
+        //costs[0] = prices[0];
+        Arrays.fill(costs, Integer.MAX_VALUE);
+        
+        for (int currentPrice : prices) {
+            for (int i = 0; i < k; i++) {
+                costs[i+1] = Math.min(costs[i+1], currentPrice - profits[i]);
+                profits[i+1] = Math.max(profits[i+1], currentPrice - costs[i+1]);
+            }
+        }
+        
+        return profits[k];
+            
     }
 }
