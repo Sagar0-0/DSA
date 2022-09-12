@@ -29,7 +29,7 @@ class Solution {
 
             seenWords.put(word, seenWords.getOrDefault(word, 0) + 1);
 
-            if(seenWords.get(word) > frequencyMap.getOrDefault(word, 0)) {
+            if(seenWords.get(word) > frequencyMap.get(word)) {
               break;
             }
 
