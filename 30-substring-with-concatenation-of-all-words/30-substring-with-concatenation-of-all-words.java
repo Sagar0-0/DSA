@@ -14,7 +14,7 @@ class Solution {
         int totalWords = words.length;
         List<Integer> result = new ArrayList<>();
 
-        for (int i = 0; i <= str.length() - totalWords * eachWordLength; i++) {
+        for (int i = 0; i <= str.length() - (totalWords * eachWordLength); i++) {
 
           Map<String, Integer> seenWords = new HashMap<>();
 
