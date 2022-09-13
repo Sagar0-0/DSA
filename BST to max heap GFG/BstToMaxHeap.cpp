@@ -1,6 +1,4 @@
-class Solution{
-  public:
-  // Inorder traversal
+
   void helper1(Node *root,vector<int>&ans){
       if(root==NULL){
           return;
@@ -9,7 +7,7 @@ class Solution{
       ans.push_back(root->data);
       helper1(root->right,ans);
   }
-  // Post order traversal
+  
   void helper2(Node *root,vector<int>&ans,int &index){
       if(root==NULL)return;
       helper2(root->left,ans,index);
@@ -21,11 +19,10 @@ class Solution{
   }
     void convertToMaxHeapUtil(Node* root)
     {
-        // Your code goes here
+        
         vector<int>ans;
         helper1(root,ans);
         int index=0;
         helper2(root,ans,index);
         
     }    
-};
