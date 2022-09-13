@@ -1,49 +1,28 @@
 class Solution {
-    public boolean validUtf8(int[] data) {
-
-        // Number of bytes in the current UTF-8 character
-        int numberOfBytesToProcess = 0;
-
-        // Masks to check two most significant bits in a byte.
-        int mask1 = 1 << 7;
-        int mask2 = 1 << 6;
-
-        // For each integer in the data array.
-        for(int i = 0; i < data.length; i++) {
-            // If this is the case then we are to start processing a new UTF-8 character.
-            if (numberOfBytesToProcess == 0) {
-                int mask = 1 << 7;
-                 while ((mask & data[i]) != 0) {
-                    numberOfBytesToProcess += 1;
-                    mask = mask >> 1;
-                 }
-
-                // 1 byte characters
-                if (numberOfBytesToProcess == 0) {
-                    continue;
-                }
-
-                // Invalid scenarios according to the rules of the problem.
-                if (numberOfBytesToProcess > 4 || numberOfBytesToProcess == 1) {
-                    return false;
-                }
-
-            } else {
-
-                // data[i] should have most significant bit set and
-                // second most significant bit unset. So, we use the two masks
-                // to make sure this is the case.
-                if (!((data[i] & mask1) != 0 && (mask2 & data[i]) == 0)) {
-                    return false;
-                }
-            }
-
-            // We reduce the number of bytes to process by 1 after each integer.
-            numberOfBytesToProcess -= 1;
-        }
-
-        // This is for the case where we might not have the complete data for
-        // a particular UTF-8 character.
-        return numberOfBytesToProcess == 0;
+    public boolean validUtf8(int[] data) 
+    {
+	if(data==null || data.length==0) return false;
+	boolean isValid = true;
+	for(int i=0;i<data.length;i++) {
+		if(data[i]>255) return false; // 1 after 8th digit, 100000000
+		int numberOfBytes = 0;
+		if((data[i] & 128) == 0) { // 0xxxxxxx, 1 byte, 128(10000000)
+			numberOfBytes = 1;
+		} else if((data[i] & 224) == 192) { // 110xxxxx, 2 bytes, 224(11100000), 192(11000000)
+			numberOfBytes = 2;
+		} else if((data[i] & 240) == 224) { // 1110xxxx, 3 bytes, 240(11110000), 224(11100000)
+			numberOfBytes = 3;
+		} else if((data[i] & 248) == 240) { // 11110xxx, 4 bytes, 248(11111000), 240(11110000)
+			numberOfBytes = 4;
+		} else {
+			return false;
+		}
+		for(int j=1;j<numberOfBytes;j++) { // check that the next n bytes start with 10xxxxxx
+			if(i+j>=data.length) return false;
+			if((data[i+j] & 192) != 128) return false; // 192(11000000), 128(10000000)
+		}
+		i=i+numberOfBytes-1;
+	}
+	return isValid;
     }
 }
