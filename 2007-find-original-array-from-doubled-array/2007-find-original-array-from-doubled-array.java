@@ -8,7 +8,7 @@
     add the half of num/2 to ans
     5. else add that 2*num to queue
     
-    TC: O(n) SC:O(n)
+    TC: O(nlogn) SC:O(n)
 */
 
 
@@ -35,5 +35,56 @@ class Solution {
         
         return q.size()>0?new int[]{}:ans;
         
+    }
+}
+
+
+//without sorting
+
+class Solution {
+    public int[] findOriginalArray(int[] changed) {
+        if(changed.length%2 != 0) return new int[0];
+        int max = Integer.MIN_VALUE;
+        for(int num : changed) max = Math.max(max, num);
+        if(max%2 != 0) return new int[0];
+        
+        int[] cnts = new int[max+1];
+        for(int num : changed) cnts[num]++;
+        
+        int[] res = new int[changed.length/2];
+        if(cnts[0] % 2 != 0) return new int[0];
+        int idx = cnts[0]/2;
+        for(int i = 1; i < cnts.length; i++) {
+            if(cnts[i] == 0) continue;
+            if(2*i > max || cnts[i] > cnts[2*i]) return new int[0];
+            int cnt = cnts[i];
+            cnts[2*i] -= cnt;
+            while(cnt-- > 0) res[idx++] = i;
+        }
+        
+        return res;
+    }
+}class Solution {
+    public int[] findOriginalArray(int[] changed) {
+        if(changed.length%2 != 0) return new int[0];
+        int max = Integer.MIN_VALUE;
+        for(int num : changed) max = Math.max(max, num);
+        if(max%2 != 0) return new int[0];
+        
+        int[] cnts = new int[max+1];
+        for(int num : changed) cnts[num]++;
+        
+        int[] res = new int[changed.length/2];
+        if(cnts[0] % 2 != 0) return new int[0];
+        int idx = cnts[0]/2;
+        for(int i = 1; i < cnts.length; i++) {
+            if(cnts[i] == 0) continue;
+            if(2*i > max || cnts[i] > cnts[2*i]) return new int[0];
+            int cnt = cnts[i];
+            cnts[2*i] -= cnt;
+            while(cnt-- > 0) res[idx++] = i;
+        }
+        
+        return res;
     }
 }
