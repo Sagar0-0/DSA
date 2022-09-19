@@ -1,22 +1,29 @@
-
-public class Solution {
-    public List < List < String >> findDuplicate(String[] paths) {
-        HashMap < String, List < String >> map = new HashMap < > ();
-        for (String path: paths) {
-            String[] values = path.split(" ");
-            for (int i = 1; i < values.length; i++) {
-                String[] name_cont = values[i].split("\\(");
-                name_cont[1] = name_cont[1].replace(")", "");
-                List < String > list = map.getOrDefault(name_cont[1], new ArrayList < String > ());
-                list.add(values[0] + "/" + name_cont[0]);
-                map.put(name_cont[1], list);
+class Solution {
+    public List<List<String>> findDuplicate(String[] paths) {
+        Map<String, List<String>> map = new HashMap<>();
+        List<List<String>> res = new ArrayList<>();
+        for(int i = 0; i < paths.length; i++){
+            String s = paths[i];
+            String[] str = s.split(" ");
+            String prefix = str[0] + "/";
+            for(int j = 1; j < str.length; j++){
+                String nc = str[j];
+                int t = nc.length() - 1;
+                while(t >= 0 && nc.charAt(t) != '(') t--;
+                String name = nc.substring(0, t);
+                String content = nc.substring(t + 1, nc.length() - 1);
+                map.computeIfAbsent(content, a -> new ArrayList<>());
+                map.get(content).add(prefix + name);
             }
         }
-        List < List < String >> res = new ArrayList < > ();
-        for (String key: map.keySet()) {
-            if (map.get(key).size() > 1)
+        
+        for(String key: map.keySet()){
+            if(map.get(key).size() > 1){
                 res.add(map.get(key));
+            }
         }
-        return res;
+        
+        return(res);
+        
     }
 }
