@@ -1,4 +1,29 @@
+
+=======
+    public int minLength(String s, int n) { 
+    	// code here
+    	Stack<Integer>st=new Stack<>();
+    	int pair[]=new int[]{9,2,1,4,3,6,5,8,7,0};
+    	for(char ch:s.toCharArray()){
+    	    int key=ch-'0';
+    	    if(st.size()==0){
+    	        st.push(key);
+    	    }else{
+    	        if(st.peek()==pair[key]){
+    	            st.pop();
+    	        }else{
+    	            st.push(key);
+    	        }
+    	    }
+    	}
+    	return st.size();
+    }
+}
+
+Approach 2:
+
 class Solution { 
+
     public int minLength(String s1, int n) { 
     	Stack<Character>stack=new Stack<Character>();
     	
@@ -34,3 +59,4 @@ Auxiliary Space:O(N)[Stack is used][In worst Case all characters will be there i
 
 Total Test Cases:210
 */
+
