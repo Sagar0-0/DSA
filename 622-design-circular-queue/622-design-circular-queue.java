@@ -56,7 +56,7 @@ class MyCircularQueue {
     }
     
     public boolean isEmpty() {
-        if(curr==head && head.canUse==true){
+        if(head.canUse==true){
             return true;
         }
         return false;
