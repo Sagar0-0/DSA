@@ -5,7 +5,16 @@
 
 # 🔥Find your solution
 - Press "T" in windows/mac/linux to open the file finder.
-- Enter your problem name
+- Enter your problem name. We support only following naming formats to find files! Note: We are slowly migrating to normal word spacing format for new files, see [Contributing.md](https://github.com/Sagar0-0/DsA/blob/main/CONTRIBUTING.md).
+  - ### Old questions finding
+  - PascalCase (ThisIsTheExampleOfPascalCaseWritingWriting)
+  - Snake case (this_is_the_example_of_snake_case_writing)
+  - Caterpillar case (this-is-the-example-of-catarpillar-case-writing)
+  - Normal (A question name with proper words and spacings)
+  - Most of Leetcode Questions also have question numbers. Eg. 1007-minimum-domino-rotations-f...
+  - ### New questions finding
+  - Normal (A question name with proper words and spacings)
+  - Proper structure with folders/directories according to codign platoforms.
 - If exists, select your solution file according to your programming language.
 - If your problem's solution doesn't exist
   - Either create an new [Issue](https://github.com/Sagar0-0/DsA/issues) and request public to solve it for you.(Coming soon...)
