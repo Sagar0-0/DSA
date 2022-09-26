@@ -1,7 +1,17 @@
 # DSA
 > Building the largest DSA solutions repository TOGETHER.
 
-<br>
+---
+
+# 🔥Find your solution
+- Press "T" in windows/mac/linux to open the file finder.
+- Enter your problem name
+- If exists, select your solution file according to your programming language.
+- If your problem's solution doesn't exist
+  - Either create an new [Issue](https://github.com/Sagar0-0/DsA/issues) and request public to solve it for you.(Coming soon...)
+  - Or [Contribute](https://github.com/Sagar0-0/DsA/pulls) it by yourself🔥
+
+---
 
 # ✅Open To Contribute 
 - Start your open source jouney with us🚀
@@ -10,7 +20,7 @@
 - Contribute and get Appreciated🤝
 
 > *I contribute 3 Code per day*
-<br>
+---
 
 # ➡️Platforms covered:
 <a href="https://leetcode.com/problemset/all/">
@@ -37,12 +47,16 @@
 <br>
 <br>
 
+---
+
 # ✅Code Contributors
 > Thanks to these amazing contributors who helps us in building the LARGEST DSA SOLUTIONS REPOSITORY
 
 <a href="https://github.com/Sagar0-0/DsA/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Sagar0-0/DsA" />
 </a>
+
+---
 
 # ☕My Coding Profiles:
 <a href="https://leetcode.com/sagar0_0/">
