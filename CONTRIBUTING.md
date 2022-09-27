@@ -29,10 +29,10 @@
 > **Please Use PR templates according to your requirements(if available).**
 ### 💻Code PRs
 - Currently, we only cover problems of [LeetCode](https://leetcode.com/problemset/all/), [GeeksForGeeks](https://practice.geeksforgeeks.org/explore?page=1&sortBy=submissions) and [InterviewBit](https://practice.geeksforgeeks.org/explore?page=1&sortBy=submissions). Problems of other good platforms will be accepted(ONLY AFTER [DISCUSSIONS](https://github.com/Sagar0-0/DsA/discussions)).
-- Previously any code was just contributed to the main directory but due to overflow of files, we decided to structure the repositroy by creating specific directories corresponding to coding platoforms i.e. LeetCode, GFG, InterviewBit.
-- ⚠️Please contribute your code in the right directory!! Example - LeetCode questions should be in the LeetCode directory and same for others.
-- **All leetcode questions should be in the LeetCode directory(if contributed manually)/(Non-LeetHub users).**
-- [LeetHub](https://github.com/QasimWani/LeetHub) users, only you can upload your code in the main directory from now.(only using extension)
+- Previously any code was just contributed to the main directory but due to overflow of files, we decided to structure the repositroy by creating specific directories corresponding to coding platoforms i.e. [Leetcode](https://github.com/Sagar0-0/DsA/tree/main/Leetcode), [GFG](https://github.com/Sagar0-0/DsA/tree/main/GFG), [Interviewbit](https://github.com/Sagar0-0/DsA/tree/main/Interviewbit).
+- ⚠️Please contribute your code in the right directory!! Example - LeetCode questions should be in the [LeetCode directory](https://github.com/Sagar0-0/DsA/tree/main/Leetcode) and same for others.
+- **All leetcode questions should be in the [Leetcode directory](https://github.com/Sagar0-0/DsA/tree/main/Leetcode)(if contributed manually)/(Non-LeetHub users).**
+- [LeetHub](https://github.com/QasimWani/LeetHub) users, only you can upload your code in the [main directory](https://github.com/Sagar0-0/DsA) from now.(only using extension)
 - **MUST CHECK** if that question already exists or not!! Follow following steps:  
 Example- A solution named "Nine divisors.java" is to be added, then first check if any directory(or new PR) with the name "Nine divisors" exists or not and if yes, then move to "Nine divisors" directory and then add your code there(if java file exists then append in that file) or if that folder doesn't exists then create a folder/directory with the name "Nine divisors" and then add your code. [How to create a folder/directory?](https://stackoverflow.com/a/34259067/16775065)
 - File naming convention: 
