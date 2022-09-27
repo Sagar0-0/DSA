@@ -1,30 +1,52 @@
 class Solution {
-    public String pushDominoes(String S) {
-        char[] A = S.toCharArray();
-        int N = A.length;
-        int[] forces = new int[N];
-
-        // Populate forces going from left to right
-        int force = 0;
-        for (int i = 0; i < N; ++i) {
-            if (A[i] == 'R') force = N;
-            else if (A[i] == 'L') force = 0;
-            else force = Math.max(force - 1, 0);
-            forces[i] += force;
+    public String pushDominoes(String dominoes) {
+        int n = dominoes.length();
+        char[] dArray = dominoes.toCharArray();
+        char start = '.';
+        char last = '.';
+        int stidx = 0;
+        int i = 0;
+        while(i<n){
+            stidx = i;
+            while(i<n && dArray[i]=='.'){
+                i++;
+            }
+            if(i<n){
+                last = dArray[i];
+            }
+            if(i-stidx>0){
+                if(start=='R' && last=='L'){
+                    int l = stidx;
+                    int r = i-1;
+                    while(l<r){
+                        dArray[l]='R';
+                        dArray[r]='L';
+                        l++;
+                        r--;
+                        
+                    }
+                   
+                }
+                else if(last=='L'){
+                    int l = i-1;
+                    while(l>=stidx){
+                        dArray[l]='L';
+                        l--;
+                    }
+                }
+                else if(start=='R'){
+                    int r = stidx;
+                    while(r<i){
+                        dArray[r]='R';
+                        r++;
+                    }   
+                }
+            }
+            
+            start = last;
+            i++;
+            last = '.';
         }
-
-        // Populate forces going from right to left
-        force = 0;
-        for (int i = N-1; i >= 0; --i) {
-            if (A[i] == 'L') force = N;
-            else if (A[i] == 'R') force = 0;
-            else force = Math.max(force - 1, 0);
-            forces[i] -= force;
-        }
-
-        StringBuilder ans = new StringBuilder();
-        for (int f: forces)
-            ans.append(f > 0 ? 'R' : f < 0 ? 'L' : '.');
-        return ans.toString();
+        return new String(dArray);
     }
 }
