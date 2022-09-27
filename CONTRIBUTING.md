@@ -39,9 +39,9 @@ Example- A solution named "Nine divisors.java" is to be added, then first check 
   - Every word in the file should be separated by a space. eg. "Rat in the maze" , "19. Remove Nth Node From End of List".
   - ❌No other naming format will be accepted from now.(to maintian the structure)
   - Do not use "/" in the name of any file!(this will leads to creating a directory) 
-- Adding Readme.md with any question will be a +1
+- Adding Readme.md with any question will be a plus 1
 #### Migration PRs
 > Help us structure this repository.
 - Select a code file from the main/home directory **that was not contributed by LeetHub extension**.
-- Add it to the directory of their corresponding coding platoform(with a folder name of that problem). Eg. "Nine divisors.java" file should be in the directory "GFG/Nine divisors".
+- Add it to the directory of their corresponding coding platform(with a folder name of that problem). Eg. "Nine divisors.java" file should be in the directory "GFG/Nine divisors".
 - Delete that file from the home directory.
