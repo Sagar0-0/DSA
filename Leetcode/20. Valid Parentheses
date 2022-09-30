@@ -1,0 +1,29 @@
+class Solution {
+    public boolean isValid(String s) {
+        if(s.length()%2!=0) return false;
+        
+        Stack<Character> stack = new Stack<>();
+        for(char c : s.toCharArray())
+        {
+            if(c=='(' || c=='{' || c=='[') stack.push(c);
+            else if(c==')' && !stack.isEmpty() && stack.peek()=='(') stack.pop();
+            else if(c=='}' && !stack.isEmpty() && stack.peek()=='{') stack.pop();
+            else if(c==']' && !stack.isEmpty() && stack.peek()=='[') stack.pop();
+            else return false;
+            
+        }
+        return stack.isEmpty();
+    }
+}
+
+
+Algorithm for this problem :
+
+**1. First of all we check whether the length of the string is even. if false then we simply return false**
+**2. create a stack of Characters**
+**3. Make it to character array and check whether it is opening bracket if yes then push() it to stack**
+**4. else check for the condition (c==')' && !stack.isEmpty() && stack.peek()=='('**
+**5. if above condition is true remove the top element of stack**
+**6. check above conditions for all types of brackets**
+**7. for edge cases like (}}))]]) simply return false**
+**8. in the end if the stack is empty return true.**
