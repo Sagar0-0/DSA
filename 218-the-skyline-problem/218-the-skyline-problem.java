@@ -1,67 +1,68 @@
 class Solution {
-    public List<List<Integer>> getSkyline(int[][] buildings) {
-        List<Pair> list = new ArrayList<>();
-        
-        for(int i=0;i<buildings.length;i++){
-            int sp = buildings[i][0];       //start point
-            int ep = buildings[i][1];       //end point
-            int ht = buildings[i][2];       //height
-            
-            list.add(new Pair (sp, -ht));//add point (height as negative bez start of the rectangle)
-            list.add(new Pair (ep, ht));//add point (height as positive bez end of the rectangle
+    class KeyPoint {
+        public int key;
+        public int height;
+        public KeyPoint next = null;
+
+        public KeyPoint(int key, int height) {
+            this.key = key;
+            this.height = height;
         }
-        
-        Collections.sort(list);     //sort in ascending
-         List<List<Integer>> res= new ArrayList<>();    //store result
-        
-        //for storing the heights
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());      //max heap
-        
-        int currheight =0;
-        pq.add(0);      //add the base height;
-        
-        for(int i=0;i<list.size();i++){     //looping through the all points in the list
-            int x= list.get(i).x;
-            int ht = list.get(i).ht;
-            
-            if(ht<0){           //if height is negative means it is start point of rectangle      
-                pq.add(-ht);    //therefore add it in heap
-            }else{
-                pq.remove(ht);   //if it is not start then remove it from heap
-            }
-            
-            if(currheight != pq.peek()){    
-                List<Integer> temp = new ArrayList<>(); 
-                
-                temp.add(x);            //add left coordinate
-                temp.add(pq.peek());    //add maximum height in the heap
-                
-                res.add(temp);          
-                currheight = pq.peek();     //update current height as peak of the heap
-            }
-            
-        }
-        
-        return res;     //return result;
-        
     }
-    
-    public class Pair implements Comparable<Pair>{
-        int x;
-        int ht;
-        
-        public Pair(int x, int ht){
-            this.x=x;
-            this.ht=ht;
-        }
-        
-        public int compareTo(Pair o){
-            if(this.x != o.x){
-                return this.x -o.x;
+
+    public List<List<Integer>> getSkyline(int[][] buildings) {
+        List<List<Integer>> res = new ArrayList<>();
+        KeyPoint dummy = new KeyPoint(-1, 0); // dummy head
+        KeyPoint pre = dummy;
+
+        for (int[] bd : buildings) {
+            int L = bd[0];
+            int R = bd[1];
+            int H = bd[2];
+
+            while (pre.next != null && pre.next.key <= L)
+                pre = pre.next;
+
+            int preH = pre.height;
+
+            if (pre.key == L)
+                pre.height = Math.max(pre.height, H);
+            else if (pre.height < H) {
+                KeyPoint next = pre.next;
+                pre.next = new KeyPoint(L, H);
+                pre = pre.next;
+                pre.next = next;
             }
-            else{
-                return this.ht - o.ht;
+
+            KeyPoint preIter = pre;
+            KeyPoint curIter = pre.next;
+            while (curIter != null && curIter.key < R) {
+                preH = curIter.height;
+                curIter.height = Math.max(curIter.height, H);
+
+                if (curIter.height == preIter.height)
+                    preIter.next = curIter.next;
+                else
+                    preIter = curIter;
+
+                curIter = curIter.next;
+            }
+
+            if (preIter.height != preH && preIter.key != R && (curIter == null || curIter.key != R)) {
+                KeyPoint next = preIter.next;
+                preIter.next = new KeyPoint(R, preH);
+                preIter.next.next = next;
             }
         }
+
+        KeyPoint first = dummy;
+        KeyPoint second = dummy.next;
+        while (second != null) {
+            if (second.height != first.height)
+                res.add(Arrays.asList(second.key, second.height));
+            first = first.next;
+            second = second.next;
+        }
+        return res;
     }
 }
