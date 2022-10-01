@@ -1,25 +1,25 @@
 class Solution {
-    int ans;
     public int numDecodings(String s) {
-        ans=0;
-        int[]dp=new int[s.length()];
-        dfs(0,s,dp);
-        return ans;
-    }
-    void dfs(int i,String s,int[]dp){
-        if(i>=s.length()){
-            ans++;
-            return;
+        int[] dp=new int[s.length()];
+        if(s.charAt(0)=='0'){
+            return 0;
         }
-        if(s.charAt(i)=='0')return;
-        if(dp[i]!=0){
-            ans+=dp[i];
-            return;
+        dp[0]=1;
+        for(int i=1;i<dp.length;i++){
+            if(s.charAt(i)!='0'){
+                dp[i]+=dp[i-1];
+            }
+            int two=Integer.parseInt(s.substring(i-1,i+1));
+            if(two>=10&&two<=26){
+                if(i==1){
+                    dp[i]++;
+                }
+                else{
+                    dp[i]+=dp[i-2];
+                }
+                
+            }
         }
-        dfs(i+1,s,dp);
-        if(i+1<s.length() && Integer.parseInt((""+s.charAt(i)+s.charAt(i+1)))<=26){
-            dfs(i+2,s,dp);
-        }
-        dp[i]=ans;
+        return dp[dp.length-1];
     }
 }
