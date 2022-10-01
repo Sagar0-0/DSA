@@ -1,0 +1,23 @@
+public class med_2sort {
+    public static void main(String[] args) {
+        int[] nums= new int[]{1,2,3,4};
+        int [][] queries=new int[][]{ {1,0} , {-3,1 }, {-4,0} , {2,3}};
+        int t[]=new int[nums.length];
+        int i,sum;
+        for(i=0;i<nums.length;i++)
+        {
+            nums[queries[i][1]]+=queries[i][0];
+            sum=0;
+            for (int a:nums)
+            {
+                if(a%2==0)sum+=a;
+            }
+            t[i]=sum;
+        }
+        for (int c:t) {
+            System.out.println(c);
+        }
+
+
+    }
+}
