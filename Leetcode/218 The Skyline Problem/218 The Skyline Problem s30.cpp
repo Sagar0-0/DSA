@@ -1,40 +1,56 @@
-#include<bits/stdc++.h>
-using namespace std;
-
 class Solution {
 public:
-    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
-       vector<vector<int>> res;
-        multiset<int> pq{0};
+    vector<vector<int>> getSkyline(vector<vector<int>>& b) {
+        vector<pair<int,int>> cd;  //cd == coordinates
+        vector<vector<int>> ans;   //for storing answer
         
-        vector<pair<int, int>> points;
+        // FIRST STEP : to mark all starting and ending points
+        // to indicate starting point height will be negetive
+        // 2 , -10 means a building of height 10 is starting at 2
         
-        for(auto b: buildings){
-            points.push_back({b[0], -b[2]});
-            points.push_back({b[1], b[2]});
+        for(auto x:b)
+        {
+            // here x is a vector -> [2,9,10]
+            cd.push_back({x[0],-1*x[2]});  // starting point 2,-10
+            cd.push_back({x[1],x[2]}); //ending point 9,10
         }
         
-        sort(points.begin(), points.end());
+        // we sort it wrt values of x ( because answer must be sorted )
+        // sorting based on x coordinate 
+        // if x is same then it's based on increasing y
         
-        int ongoingHeight = 0;
+        // [2,-10] , [2,-9] , [2,-7] 
         
-        for(int i = 0; i < points.size(); i++){
-            int currentPoint = points[i].first; // x coordinate
-            int heightAtCurrentPoint = points[i].second; // ht
+        sort(cd.begin(),cd.end());
+        multiset<int,greater<int>> pq;  // multiset with max at top
+        //we use multiset because it gives us an option to delete with find
+        // which is not there is priority queue
+        
+        pq.insert(0);
+        int prev = 0;
+
+        for(auto &x : cd)
+        {
+            // here x is a pair
+            int value = x.first;
+            int height = x.second;
             
-            if(heightAtCurrentPoint < 0){
-                pq.insert(-heightAtCurrentPoint);
-            } else {
-                pq.erase(pq.find(heightAtCurrentPoint));
-            }
+            if(height<0)  // means starting point of some building
+                pq.insert(-height); //make it positive again and push
+            else
+                pq.erase(pq.find(height));
             
-            auto pqTop = *pq.rbegin();
-            if(ongoingHeight != pqTop){
-                ongoingHeight = pqTop;
-                res.push_back({currentPoint, ongoingHeight});
+            int top = *pq.begin();  //pq.begin() gives iterator deref it
+            if( prev != top)  // if the top changes then
+            {
+                ans.push_back({value,top});
+                prev = top;  //  prev becomes the new top
             }
+                
         }
         
-        return res; 
+        return ans;
+        
+        
     }
 };
