@@ -10,3 +10,13 @@ The above figure represents the given linked list. The indices of the nodes are 
 Since n = 7, node 3 with value 7 is the middle node, which is marked in red.
 We return the new list after removing this node. 
 </pre>
+
+ 
+<p>&nbsp;</p>
+<p><strong>Constraints:</strong></p>
+
+<ul>
+	<li><code>The number of nodes in the list is in the range [1, 10]<sup>5</sup></code></li>
+ <li><code>1 &lt;= Node.val, bottoms[i] &lt;= 10<sup>5</sup></code></li>
+</ul>
+</div>
