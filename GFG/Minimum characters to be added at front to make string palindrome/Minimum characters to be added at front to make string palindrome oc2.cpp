@@ -7,7 +7,7 @@ public:
         int i =0, j = str.length()-1;
         int temp_j =j, res =0;       
         while(i <=j){
-            // to check curr with reverse, if matches inc
+            // to check curr with reverse, if matches incr
             if(str[i]== str[j]){
                 i++; j--;
             }else{
