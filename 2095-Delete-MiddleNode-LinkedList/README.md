@@ -2,7 +2,7 @@
  
  <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/11/16/eg1drawio.png" style="height: 200px; width: 700px;">
+<img alt="" src="https://assets.leetcode.com/uploads/2021/11/16/eg1drawio.png" style="height: 150px; width: 650px;">
 <pre><strong>Input:</strong> tops = [2,1,2,4,2,2]
 <strong>Output:</strong> [1,3,4,1,2,6]
 <strong>Explanation:</strong> 
