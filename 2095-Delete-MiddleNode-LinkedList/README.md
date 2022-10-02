@@ -17,6 +17,6 @@ We return the new list after removing this node.
 
 <ul>
 	<li><code>The number of nodes in the list is in the range [1, 10]<sup>5</sup></code></li>
- <li><code>1 &lt;= Node.val, bottoms[i] &lt;= 10<sup>5</sup></code></li>
+ <li><code>1 &lt;= Node.val &lt;= 10<sup>5</sup></code></li>
 </ul>
 </div>
