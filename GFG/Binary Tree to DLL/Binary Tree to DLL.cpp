@@ -1,3 +1,8 @@
+/* This code is contributed by -
+   Aman Bhatt (https://github.com/bhattaman0001)
+   Anish Mandal (https://github.com/AnishMandal939)
+*/
+
 // there are 2 approaches another one is below
 
 Node * bToDLL(Node *root)

@@ -33,7 +33,7 @@ Example- A solution named "Nine divisors.java" is to be added, then first check 
   - Do not use "/" in the name of any file!(this will leads to creating a directory) 
 - We strictly avoid removing the code of other contributors.
 
-#### Migration PRs
+#### Migration PRs<!--Not applicable for hacktoberfest-->
 > Help us structure this repository.
 - Select a code file from the main/home directory **that was not contributed by LeetHub extension**.
 - Add it to the directory of their corresponding coding platform(with a folder name of that problem). Eg. "Nine divisors.java" file should be in the directory "GFG/Nine divisors".

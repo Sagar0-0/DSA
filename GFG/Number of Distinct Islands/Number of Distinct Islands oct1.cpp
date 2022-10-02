@@ -47,3 +47,47 @@ int main() {
         cout << obj.countDistinctIslands(grid) << endl;
     }
 }
+
+
+// Another Approach :
+/*
+  Instead of changing the original content/values of grid vector, we can also use a different vector storing each visited indexes,
+  while keeping grid vector intact, as in general it's not recommended to change values of original vector.
+  
+  Below is my Code class implementing my logic, I hope it will help,
+*/
+
+class Solution {
+  public:
+void dfs(int i,int j,int r,int c,vector<vector<int>> &vis, vector<vector<int>> &v,vector<vector<int>>&a){
+    int n = v.size(), m = v[0].size();
+    if(r>=n || c>=m || r<0 || c<0 || v[r][c]==0 || vis[r][c]==1) return;
+    
+    a.push_back({i,j});
+    vis[r][c] = 1;
+    
+    dfs(i+1,j,r+1,c,vis,v,a);
+    dfs(i,j+1,r,c+1,vis,v,a);
+    dfs(i-1,j,r-1,c,vis,v,a);
+    dfs(i,j-1,r,c-1,vis,v,a);
+    
+}  
+    int countDistinctIslands(vector<vector<int>>& grid) {
+        set<vector<vector<int>>> st;
+        
+        vector<vector<int>> vis(grid.size(),vector<int>(grid[0].size(),0));
+        
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                if(grid[i][j]==1 && vis[i][j]==0){
+                    vector<vector<int>> v;
+                    dfs(0,0,i,j,vis,grid,v);
+                    if(v.size()>0)  st.insert(v);
+                }
+            }
+        }
+        
+        
+        return st.size();
+    }
+};
