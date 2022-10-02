@@ -27,6 +27,7 @@
 - Share your code with the world✨
 - Become an active member🔥
 - Contribute and get Appreciated🤝
+- Must read [CONTRIBUTING.md](https://github.com/Sagar0-0/DsA/blob/main/CONTRIBUTING.md) before contributing.
 
 > *I contribute 3 Code per day*
 ---
