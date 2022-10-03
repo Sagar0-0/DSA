@@ -23,7 +23,7 @@
 ---
 
 # ✅Open To Contribute 
-- Start your open source jouney with us🚀
+- Start your open source journey with us🚀
 - Share your code with the world✨
 - Become an active member🔥
 - Contribute and get Appreciated🤝
