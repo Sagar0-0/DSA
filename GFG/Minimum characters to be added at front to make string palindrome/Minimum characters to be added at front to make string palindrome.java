@@ -18,27 +18,27 @@ class Solution {
 }
 
 //=====================================================
-class Solution {
-    public static int minChar(String s) {
-       //Write your code here
-       int i=0;
-       int j=s.length()-1;
-       int ans=0;
-       while(i<j){
-           if(s.charAt(i)==s.charAt(j)){
-               i++;
-               j--;
-           }else{
-               ans=s.length()-j;
-               i=0;
-               //reduce add
-                while(s.charAt(i)==s.charAt(j)){
-                    ans--;
-                    i++;
-                }
-               j--;
-           }
-       }
-       return ans;
-    }
-}
+// class Solution {
+//     public static int minChar(String s) {
+//        //Write your code here
+//        int i=0;
+//        int j=s.length()-1;
+//        int ans=0;
+//        while(i<j){
+//            if(s.charAt(i)==s.charAt(j)){
+//                i++;
+//                j--;
+//            }else{
+//                ans=s.length()-j;
+//                i=0;
+//                //reduce add
+//                 while(s.charAt(i)==s.charAt(j)){
+//                     ans--;
+//                     i++;
+//                 }
+//                j--;
+//            }
+//        }
+//        return ans;
+//     }
+// }

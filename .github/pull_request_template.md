@@ -22,8 +22,7 @@
 - [ ] Interviewbit
 - [ ] Others(only acceptable after DISCUSSIONS)
 
-
-# Migration PRs?🤝<!-- If helping in migrating old code files in their respective directories,only then fill out this portion -->
+# Migration PRs?🤝<!-- ONLY fill out this portion, If helping in migrating old code files in their respective directories -->
 
 - [ ] Done deleteing file from home directory?<!--MUST-->
 - [ ] Added file with correct name and correct directory?<!--MUST-->
