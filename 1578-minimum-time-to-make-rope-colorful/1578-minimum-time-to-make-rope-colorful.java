@@ -1,26 +1,23 @@
 class Solution {
-    public int minCost(String s, int[] arr) {
-        int ans=0;
-        int i=0;
-        while(i<s.length()){
-            if(i+1<s.length() && s.charAt(i)==s.charAt(i+1)){
-                int j=i;
-                int maxValue=0;
-                while(j<s.length() && s.charAt(j)==s.charAt(i)){
-                    if(arr[j]>maxValue){
-                        maxValue=arr[j];
-                    }
-                    j++;
+    public int minCost(String colors, int[] neededTime) {
+        int prev = 0;
+        int res = 0;
+        char arr[] = colors.toCharArray();
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[prev] != arr[i])
+               prev = i;
+            
+            else {
+                if (neededTime[prev] < neededTime[i]) {
+                    res += neededTime[prev];
+                    prev = i;
                 }
-                while(i<j){
-                    ans+=arr[i];
-                    i++;
+                
+                else {
+                    res += neededTime[i];
                 }
-                ans-=maxValue;
-            }else{
-                i++;
             }
         }
-        return ans;
+        return res;
     }
 }
