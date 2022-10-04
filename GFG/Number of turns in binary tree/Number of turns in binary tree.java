@@ -1,3 +1,7 @@
+/*
+  This code is contributed by:- Pulkit Malhotra (https://github.com/PulkitMalhotra161001)
+*/
+
 class Solution
 {
     static int ans;
@@ -129,8 +133,3 @@ class Solution
 	    return left==null?right:left;
 	}
 }
-
-
-
-
-

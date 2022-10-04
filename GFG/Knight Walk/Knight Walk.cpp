@@ -1,3 +1,8 @@
+/*
+  This code is contributed by:
+  - Shubham Kumar Jha (https://github.com/Shubhamjha1710)
+  - Adarsh Urmaliya (https://github.com/Satellite-system)
+*/
 class Solution {
 public:
 	int minStepToReachTarget(vector<int>&KnightPos, vector<int>&TargetPos, int N)
@@ -43,14 +48,11 @@ public:
 
 /*
 Another Approach : Store the number of steps it taken to each square and from them find the minimum Distance Steps needed to reach Target Position.
-
 Steps to reach other squares from starting Square could be find By BFS Algorithm, so we will use this Algorithm.
-
 First initialize Stating position as steps 0, now from each position we have total 8 Possible pos(positions), where we could traverse(given that those
 are valid positions, and have never been visited before), and store stps in vector.
 Whenever we encounter the target positon, we return it as we are using BFS algorithm, that's why whenever we react to target position,
 then that would be our First time when we have reached that position, hence will be in shortest steps.
-
 */
 
 class Solution {
