@@ -1,31 +1,31 @@
 Wildcard Matching
 
-Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*' where:
+Given an input string (s) and a pattern (p), implement wildcard pattern matching with support for '?' and '*' where : <br>
 
-'?' Matches any single character.
-'*' Matches any sequence of characters (including the empty sequence).
-The matching should cover the entire input string (not partial).
+'?' Matches any single character.<br>
+'*' Matches any sequence of characters (including the empty sequence).<br>
+The matching should cover the entire input string (not partial).<br>
 
-Example 1:
-Input: s = "aa", p = "a"
-Output: false
-Explanation: "a" does not match the entire string "aa".
+Example 1:<br>
+Input: s = "aa", p = "a"<br>
+Output: false<br>
+Explanation: "a" does not match the entire string "aa".<br>
 
+<br><br>
+Example 2:<br>
+Input: s = "aa", p = "*"<br>
+Output: true<br>
+Explanation: '*' matches any sequence.<br>
 
-Example 2:
-Input: s = "aa", p = "*"
-Output: true
-Explanation: '*' matches any sequence.
-
-
-Example 3:
-Input: s = "cb", p = "?a"
-Output: false
-Explanation: '?' matches 'c', but the second letter is 'a', which does not match 'b'.
+<br><br>
+Example 3:<br>
+Input: s = "cb", p = "?a"<br>
+Output: false<br>
+Explanation: '?' matches 'c', but the second letter is 'a', which does not match 'b'.<br>
  
-
-Constraints:
-
--0 <= s.length, p.length <= 2000
--s contains only lowercase English letters.
--p contains only lowercase English letters, '?' or '*'.
+<br><br>
+Constraints:<br>
+<br>
+-0 <= s.length, p.length <= 2000<br>
+-s contains only lowercase English letters.<br>
+-p contains only lowercase English letters, '?' or '*'.<br>
