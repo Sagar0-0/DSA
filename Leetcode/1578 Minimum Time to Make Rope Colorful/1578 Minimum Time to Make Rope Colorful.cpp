@@ -1,5 +1,35 @@
+//There are two approch for this Problem both approch are optimal also both uses O(n) Time Complexity
+
 #include<bits/stdc++.h>
 using namespace std;
+
+
+//===========================Approch 1======================
+
+
+class Solution {
+public:
+    int minCost(string s, vector<int>& time) {
+        int ans = 0;
+        int n = s.length();
+        for(int i = 1; i < n; i++)
+        {
+            if(s[i] == s[i - 1])
+            {
+                ans += min(time[i], time[i - 1]); 
+                time[i] = max(time[i], time[i - 1]); 
+            }     
+        }
+        
+        return ans;
+    }
+};
+
+
+//===========================Approch 2 =========================
+
+
+
 
 class Solution {
 public:
