@@ -1,6 +1,9 @@
 # DSA
 > Building the largest DSA solutions repository TOGETHER.
 
+# Note:
+> All DsA repositories are excluded from Hacktoberfest
+
 ---
 <a href="https://github.com/Sagar0-0/DsA"><img src="https://img.shields.io/github/contributors/Sagar0-0/DsA?style=flat-square"></a>
 <a href="https://github.com/Sagar0-0/DsA"><img src="https://img.shields.io/github/repo-size/Sagar0-0/DsA?style=flat-square"></a>
@@ -60,7 +63,7 @@
 
 ---
 
-# ✅Code Contributors
+# ✅Contributors
 > Thanks to these amazing contributors who helps us in building the LARGEST DSA SOLUTIONS REPOSITORY
 
 <a href="https://github.com/Sagar0-0/DsA/graphs/contributors">
