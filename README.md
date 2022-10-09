@@ -6,9 +6,8 @@
 
 # Beginner's Guide
 <a href="https://www.youtube.com/watch?v=7r05126pOk8" target="_blank"><img src="https://i.ytimg.com/vi/7r05126pOk8/mqdefault.jpg" height="200px" border="20"></a>
+
 ---
-<a href="https://github.com/Sagar0-0/DsA"><img src="https://img.shields.io/github/contributors/Sagar0-0/DsA?style=flat-square"></a>
-<a href="https://github.com/Sagar0-0/DsA"><img src="https://img.shields.io/github/repo-size/Sagar0-0/DsA?style=flat-square"></a>
 # 🔥Find your solution
 - Press "T" in windows/mac/linux to open the file finder.
 - Enter your problem name. We support only following naming formats to find files! Note: We are slowly migrating to normal word spacing format for new files, see [Contributing.md](https://github.com/Sagar0-0/DsA/blob/main/CONTRIBUTING.md).
