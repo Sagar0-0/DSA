@@ -32,6 +32,7 @@ Example- A solution named "Nine divisors.java" is to be added, then first check 
   - ❌No other naming format will be accepted from now.(to maintian the structure)
   - Do not use "/" in the name of any file!(this will leads to creating a directory) 
 - We strictly avoid removing the code of other contributors.
+- Check [Beginner's Guide](https://youtu.be/7r05126pOk8) for any issues faced.
 
 #### Migration PRs<!--Not applicable for hacktoberfest-->
 > Help us structure this repository.
