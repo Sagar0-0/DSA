@@ -1,0 +1,29 @@
+class Solution
+{
+    //Function to find the next greater element for each element of the array.
+    public static long[] nextLargerElement(long[] arr, int n)
+    { 
+        // Your code here
+        long[] ans=new long[n];
+        int idx=n-1;
+        Stack<Long> stack=new Stack<>();
+        for(int i=n-1;i>=0;i--)
+        {
+           while(!stack.isEmpty() && arr[i]>=stack.peek())
+           {
+               stack.pop();
+           }
+           if(stack.isEmpty())
+           {
+               ans[idx]=-1;
+           }
+           else
+           {
+               ans[idx]=stack.peek();
+           }
+           idx--;
+           stack.push(arr[i]);
+        }
+        return ans;
+    } 
+}
