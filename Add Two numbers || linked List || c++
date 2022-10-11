@@ -1,0 +1,47 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        int carry = 0;
+        ListNode *curr1 = l1, *curr2 = l2;
+        ListNode *newhead = new ListNode((curr1->val + curr2->val)%10);
+        ListNode *newcurr = newhead;
+        carry = (curr1->val + curr2->val)/10;
+        // cout<<carry<<"  ";
+        // cout<<newcurr->val<<"  ";
+        curr1 = curr1->next;
+        curr2 = curr2->next;
+        while(curr1 && curr2){
+            // int newnode = (curr1->val + curr2->val + carry)%10
+            ListNode *temp = new ListNode((curr1->val + curr2->val + carry)%10);
+            // cout<<temp->val<<"  ";
+            carry = (curr1->val + curr2->val + carry)/10;
+            // cout<<carry<<"  ";
+            newcurr->next = temp;
+            // cout<<newcurr->next->val<<"  ";
+            newcurr = newcurr->next;
+            curr1 = curr1->next;
+            curr2 = curr2->next;
+        }
+        
+        while(curr1){
+            ListNode *temp = new ListNode((curr1->val + carry)%10);
+            carry = (curr1->val + carry)/10;
+            newcurr->next = temp;
+            newcurr = newcurr->next;
+            curr1 = curr1->next;
+        }
+        while(curr2){
+            ListNode *temp = new ListNode((curr2->val + carry)%10);
+            carry = (curr2->val + carry)/10;
+            newcurr->next = temp;
+            newcurr = newcurr->next;
+            curr2 = curr2->next;
+        }
+        if(carry > 0){
+            ListNode *temp = new ListNode(carry);
+            newcurr->next = temp;
+        }
+        
+        return newhead;
+    }
+};
