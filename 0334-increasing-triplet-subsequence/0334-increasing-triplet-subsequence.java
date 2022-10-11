@@ -8,7 +8,7 @@ class Solution {
             {
                 first_num = num;
             }
-            else if(num>first_num&&num<=second_num)
+            else if(num<=second_num)
             {
                 second_num = num;
             }else
