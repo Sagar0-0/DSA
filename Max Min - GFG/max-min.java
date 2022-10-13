@@ -17,7 +17,7 @@ class Array {
         while(t-- > 0)
         {
             int n = sc.nextInt();
-            int a[] = new int[n + 1];
+            int a[] = new int[n];
             
             for(int i=0;i<n;i++){
                 a[i] = sc.nextInt();
@@ -43,9 +43,9 @@ class Solution
         int min=Integer.MAX_VALUE;
         int max=Integer.MIN_VALUE;
         for(int x:A){
-            min=Math.min(min,x);
             max=Math.max(max,x);
+            min=Math.min(min,x);
         }
-        return min+max;
+        return max+min;
     }
 }
