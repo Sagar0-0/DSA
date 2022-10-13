@@ -40,12 +40,12 @@ class Solution
     public static int findSum(int A[],int N) 
     {
         //code here
-        int min=Integer.MAX_VALUE;
-        int max=Integer.MIN_VALUE;
-        for(int x:A){
-            max=Math.max(max,x);
-            min=Math.min(min,x);
+        int maxValue=Integer.MIN_VALUE;
+        int minValue=Integer.MAX_VALUE;
+        for(int ele:A){
+            maxValue=Math.max(maxValue,ele);
+            minValue=Math.min(minValue,ele);
         }
-        return max+min;
+        return maxValue+minValue;
     }
 }
