@@ -62,11 +62,10 @@ class Solution {
         ArrayList<Integer> ans = new ArrayList<>();
         TreeSet<Integer> set = new TreeSet<>();
         for(int i = n-1;i>=0;i--){
-            set.add(a[i]);
-            if(set.higher(a[i]) == null) ans.add(-1);
+            if(set.higher(a[i]) == null)ans.add(-1);
             else ans.add(set.higher(a[i]));
+            set.add(a[i]);
         }
-
         Collections.reverse(ans);
 
         return ans;
