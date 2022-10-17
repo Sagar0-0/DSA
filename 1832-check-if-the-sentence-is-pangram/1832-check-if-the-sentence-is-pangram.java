@@ -1,10 +1,10 @@
 class Solution {
-    public boolean checkIfPangram(String s) {
-        boolean[] vis=new boolean[26];
-        for(char c:s.toCharArray()){
-            vis[c-'a']=true;
-        }
-        for(boolean b:vis)if(!b)return b;
-        return true;
+    public boolean checkIfPangram(String sentence) {
+        for(int i=0;i<26;i++){
+            int c=(char)('a'+i);
+            if(sentence.indexOf(c)==-1){
+                return false;
+            }
+        }return true;
     }
 }
