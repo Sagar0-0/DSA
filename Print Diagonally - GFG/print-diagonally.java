@@ -44,19 +44,19 @@ class Solution{
         while(col<N){
             int r=row;
             int c=col;
-            while(c>=0 && r<N){
+            while(r<N && c>=0){
                 ans.add(A[r][c]);
                 r++;
                 c--;
             }
             col++;
         }
-        col--;
+        col=N-1;
         row=1;
         while(row<N){
             int r=row;
             int c=col;
-            while(c>=0 && r<N){
+            while(r<N && c>=0){
                 ans.add(A[r][c]);
                 r++;
                 c--;
