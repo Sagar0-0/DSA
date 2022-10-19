@@ -1,23 +1,25 @@
 class Solution { 
     int minSubset(int[] Arr,int N) { 
+        if(N == 1) return 1;
+        
         Arrays.sort(Arr);
-        long sum=0;
-        int count=1;
-        for(int i=0;i<N;i++){
-            sum+=Arr[N-1-i];
-            if(sum> sumOf(Arr,0,N-i-2)){
-                return count;
+        int start = 0; 
+        int end = N-1;
+        
+        int count = 1;
+        
+        
+        int sum = Arr[end];
+        
+        while(start < end) {
+            if(Arr[start] < sum) {
+                sum -= Arr[start++];
+            } else {
+                sum += Arr[--end];
+                count++;
             }
-            count++;
         }
-        return 0;
-    }
-    
-    long sumOf(int[] Arr ,int beg, int end){
-        long sum=0;
-        for(int i=beg;i<=end;i++){
-            sum+=Arr[i];
-        }
-     return sum;
+        
+        return count;
     }
 }

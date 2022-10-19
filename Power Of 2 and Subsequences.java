@@ -1,13 +1,20 @@
 class Solution{
     static Long numberOfSubsequences(int N, ArrayList<Long> A){
         // code here
-        int cnt=0;
-        long mod=1000000007l;
-        for(Long i:A){
-            if((i&(i-1))==0){
-                cnt++;
+        long m=(long)1e9+7;
+        long count=0;
+        for(int i=0;i<N;i++){
+            long num=A.get(i);
+            if((num & num-1)==0){
+               count++; 
             }
         }
-        return (long)(Math.pow(2,cnt)%mod-1)%mod;
+        long ans=1;
+        while(count!=0){
+            ans=(ans*2)%m;
+            count--;
+        }
+        return ans-1;
     }
+    
 }
