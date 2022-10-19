@@ -1,33 +1,37 @@
 class Solution {
-    public List<String> topKFrequent(String[] words, int k) {
-        int maxFreq=0;
-        Map<String,Integer> map=new HashMap<>();
-        for(String s:words){
-            maxFreq=Math.max(maxFreq,map.getOrDefault(s,0)+1);
-            map.put(s,map.getOrDefault(s,0)+1);
-        }
-        Map<Integer,PriorityQueue<String>> map2=new HashMap<>();
-        for(String s:words){
-            if(!map.containsKey(s))continue;
-            int freq=map.get(s);
-            map.remove(s);
-            map2.putIfAbsent(freq,new PriorityQueue());
-            map2.get(freq).add(s);
-        }
-        List<String>ans=new ArrayList<>();
-        while(maxFreq>0){
-            if(!map2.containsKey(maxFreq)){
-                maxFreq--;
-                continue;
+  public List<String> topKFrequent(String[] words, int k) {
+        
+        // map hold the word: counts
+        HashMap<String, Integer> map = new HashMap();
+        
+        // sort the map by frequency high->low order, sort words lexi order
+        PriorityQueue<Map.Entry<String, Integer>> heap = new PriorityQueue<>(
+            (a,b)->{
+                if(a.getValue() != b.getValue())
+                    return a.getValue().compareTo(b.getValue());
+                return -a.getKey().compareTo(b.getKey());
             }
-            PriorityQueue<String> pq=map2.get(maxFreq);
-            maxFreq--;
-            while(!pq.isEmpty()){
-                ans.add(pq.poll());
-                if(ans.size()==k)break;
-            }
-            if(ans.size()==k)break;
+        );
+        
+        // fill the map
+        for(String word: words){
+            map.merge(word, 1, Integer::sum);
         }
+        
+        // put into heap
+        for(Map.Entry<String, Integer> entry: map.entrySet()){
+            heap.offer(entry);
+            if(heap.size() > k)
+                heap.poll();
+        }
+        
+        // pop out the answer
+        List<String> ans = new ArrayList();
+        while(heap.size() > 0)
+            ans.add(heap.poll().getKey());
+        
+        // check the order
+        Collections.reverse(ans);
         return ans;
     }
 }
