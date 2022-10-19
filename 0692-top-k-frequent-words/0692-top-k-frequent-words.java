@@ -1,37 +1,22 @@
 class Solution {
-  public List<String> topKFrequent(String[] words, int k) {
-        
-        // map hold the word: counts
-        HashMap<String, Integer> map = new HashMap();
-        
-        // sort the map by frequency high->low order, sort words lexi order
-        PriorityQueue<Map.Entry<String, Integer>> heap = new PriorityQueue<>(
-            (a,b)->{
-                if(a.getValue() != b.getValue())
-                    return a.getValue().compareTo(b.getValue());
-                return -a.getKey().compareTo(b.getKey());
-            }
-        );
-        
-        // fill the map
-        for(String word: words){
-            map.merge(word, 1, Integer::sum);
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String,Integer> map = new HashMap<>();
+        for(String w : words){
+            int c = map.getOrDefault(w,0);
+            c++;
+            map.put(w,c);
         }
-        
-        // put into heap
-        for(Map.Entry<String, Integer> entry: map.entrySet()){
-            heap.offer(entry);
-            if(heap.size() > k)
-                heap.poll();
+        Queue<Map.Entry<String,Integer>> pq = new PriorityQueue<>((a,b)->(a.getValue() == b.getValue() ? a.getKey().compareTo(b.getKey()) : (a.getValue()-b.getValue())*-1));
+
+        for(Map.Entry<String,Integer> e : map.entrySet()){
+            pq.offer(e);
         }
-        
-        // pop out the answer
-        List<String> ans = new ArrayList();
-        while(heap.size() > 0)
-            ans.add(heap.poll().getKey());
-        
-        // check the order
-        Collections.reverse(ans);
-        return ans;
+        List<String> result = new ArrayList<>();
+        while(k > 0){
+            k--;
+            result.add(pq.poll().getKey());
+        }
+        return result;
+
     }
 }
