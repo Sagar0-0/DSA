@@ -35,31 +35,27 @@ class GFG
 //User function Template for Java
 
 class Solution{
+    int ans;
     int steppingNumbers(int n, int m){
         // code here
-        int ans=0;
+        ans=0;
         if(n==0)ans++;
-        Queue<Integer> q=new LinkedList<>();
         for(int i=1;i<=9;i++){
-            q.add(i);
-        }
-        while(q.size()>0){
-            int sz=q.size();
-            while(sz-->0){
-                int ele=q.remove();
-                if(ele>m)continue;
-                if(ele>=n && ele<=m)ans++;
-                int lastDigit=ele%10;
-                if(lastDigit==0){
-                    q.add(ele*10+1);
-                }else if(lastDigit==9){
-                    q.add(ele*10+8);
-                }else{
-                    q.add(ele*10+(lastDigit-1));
-                    q.add(ele*10+(lastDigit+1));
-                }
-            }
+            dfs(i,n,m);
         }
         return ans;
+    }
+    void dfs(int curr,int n,int m){
+        if(curr>m)return;
+        if(curr>=n && curr<=m)ans++;
+        int lastDigit=curr%10;
+        if(lastDigit==0){
+            dfs(curr*10+1,n,m);
+        }else if(lastDigit==9){
+            dfs(curr*10+8,n,m);
+        }else{
+            dfs(curr*10+(lastDigit-1),n,m);
+            dfs(curr*10+(lastDigit+1),n,m);
+        }
     }
 }
