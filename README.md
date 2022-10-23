@@ -73,6 +73,12 @@
 
 ---
 
+## Love my work?
+<a href="https://www.buymeacoffee.com/0sagar0">
+<img src="https://user-images.githubusercontent.com/85388413/197355117-e4a5f6e7-44ee-4303-adb8-3ef39cd18246.jpg" width=200px>
+</a>
+
+
 # ☕My Coding Profiles:
 <a href="https://leetcode.com/sagar0_0/">
 <img src="https://assets.leetcode.com/static_assets/public/webpack_bundles/images/logo-dark.e99485d9b.svg" width=200px>
