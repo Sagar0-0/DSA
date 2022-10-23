@@ -49,13 +49,13 @@ class Solution{
         if(curr>m)return;
         if(curr>=n && curr<=m)ans++;
         int lastDigit=curr%10;
-        if(lastDigit==0){
-            dfs(curr*10+1,n,m);
-        }else if(lastDigit==9){
+        if(lastDigit==9){
             dfs(curr*10+8,n,m);
+        }else if(lastDigit==0){
+            dfs(curr*10+1,n,m);
         }else{
-            dfs(curr*10+(lastDigit-1),n,m);
             dfs(curr*10+(lastDigit+1),n,m);
+            dfs(curr*10+(lastDigit-1),n,m);
         }
     }
 }
