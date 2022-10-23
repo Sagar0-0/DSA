@@ -1,0 +1,13 @@
+x-repeat
+y-missing
+​
+(sum-realSum)=(x-y)
+(sqrSum-realSqrSum)=(x+y)(x-y)
+​
+​
+(x-y)=(sum-realSum)
+(x+y)=(sqrSum-realSqrSum)/(sum-realSum)
+---------------------
+x=((sum-realSum)+(sqrSum-realSqrSum)/(sum-realSum))/2
+​
+​
