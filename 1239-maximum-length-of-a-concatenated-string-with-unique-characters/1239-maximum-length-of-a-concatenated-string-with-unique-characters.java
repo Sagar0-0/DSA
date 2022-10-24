@@ -6,10 +6,9 @@ class Solution {
     }
     
     private void backTrack(List<String> arr, String current, int start){
-        if(max<current.length())
-            max =current.length();
+        if(max<current.length())max=current.length();
         for(int i=start; i<arr.size();i++){
-            if(!isValid(current,arr.get(i))) continue;
+            if(!isValid(current,arr.get(i)))continue;
             backTrack(arr,current+arr.get(i),i+1);
         }
     }
