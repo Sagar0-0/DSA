@@ -3,8 +3,7 @@ class Solution {
         StringBuilder s1 = new StringBuilder();
         StringBuilder s2 = new StringBuilder();
         
-        int len=Math.max(word1.length , word2.length);
-        for(int i = 0 ; i < len ; i++){
+        for(int i = 0 ; i < Math.max(word1.length , word2.length) ; i++){
             if(i < word1.length){
                 s1.append(word1[i]);
             }
