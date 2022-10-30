@@ -1,53 +1,56 @@
 class Solution {
-    public int shortestPath(int[][] grid, int k) {
-        
-        int m = grid.length, n = grid[0].length;
-        boolean[][][] visited = new boolean[m][n][k + 1];
-        
-		Queue<int[]> Q = new LinkedList(); 
-        Q.add(new int[]{0, 0, k});
-		//0 index -> x coordinate
-		//1 index -> y coordinate
-		//2 index -> obstacle count
-     
-        int res = 0;
-        
-        while(Q.size() > 0){
-            int size = Q.size();
-			
-            while(size-- > 0){
-                
-                int[] rem = Q.remove();
-                int x = rem[0];
-                int y = rem[1];
-                int obs = rem[2];
-                
-                if(x == m - 1 && y == n - 1 && obs >= 0)   return res;     // reached end
-                
-                if(obs < 0 || visited[x][y][obs] == true)  continue;
-                visited[x][y][obs] = true;
-                
-                // up
-                if(x - 1 >= 0){
-                    Q.add(new int[]{x - 1, y, obs - grid[x - 1][y]});
-                }
+    class Node {
+        int row;
+        int col;
+        int obstacles;
+
+        Node(int row, int col, int obstacles){
+            this.row = row;
+            this.col = col;
+            this.obstacles = obstacles;
+        }
+    }
     
-                // down
-                if(x + 1 < m){
-                    Q.add(new int[]{x + 1, y, obs - grid[x + 1][y]});
+    private int[][] directions = {{1, 0}, {0, 1}, {0, -1}, {-1, 0}};
+    
+    public int shortestPath(int[][] grid, int k) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+        int[][] visited = new int[rows][cols];
+        for(int i = 0; i < rows; i++) {
+            Arrays.fill(visited[i], Integer.MAX_VALUE);
+        }
+        
+        visited[0][0] = grid[0][0];
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(new Node(0, 0, grid[0][0]));
+        int result = 0;
+        
+        while(!queue.isEmpty()) {
+            int size = queue.size();
+            for(int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                if(node.row == rows-1 && node.col == cols-1) {
+                    return result;
                 }
-                
-                // left
-                if(y - 1 >= 0){
-                    Q.add(new int[]{x , y - 1, obs - grid[x][y - 1]});
-                }
-                
-                // right
-                if(y + 1 < n){
-                    Q.add(new int[]{x , y + 1, obs - grid[x][y + 1]});
+                for(int t = 0; t < directions.length; t++) {
+                    int newRow = node.row + directions[t][0];
+                    int newCol = node.col + directions[t][1];
+                    
+                    if(newRow >= 0 && newRow < rows && newCol >= 0 && newCol < cols) {
+
+                        int obstacles = node.obstacles + grid[newRow][newCol];
+                        if(obstacles > k) {
+                            continue;
+                        }
+                        if(visited[newRow][newCol] > obstacles) {
+                            visited[newRow][newCol] = obstacles;
+                            queue.add(new Node(newRow, newCol, obstacles));
+                        }
+                    }
                 }
             }
-            ++res;
+            result++;
         }
         return -1;
     }
