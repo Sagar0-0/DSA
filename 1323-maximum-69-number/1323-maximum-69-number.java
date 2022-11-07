@@ -1,17 +1,13 @@
 class Solution {
     public int maximum69Number (int num) {
-        var temp = num;
-        int firstDigit = -1;
-        for (int i = 0; temp > 0; i++){
-            if (temp % 10 == 6){
-                firstDigit = i;
+        char[] arr=(String.valueOf(num)).toCharArray();
+        for(int i=0;i<arr.length;i++){
+            char c=arr[i];
+            if(c=='6'){
+                arr[i]='9';
+                break;
             }
-            temp /= 10;
         }
-        if (firstDigit == -1){
-            return num;
-        }
-        temp = num / (int)Math.pow(10,firstDigit);
-        return (temp + 3) * (int)Math.pow(10,firstDigit) + num % (int)Math.pow(10, firstDigit);
+        return Integer.parseInt(new String(arr));
     }
 }
