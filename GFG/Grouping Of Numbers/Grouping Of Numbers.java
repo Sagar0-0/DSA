@@ -23,3 +23,43 @@ class Solution {
         return maxSize;
     }
 };
+
+
+// Method 2:
+
+class Solution {
+    static int maxGroupSize(int[] arr, int N, int K) {
+        // code here
+        int freq[]=new int[K];
+        for(int i=0;i<N;i++) {
+            freq[arr[i]%K]+=1;
+        }
+        int start=1;
+        int end=K-1;
+        while(start<=end) {
+            if(start!=end) {
+                if(freq[start]!=0 && freq[end]!=0) {
+                    if(freq[start]>freq[end]) {
+                        freq[end]=0;
+                    }
+                    else {
+                        freq[start]=0;
+                    }
+                }
+            }
+            else {
+                if(freq[start]>0) freq[start]=1;
+            }
+            start+=1;
+            end-=1;
+        }
+        
+        if(freq[0]>0) freq[0]=1;
+        
+        int count=0;
+        for(int i=0;i<K;i++) {
+            if(freq[i]>0) count+=freq[i];
+        }
+        return count;
+    }
+};
