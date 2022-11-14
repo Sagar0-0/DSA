@@ -11,7 +11,7 @@ class Solution {
             uf.union(edge[0] + 10001, edge[1]);
         }
 
-        return n - uf.getCount();
+        return n - uf.count;
     }
 
     class UnionFind {
@@ -23,9 +23,6 @@ class Solution {
             count = 0;
         }
 
-        public int getCount() {
-            return count;
-        }
 
         public int find(int x) {
             if (!parents.containsKey(x)) {
