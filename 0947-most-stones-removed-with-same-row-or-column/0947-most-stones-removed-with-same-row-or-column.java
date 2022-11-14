@@ -23,7 +23,6 @@ class Solution {
             count = 0;
         }
 
-
         public int find(int x) {
             if (!parents.containsKey(x)) {
                 parents.put(x, x);
