@@ -1,0 +1,27 @@
+public class Solution {
+    public ListNode mergeTwoLists(ListNode A, ListNode B) {
+        ListNode head=new ListNode(-1);
+        ListNode my=head;
+        while(A!=null && B!=null){
+            if(B.val<A.val){
+                ListNode curr=B;
+                B=B.next;
+                curr.next=null;
+                my.next=curr;
+                my=my.next;
+            }else{
+                ListNode curr=A;
+                A=A.next;
+                curr.next=null;
+                my.next=curr;
+                my=my.next;
+            }
+        }
+        if(A==null){
+            my.next=B;
+        }else if(B==null){
+            my.next=A;
+        }
+        return head.next;
+    }
+}

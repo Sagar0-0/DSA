@@ -1,0 +1,34 @@
+class Solution {
+    public int maxDistToClosest(int[] seats) {
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<seats.length;i++){
+            if(seats[i]==0){
+                max=Math.max(max,closestPerson(seats,i));
+            }
+        }
+        return max;
+    }
+    public int closestPerson(int[]a,int i){
+        int leftClosest=0;
+        int x=i-1;
+        while(x>=0){
+            leftClosest++;
+            if(a[x]==1)break;
+            x--;
+        }
+        int y=i+1;
+        int rightClosest=0;
+        while(y<a.length){
+            rightClosest++;
+            if(a[y]==1)break;
+            y++;
+        }
+        if(y==a.length){
+            return rightClosest+leftClosest;
+        }
+        if(leftClosest==0){
+            return rightClosest;
+        }
+        return Math.min(leftClosest,rightClosest);
+    }
+}

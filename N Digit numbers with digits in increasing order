@@ -1,0 +1,46 @@
+class Solution{
+    static ArrayList<Integer> increasingNumbers(int n){
+        // code here
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        if(n==1){
+            for(int i=0;i<10;i++){
+                list.add(i);       
+            }
+            
+            return list;
+        }else if(n==9){
+            list.add(123456789);
+            return list;
+        }else if(n==8){
+            list.add(12345678);
+            list.add(12345679);
+            list.add(12345689);
+            list.add(12345789);
+            list.add(12346789);
+            list.add(12356789);
+            list.add(12456789);
+            list.add(13456789);
+            list.add(23456789);
+            return list;
+        }else{
+            int start=(int)Math.pow(10,n-1);
+            int end=(int)Math.pow(10,n);
+            while(start<end){
+                if(isValid(start)){
+                    list.add(start);
+                }
+                start++;
+            }
+            return list;
+        }
+    }
+    static boolean isValid(int num){
+        while(num!=0){
+            if((num%10)<=(num/10)%10){
+                return false;    
+            }
+            num/=10;
+        }
+        return true;
+    }
+}

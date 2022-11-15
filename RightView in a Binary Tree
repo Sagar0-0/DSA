@@ -1,0 +1,28 @@
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> solve(TreeNode A) {
+        ArrayList<Integer> ans=new ArrayList<>();
+        dfs(A,ans,0);
+        return ans;
+    }
+    public void dfs(TreeNode a,ArrayList<Integer> ans,int level){
+        if(a==null)return;
+        if(ans.size()==level){
+            ans.add(a.val);
+        }
+        dfs(a.right,ans,level+1);
+        dfs(a.left,ans,level+1);
+    }
+}

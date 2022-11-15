@@ -1,0 +1,20 @@
+class Solution {
+    public int countWords(String[] words1, String[] words2) {
+        HashSet<String> words1Set=new HashSet<>();
+        HashSet<String> words1Duplicates=new HashSet<>();
+        HashSet<String> words12Set=new HashSet<>();
+        HashSet<String> words12Duplicates=new HashSet<>();
+        for(String s: words1) {
+            if (words1Set.contains(s)) words1Duplicates.add(s);
+            else words1Set.add(s);
+        }
+        for(String s: words1Duplicates) words1Set.remove(s);
+        for(String s: words2) {
+            if (words1Set.contains(s)) {
+                if (words12Set.contains(s)) words12Duplicates.add(s);
+                else words12Set.add(s);
+            }
+        }
+        return words12Set.size()-words12Duplicates.size();
+    }
+}

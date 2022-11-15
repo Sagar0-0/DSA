@@ -1,0 +1,13 @@
+public class Solution {
+	public int pow(int a, int y, int d) {
+                
+        if(a==0)return 0;       // if base is 0
+        long res=1,x=a;         // x=a bcz of integer overflow
+        while(y>0){
+                if((y&1)!=0)res=(res*x)%d;  //if y is odd then result will be mul by "a"
+                y=y>>1;         // y=y/2
+                x=(x*x)%d;      // x=x^2 : eg. x^8 = (x^2)^4
+        }
+        return (int)((d+res)%d);// for -ve testcases d is added in res
+	}
+}

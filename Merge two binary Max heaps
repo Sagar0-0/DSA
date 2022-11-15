@@ -1,0 +1,36 @@
+class Solution{
+    public int[] mergeHeaps(int[] a, int[] b, int n, int m) {
+        // your code here
+        int ans[]=new int[a.length+b.length];
+        Arrays.sort(a);
+        Arrays.sort(b);
+        int i=a.length-1,j=b.length-1,index=0;
+        while(i>=0 && j>=0){
+            if(a[i]>b[j]){
+                ans[index]=a[i];
+                i--;
+                index++;
+            }else{
+                ans[index]=b[j];
+                j--;
+                index++;
+            }
+        }
+        if(i>=0){
+            while(i>=0){
+                ans[index]=a[i];
+                index++;
+                i--;
+            }
+        }
+        if(j>=0){
+            while(j>=0){
+                ans[index]=b[j];
+                j--;
+                index++;
+            }
+        }
+        return ans;
+        
+    }
+}
