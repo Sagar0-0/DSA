@@ -1,41 +1,37 @@
 class Solution {
     public int nearestExit(char[][] maze, int[] entrance) {
-        int rows = maze.length, cols = maze[0].length;
-        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int m = maze.length;
+        int n = maze[0].length;
         
-        // Mark the entrance as visited since its not a exit.
-        int startRow = entrance[0], startCol = entrance[1];
-        maze[startRow][startCol] = '+';
+        Queue<int[]> q = new LinkedList<>();
+        int ei = entrance[0];
+        int ej = entrance[1];
+        int[][] dvs = new int[][] {
+            {1, 0}, {0, 1}, {-1, 0}, {0, -1}    
+        };
         
-        // Start BFS from the entrance, and use a queue `queue` to store all 
-        // the cells to be visited.
-        Queue<int[]> queue = new LinkedList<>();
-        queue.offer(new int[]{startRow, startCol, 0});
+        maze[ei][ej] = '+';
+        q.add(new int[] {ei, ej, 0});
         
-        while (!queue.isEmpty()) {
-            int[] currState = queue.poll();
-            int currRow = currState[0], currCol = currState[1], currDistance = currState[2];
-
-            // For the current cell, check its four neighbor cells.
-            for (int[] dir : dirs) {
-                int nextRow = currRow + dir[0], nextCol = currCol + dir[1];
-
-                // If there exists an unvisited empty neighbor:
-                if (0 <= nextRow && nextRow < rows && 0 <= nextCol && nextCol < cols
-                   && maze[nextRow][nextCol] == '.') {
-                    
-                    // If this empty cell is an exit, return distance + 1.
-                    if (nextRow == 0 || nextRow == rows - 1 || nextCol == 0 || nextCol == cols - 1)
-                        return currDistance + 1;
-                    
-                    // Otherwise, add this cell to 'queue' and mark it as visited.
-                    maze[nextRow][nextCol] = '+';
-                    queue.offer(new int[]{nextRow, nextCol, currDistance + 1});
-                }  
+        while(!q.isEmpty()) {
+            int[] val = q.poll();
+            
+            for (int[] d: dvs) {
+                int i1 = val[0] + d[0];
+                int j1 = val[1] + d[1];
+                
+                if (i1 < 0 || j1 < 0 || i1 >= m || j1 >= n) {
+                    if (val[0] == ei && val[1] == ej) continue;
+                    return val[2];
+                }
+                
+                if (maze[i1][j1] == '.') {
+                    q.add(new int[] {i1, j1, val[2] + 1});
+                    maze[i1][j1] = '+';
+                }
             }
         }
-
-        // If we finish iterating without finding an exit, return -1.
+        
         return -1;
     }
 }
