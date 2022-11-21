@@ -1,0 +1,27 @@
+class Solution
+{
+    ArrayList<ArrayList<Integer>>ans=new ArrayList<>();
+    public ArrayList<ArrayList<Integer>> UniquePartitions(int n)
+    {
+        path(n,n,new ArrayList<Integer>());
+        return ans;
+    }
+    
+    void path(int c,int i,ArrayList<Integer>m)
+    {
+        if(c<=0)
+        {
+            ans.add(new ArrayList<>(m));
+            
+            return;
+        }
+       
+        for(int j=Math.min(i,c);j>=1;j--)
+        {
+            m.add(j);
+           path(c-j,j,m);
+          m.remove(m.size()-1);
+        }
+       
+    }
+}
