@@ -1,23 +1,24 @@
 class Solution {
     public int numSquares(int n) {
-        int[] memo = new int[n + 1];
-        return helper(n, memo);
-    }
-    
-    public int helper(int n, int[] memo) {
-        if (n < 4)
-            return n;
-        
-        if (memo[n] != 0)
-            return memo[n];
-        
-        int ans = n;
-        
-        for (int i = 1; i * i <= n; i++) {
-            int square = i * i;
-            ans = Math.min(ans, 1 + helper(n - square, memo));
-        }
-        
-        return memo[n] = ans;
-    }
+	int sqrt = (int) Math.sqrt(n);
+
+	if (sqrt * sqrt == n) // Perfect square
+		return 1;
+
+	while (n % 4 == 0) // 4^a (8b + 7)
+		n = n / 4;
+
+	if (n % 8 == 7)
+		return 4;
+
+	for (int i = 1; i * i <= n; i++) { // Sum of two perfect squares
+		int square = i * i;
+		int base = (int) Math.sqrt(n - square);
+
+		if (base * base == n - square)
+			return 2;
+	}
+
+	return 3;
+}
 }
