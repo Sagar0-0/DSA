@@ -1,19 +1,35 @@
 class Solution {
-    public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
-        int n=startTime.length;
-        int[][]jobs=new int[n][3];
-        for(int i=0;i<n;i++){
-            jobs[i]=new int[]{startTime[i],endTime[i],profit[i]};
+    class Job implements Comparable<Job>{
+        int start;
+        int end;
+        int profit;
+        Job(int start, int end, int profit) {
+            this.start = start;
+            this.end = end;
+            this.profit = profit;
         }
-        Arrays.sort(jobs,(a,b)->a[1]-b[1]);
-        TreeMap<Integer,Integer> map=new TreeMap<>();
-        map.put(0,0);
-        for(int[]job:jobs){
-            int val=job[2]+ map.floorEntry(job[0]).getValue();
-            if(val>map.lastEntry().getValue()){
-                map.put(job[1],val);
+        public int compareTo(Job otherJob) {
+            return this.start - otherJob.start;
+        }
+    }
+    public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
+        int n = startTime.length;
+        Job[] jobs = new Job[n];
+        for (int i=0; i<n; i++) {
+            jobs[i] = new Job(startTime[i], endTime[i], profit[i]);
+        }
+        Arrays.sort(jobs);
+        int[] dp = new int[n];
+        dp[n-1] = jobs[n-1].profit;
+        for (int i=n-2; i >=0; i--) {
+            dp[i] = Math.max(jobs[i].profit, dp[i+1]);
+            for (int j=i+1; j < n; j++) {
+                if (jobs[i].end <= jobs[j].start) {
+                    dp[i] = Math.max(dp[i], jobs[i].profit + dp[j]);
+                    break;
+                }
             }
         }
-        return map.lastEntry().getValue();
+        return dp[0];
     }
 }
