@@ -41,8 +41,6 @@ class RandomizedSet {
     }
     
     public int getRandom() {
-        Random random=new Random();
-        int x=random.nextInt(list.size());
-        return list.get(x);
+        return list.get(new Random().nextInt(list.size()));
     }
 }
