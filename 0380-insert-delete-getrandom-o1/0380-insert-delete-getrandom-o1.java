@@ -36,7 +36,6 @@ class RandomizedSet {
         
         int temp=list.get(index);
         list.set(index,lastVal);
-        list.set(lastIndex,temp);
         
         map.put(lastVal,index);
     }
