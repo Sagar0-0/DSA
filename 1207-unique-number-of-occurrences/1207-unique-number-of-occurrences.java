@@ -1,18 +1,28 @@
 class Solution {
     public boolean uniqueOccurrences(int[] arr) {
-        boolean[]filled=new boolean[1001];
-        int[]freq=new int[2002];
-        for(int i:arr){
-            freq[i+1000]++;
-        }
-        for(int i:freq){
-            if(i==0)continue;
-            if(!filled[i]){
-                filled[i]=true;
-            }else{
-                return false;
-            }
-        }
-        return true;
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+
+		for (int num : arr) {
+			min = Math.min(min, num);
+			max = Math.max(max, num);
+		}
+
+		int[] frequency = new int[max - min + 1];
+		boolean[] frequency2 = new boolean[arr.length + 1];
+
+		for (int num : arr) {
+			frequency[num - min]++;
+		}
+
+		for (int num : frequency) {
+			if (num > 0) {
+				if (frequency2[num]) return false;
+
+				frequency2[num]=true;
+			}
+		}
+		
+		return true;
     }
 }
