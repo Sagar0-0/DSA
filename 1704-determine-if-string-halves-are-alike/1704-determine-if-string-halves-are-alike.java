@@ -1,32 +1,22 @@
 class Solution {
     public boolean halvesAreAlike(String s) {
-        int a=0;
-        int b=0;
-        int n=s.length();
-        for(int i=0;i<n;i++){
-            if(i<n/2){
-                a+=get(s.charAt(i));
-            }else{
-                b+=get(s.charAt(i));
-            }
-        }
-        return a==b;
+       char[] ch=s.toCharArray();
+       int len=s.length();
+       int mid=len/2;
+       int l=check(ch,0,mid-1);
+       int r=check(ch,mid,len-1);
+       return l==r;
+        
     }
-    int get(char c){
-        switch(c){
-            case 'a':
-            case 'e':
-            case 'i':
-            case 'o':
-            case 'u':
-            case 'A':
-            case 'E':
-            case 'I':
-            case 'O':
-            case 'U':
-                return 1;
-            default:
-                return 0;
-        }
+    public int check(char[] ch,int start,int end){
+        int count=0;
+        for(int i=start;i<=end;i++)
+        {
+            if(ch[i]=='a'||ch[i]=='e'||ch[i]=='i'||ch[i]=='o'||ch[i]=='u'||ch[i]=='A'||ch[i]=='E'||ch[i]=='I'||ch[i]=='O'||ch[i]=='U')
+            {
+               count++; 
+            }
+         }
+        return count;
     }
 }
