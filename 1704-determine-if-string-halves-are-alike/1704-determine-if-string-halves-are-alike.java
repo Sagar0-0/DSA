@@ -5,7 +5,11 @@ class Solution {
        int mid=len/2;
        int l=check(ch,0,mid-1);
        int r=check(ch,mid,len-1);
-       return l==r;
+        if(l==r)
+        {
+            return true;
+        }
+        return false;
         
     }
     public int check(char[] ch,int start,int end){
