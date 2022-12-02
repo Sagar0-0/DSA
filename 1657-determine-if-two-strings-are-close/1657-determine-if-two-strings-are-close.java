@@ -1,25 +1,24 @@
 class Solution {
-    public boolean closeStrings(String word1, String word2) {
-        if(word1.length()!=word2.length())return false;
-        int[]a=new int[26];
-        int[]b=new int[26];
-        for(char c:word1.toCharArray()){
-            a[c-'a']++;
+    public boolean closeStrings(String s1, String s2) {
+        
+        var freqs1 = new int[26];
+        for(var c1: s1.toCharArray()) {
+            freqs1[c1 - 'a']++;
         }
-        for(char c:word2.toCharArray()){
-            b[c-'a']++;
+        var freqs2 = new int[26];
+        for(var c2: s2.toCharArray()) {
+            freqs2[c2 - 'a']++;
         }
-        int[]needFreq=new int[word1.length()+1];
-        for(int i=0;i<26;i++){
-            if(b[i]!=0){
-                if(a[i]==0)return false;
-                needFreq[b[i]]++;
-                needFreq[a[i]]--;
+        for(int i = 0; i < 26; i++) {
+            if(freqs1[i]  > 0 && freqs2[i] == 0) {
+                return false;
+            }
+            if(freqs1[i] == 0 && freqs2[i]  > 0) {
+                return false; 
             }
         }
-        for(int i:needFreq){
-            if(i!=0)return false;
-        }
-        return true;
+        Arrays.sort(freqs1);
+        Arrays.sort(freqs2);
+        return Arrays.equals(freqs1, freqs2); 
     }
 }
