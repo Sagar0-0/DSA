@@ -1,22 +1,42 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
- 
-    public static void preorder(TreeNode root,ArrayList<Integer> li)
-    {
-        if(root.left==null && root.right==null)li.add(root.val);
-        if(root.left!=null)
-        {
-            preorder(root.left,li);
-        }
-        if(root.right!=null)
-        {
-            preorder(root.right,li);
-        }
-    } 
     public boolean leafSimilar(TreeNode root1, TreeNode root2) {
-      ArrayList<Integer> one=new ArrayList<>();
-    ArrayList<Integer> two=new ArrayList<>();
-        preorder(root1,one);
-        preorder(root2,two);
-        return one.equals(two);
+        // Collect the leaf values from each tree
+    List<Integer> leafValues1 = getLeafValues(root1, new ArrayList<>());
+    List<Integer> leafValues2 = getLeafValues(root2, new ArrayList<>());
+    
+    // Compare the leaf value lists
+    return leafValues1.equals(leafValues2);
+    }
+    List<Integer> getLeafValues(TreeNode node, List<Integer> values) {
+        // If the node is null, return
+        if (node == null) {
+            return values;
+        }
+        
+        // If the node is a leaf node, add its value to the list
+        if (node.left == null && node.right == null) {
+            values.add(node.val);
+        }
+        
+        // Recursively traverse the left and right subtrees
+        getLeafValues(node.left, values);
+        getLeafValues(node.right, values);
+        
+        return values;
     }
 }
