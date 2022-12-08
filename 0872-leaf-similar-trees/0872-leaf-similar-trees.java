@@ -1,18 +1,22 @@
 class Solution {
-    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
-        List<Integer> leaves1 = new ArrayList();
-        List<Integer> leaves2 = new ArrayList();
-        dfs(root1, leaves1);
-        dfs(root2, leaves2);
-        return leaves1.equals(leaves2);
-    }
-
-    public void dfs(TreeNode node, List<Integer> leafValues) {
-        if (node != null) {
-            if (node.left == null && node.right == null)
-                leafValues.add(node.val);
-            dfs(node.left, leafValues);
-            dfs(node.right, leafValues);
+ 
+    public static void preorder(TreeNode root,ArrayList<Integer> li)
+    {
+        if(root.left==null && root.right==null)li.add(root.val);
+        if(root.left!=null)
+        {
+            preorder(root.left,li);
         }
+        if(root.right!=null)
+        {
+            preorder(root.right,li);
+        }
+    } 
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+      ArrayList<Integer> one=new ArrayList<>();
+    ArrayList<Integer> two=new ArrayList<>();
+        preorder(root1,one);
+        preorder(root2,two);
+        return one.equals(two);
     }
 }
