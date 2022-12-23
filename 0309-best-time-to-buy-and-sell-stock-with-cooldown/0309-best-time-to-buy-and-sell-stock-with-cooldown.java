@@ -1,26 +1,19 @@
 class Solution {
     public int maxProfit(int[] prices) {
-        HashMap<String,Integer> hm = new HashMap<>();
-        return maxProfit(0,prices,0,hm);
+        if (prices == null || prices.length <= 1) {
+            return 0;
+        }
+        int len = prices.length;
+        int[] hold = new int[len];
+        int[] unHold = new int[len];
+        hold[0] = -prices[0];
+        hold[1] = Math.max(-prices[0], -prices[1]);
+        unHold[0] = 0;
+        unHold[1] = Math.max(0, prices[1] - prices[0]);
+        for (int i = 2; i < len; i++) {
+            hold[i] = Math.max(hold[i - 1], unHold[i - 2] - prices[i]);        
+            unHold[i] = Math.max(unHold[i - 1], hold[i - 1] + prices[i]);
+        }
+        return unHold[len - 1];
     }
-     int maxProfit(int i, int [] prices, int buyOrsell,HashMap<String ,Integer> hm){
-         if( i>=prices.length)
-         return 0;
-         String key = i+"anything" +buyOrsell;
-         if(hm.containsKey(key))
-         return hm.get(key);
-         int x = 0;
-         if(buyOrsell == 0){
-             int buy = maxProfit(i+1, prices,1,hm)-prices[i];
-             int notbuy = maxProfit(i+1,prices,0,hm);
-             x=Math.max(buy, notbuy);
-         }else{
-             int sell = maxProfit(i+2,prices,0,hm)+prices[i];
-             int notsell = maxProfit(i+1,prices,1,hm);
-             x=Math.max(sell,notsell);
-         }
-          hm.put(key,x);
-         return x;
-         
-     }
 }
