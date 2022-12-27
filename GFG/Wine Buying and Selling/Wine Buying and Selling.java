@@ -58,6 +58,40 @@ class Solution {
         }
     
         return ans;
+        
+        
+        //Method 2
+        ArrayList<Integer> positive=new ArrayList<>();
+        ArrayList<Integer> negative=new ArrayList<>();
+        
+        for(int i=0;i<Arr.length;i++) {
+            if(Arr[i]>=0) {
+                positive.add(i);
+            }
+            else {
+                negative.add(i);
+            }
+        }
+        long ans=0;
+        int neg=0;
+        int i=0;
+        while(i<positive.size() && neg<negative.size()) {
+            if(Arr[positive.get(i)]>=Math.abs(Arr[negative.get(neg)])) {
+                long diff=Math.abs(positive.get(i)-negative.get(neg));
+                long sum=-1*Arr[negative.get(neg)];
+                Arr[positive.get(i)]= Arr[positive.get(i)]+Arr[negative.get(neg)];
+                ans+=sum*diff;
+                neg+=1;
+            }
+            else {
+                long diff=Math.abs(positive.get(i)-negative.get(neg));
+                long sum=Arr[positive.get(i)];
+                Arr[negative.get(neg)]= Arr[negative.get(neg)]+Arr[positive.get(i)];
+                ans+=sum*diff;
+                i+=1;
+            }
+        }
+        return ans;
     }
 }
 
