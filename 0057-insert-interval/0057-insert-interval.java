@@ -1,6 +1,6 @@
 class Solution {
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        List<int[]> inter = new ArrayList<>();
+        List<int[]> inter = new ArrayList<>(intervals.length);
 
         for(int[] curr : intervals){
             if(curr[0] > newInterval[1]){
