@@ -1,0 +1,22 @@
+ public boolean isHappy(int n) {
+        // Using 2 pointers...
+        int slow=n;
+        int fast=n;
+        do{
+            slow=sumsq(slow);
+            fast=sumsq(sumsq(fast));
+        }while(slow!=fast);     
+        if(slow==1)return true;
+        else return false;
+    }
+     public int  sumsq(int n){
+        int rem=0;
+        int sum=0;
+        while(n!=0){
+            rem=n%10;
+            sum+=rem*rem;
+            n=n/10;
+        }
+        
+        return sum;
+    }
