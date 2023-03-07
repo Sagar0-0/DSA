@@ -34,7 +34,7 @@
 - Contribute and get Appreciated🤝
 - Must read [CONTRIBUTING.md](https://github.com/Sagar0-0/DsA/blob/main/CONTRIBUTING.md) before contributing.
 
-> *I contribute 3 Code per day*
+> *No more DSA contributions from my side.*
 ---
 
 # ➡️Platforms covered:
